@@ -6,6 +6,7 @@ import Registration from './components/registration/registrationPage';
 import './scss/global.scss';
 
 function App() {
+
   return (
     <>
       <Router>
