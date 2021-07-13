@@ -1,0 +1,56 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-width: 200px;
+  background: $lightGray;
+}
+
+.navbar {
+  height: 60px;
+  .link {
+    color: $white;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-decoration: none;
+    &:hover {
+      color: $green;
+      cursor: pointer;
+    }
+  }
+}
+
+.navbar-collapse {
+  background: $darkGray;
+}
+
+.header {
+  margin-top: 60px;
+  span {
+    color: $green;
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
+
+.footer {
+  background: $darkGray;
+  .container {
+    .row nav a {
+      color: $white;
+      text-decoration: none;
+      &:hover {
+        color: $green;
+        cursor: pointer;
+      }
+    }
+    hr {
+      color: $white;
+      height: 3px;
+    }
+  }
+}

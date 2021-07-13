@@ -1,0 +1,15 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+$green: rgb(139, 175, 8);
+$white: rgb(255, 255, 255);
+$darkGray: rgb(33, 37, 41);
+
+button.btn {
+    color:$white;
+    background-color: $darkGray;
+
+    &:hover {
+        color: $green;
+        cursor: pointer;
+      }
+}
