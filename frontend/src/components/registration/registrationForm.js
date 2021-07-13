@@ -12,7 +12,7 @@ export default function Registrate() {
     REACT_APP_BACKEND_PORT
   } = process.env;
 
-  const backendUrl = `${REACT_APP_BACKEND_PROTOCOL}://${REACT_APP_BACKEND_HOST}:${REACT_APP_BACKEND_PORT}`;
+  const backendUrl = `${REACT_APP_BACKEND_PROTOCOL}://${REACT_APP_BACKEND_HOST}:${REACT_APP_BACKEND_PORT}/register`;
 
   const [fieldValues, setFieldValues] = useState({
     firstName: "",
@@ -142,11 +142,7 @@ export default function Registrate() {
           password: fieldValues.password
         })
       })
-        .then((response) => {
-
-          setFieldValues(response.data)
-
-        })
+        .then((response) => response.json())
         .then((response) => {
           if (response.status < 200 || response.status >= 300) {
             setFormAlertText(response.error)
