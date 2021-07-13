@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { useHistory, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import validator from 'validator';
 import InputFieldSet from "../InputFieldSet";
 import '../../scss/Registrate.scss'
@@ -12,7 +12,7 @@ export default function Registrate() {
     REACT_APP_BACKEND_PORT
   } = process.env;
 
-  const backendUrl = `${REACT_APP_BACKEND_PROTOCOL}://${REACT_APP_BACKEND_HOST}:${REACT_APP_BACKEND_PORT}/register`;
+  const backendUrl = `${REACT_APP_BACKEND_PROTOCOL}://${REACT_APP_BACKEND_HOST}:${REACT_APP_BACKEND_PORT}/api/register`;
 
   const [fieldValues, setFieldValues] = useState({
     firstName: "",
@@ -128,7 +128,7 @@ export default function Registrate() {
     const isValid = isFormValid();
 
     if (isValid) {
-      await fetch(backendUrl, {
+      fetch(backendUrl, {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -142,22 +142,20 @@ export default function Registrate() {
           password: fieldValues.password
         })
       })
-        .then((response) => response.json())
-        .then((response) => {
+        .then(response => response.json())
+        .then(response => {
           if (response.status < 200 || response.status >= 300) {
-            setFormAlertText(response.error)
+            throw new Error(response.error);
           } else {
-            // redirect
-            const history = useHistory();
-            history.push("/login")
-            setIsRegisterSuccess(true);
+            setTimeout(() => {
+              setIsRegisterSuccess(true);
+            }, 2000);
           }
         })
-        .catch((error) => {
+        .catch(error => {
           setFormAlertText("Error fetching data: ", error.message);
         })
     }
-
     setFormWasValidated(true);
   }
 

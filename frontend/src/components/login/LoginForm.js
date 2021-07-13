@@ -144,7 +144,7 @@ export default function LoginForm() {
             throw new Error('Incorrect email or password.');
           } else {
             localStorage.setItem(
-              'user',
+              'SanitallyUser',
               JSON.stringify({ token: res.user.token })
             );
             setFieldValues({
@@ -185,9 +185,8 @@ export default function LoginForm() {
       <form
         onSubmit={handleSubmit}
         noValidate
-        className={`login-form needs-validation ${
-          formWasValidated ? 'was-validated' : ''
-        }`}
+        className={`login-form needs-validation ${formWasValidated ? 'was-validated' : ''
+          }`}
       >
         <InputFieldSet
           reference={references.email}
