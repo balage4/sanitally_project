@@ -1,19 +1,13 @@
 import React, { useState, useRef } from 'react';
 import { Redirect } from "react-router-dom";
+
 import validator from 'validator';
+
 import InputFieldSet from "../InputFieldSet";
+
 import '../../scss/Registrate.scss'
 
-export default function Registrate() {
-
-  const {
-    REACT_APP_BACKEND_PROTOCOL,
-    REACT_APP_BACKEND_HOST,
-    REACT_APP_BACKEND_PORT
-  } = process.env;
-
-  const backendUrl = `${REACT_APP_BACKEND_PROTOCOL}://${REACT_APP_BACKEND_HOST}:${REACT_APP_BACKEND_PORT}/api/register`;
-
+export default function RegistrationForm() {
   const [fieldValues, setFieldValues] = useState({
     firstName: "",
     lastName: "",
@@ -118,7 +112,19 @@ export default function Registrate() {
     return isValid;
   }
 
-  async function handleSubmit(e) {
+  const backend = {
+    protocol: 'http',
+    host: '127.0.0.1',
+    port: 5000,
+  };
+
+  const backendUrl = `${backend.protocol}://${backend.host}:${backend.port}`;
+
+  const endpoint = {
+    register: `${backendUrl}/api/register`,
+  };
+
+  function handleSubmit(e) {
     e.preventDefault();
 
     setFormAlertText('');
@@ -128,7 +134,7 @@ export default function Registrate() {
     const isValid = isFormValid();
 
     if (isValid) {
-      fetch(backendUrl, {
+      fetch(endpoint.register, {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -142,21 +148,35 @@ export default function Registrate() {
           password: fieldValues.password
         })
       })
-        .then(response => response.json())
-        .then(response => {
+        .then((response) => {
           if (response.status < 200 || response.status >= 300) {
-            throw new Error(response.error);
-          } else {
-            setTimeout(() => {
-              setIsRegisterSuccess(true);
-            }, 2000);
+            const err = new Error();
+            err.response = response;
+            throw err;
+          }
+          if (response.status === 204) {
+            setFormWasValidated(true);
+            setFormAlertText('');
+            setFormAlertType('');
+            setIsRegisterSuccess(true);
           }
         })
-        .catch(error => {
-          setFormAlertText("Error fetching data: ", error.message);
+        .catch((error) => {
+          if (error.response) {
+            error.response.json().then(data => {
+              setFormWasValidated(false);
+              setFormAlertText(data.error);
+              setFormAlertType('danger');
+              setIsRegisterSuccess(false);
+            })
+          } else {
+            setFormWasValidated(false);
+            setFormAlertText("unknown error");
+            setFormAlertType('danger');
+            setIsRegisterSuccess(false);
+          }
         })
     }
-    setFormWasValidated(true);
   }
 
   function handleInputChange(e) {
@@ -183,7 +203,6 @@ export default function Registrate() {
 
   return (
     <main className="registrate d-flex justify-content-center">
-
       <form onSubmit={handleSubmit} noValidate
         className={`text-center my-4 mb-3 needs-validation ${formWasValidated ? 'was-validated' : ''}`}>
 
@@ -234,14 +253,13 @@ export default function Registrate() {
 
         <button type="submit" className="btn">Registrate</button>
 
+        {formAlertText &&
+          <div className={`alert mt-3 alert-${formAlertType}`} role="alert">
+            {formAlertText}
+          </div>
+        }
+
       </form>
-
-      {formAlertText &&
-        <div className={`alert mt-3 alert-${formAlertType}`} role="alert">
-          {formAlertText}
-        </div>
-      }
-
     </main>
   )
 }
