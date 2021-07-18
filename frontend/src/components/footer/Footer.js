@@ -45,33 +45,16 @@ export default function Footer() {
           {footerMenu.map((footer, i) => (
             <div className="col-md-4 mb-4 mb-md-0 d-none d-md-block">
               <h4 className="mb-3 text-white">{Object.keys(footer)[0]}</h4>
-              <nav className="nav flex-column" />
-              {footerMenu[i][Object.keys(footer)[0]].map(link => (
-                <div>
+              <nav className="nav flex-column">
+                {footerMenu[i][Object.keys(footer)[0]].map(link => (
                   <LinkItem
                     linkName={link.title}
                     linkTo={link.linkTo}
                   />
-
-                </div>
-              ))}
+                ))}
+              </nav>
             </div>
           ))}
-
-          {/* <Navigation
-            title="Navigation"
-            linkName1="Home"
-            linkName2="Login"
-            linkTo2="/login"
-            linkName3="Registration"
-            linkTo3="/register"
-          />
-          <Navigation
-            title="Partners"
-            linkName1="Littel Ltd"
-            linkName2="Sigurdsson and Sons"
-            linkName3="Thiel-Rodriguez Ltd"
-          /> */}
           <Company />
         </div>
         <hr className="col-md-12 d-none d-md-block" />
