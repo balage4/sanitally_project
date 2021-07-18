@@ -13,7 +13,7 @@ export default function Footer() {
             linkName2="Login"
             linkTo2="/login"
             linkName3="Registration"
-            linkTo3="/register"  
+            linkTo3="/register"
           />
           <Navigation
             title="Partners"
@@ -21,13 +21,13 @@ export default function Footer() {
             linkName2="Sigurdsson and Sons"
             linkName3="Thiel-Rodriguez Ltd"
           />
-          <Company/>
+          <Company />
         </div>
-        <hr className="col-md-12 d-none d-md-block"/>
+        <hr className="col-md-12 d-none d-md-block" />
         <div className="row">
           <div className="text-center">
             <h5 className="mt-0 mt-md-3 mb-0 text-white">
-            Copyright © 2021 Avius Coronilla Group
+              Copyright © 2021 Sanitally Appointment System
             </h5>
           </div>
         </div>

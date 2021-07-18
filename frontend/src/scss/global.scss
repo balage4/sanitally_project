@@ -19,7 +19,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
-  max-width:100%;
+  max-width: 100%;
 }
 
 .navbar {
@@ -41,6 +41,8 @@ body {
 
 .header {
   margin-top: 60px;
+  background-image: url('../assets/sanitally-background.jpg');
+  background-size: cover;
   span {
     color: $green;
     &:hover {

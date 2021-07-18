@@ -21,9 +21,10 @@ export default function Home() {
           <Navbar />
           <div className="header d-flex justify-content-center py-5">
             <div>
-              <h1 className="text-center mb-5">Sanitally</h1>
+              <h1 className="text-center">SanitAlly</h1>
+              <h2 className="text-center text-muted">Medical appointment system</h2>
               <div>
-                <h3 className="text-center mb-3">No authenticated user</h3>
+                <h3 className="text-center mb-3 text-muted">No authenticated user</h3>
                 <h3 className="text-center">
                   Please{' '}
                   <span onClick={goToRegistration} aria-hidden="true">
