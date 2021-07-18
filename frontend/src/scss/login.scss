@@ -1,0 +1,64 @@
+@import 'color';
+
+h1{
+    text-align: center;
+}
+
+.login-form{
+        background-color: white;
+        border-radius: 50px;
+        max-width: 50%;
+        margin: 0 auto;
+        padding: 60px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 5px 5px 8px $darkGray, 10px 10px 8px $green;
+     
+}
+
+.login-form input{
+    background-image: linear-gradient(to right, lightgray, white, lightgray);
+    border-radius: 24px;
+    flex: 1 1 auto;
+    margin: 10px;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+}
+
+.login-form input:hover {
+    background-position: right center;
+  }
+
+  
+  .login-form input:focus {
+    outline: none ;
+    border: none ;
+    box-shadow: none ;
+}
+
+
+button.btn.login-btn{
+  background-color: $darkGray;
+  color: $green;
+  border-radius:24px;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 1024px) {
+    .login-form{
+      max-width: 60%;
+    }
+  }
+
+@media only screen and (max-width: 768px) {
+    .login-form{
+      max-width: 80%;
+    }
+  }
+
+  @media only screen and (max-width: 425px) {
+    .login-form{
+      max-width: 90%;
+    }
+  }
