@@ -3,6 +3,39 @@ import Company from './Company';
 import Navigation from './Navigation';
 
 export default function Footer() {
+
+  const footerMenu = [
+    {
+      'Navigation': [
+        {
+          title: 'Home',
+          linkTo: '/'
+        },
+        {
+          title: 'Login',
+          linkTo: '/login'
+        },
+        {
+          title: 'Registration',
+          linkTo: '/register'
+        }]
+    },
+    {
+      'Partners': [
+        {
+          title: 'SanitCorp',
+          linkTo: '/'
+        },
+        {
+          title: 'MedicalResearch',
+          linkTo: '/'
+        },
+        {
+          title: 'PartnerFlow',
+          linkTo: '/'
+        }]
+    }];
+
   return (
     <footer className="py-4 text-center text-md-start footer" id="footer">
       <div className="container">
