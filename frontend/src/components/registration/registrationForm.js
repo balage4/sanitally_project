@@ -23,7 +23,6 @@ export default function RegistrationForm() {
   });
 
   const [isRegisterSuccess, setIsRegisterSuccess] = useState(false);
-
   const [formWasValidated, setFormWasValidated] = useState(false);
 
   const [formAlertText, setFormAlertText] = useState('');
