@@ -1,6 +1,7 @@
 import React from 'react';
 import Company from './Company';
 /* import Navigation from './Navigation'; */
+import LinkItem from './LinkItem';
 
 export default function Footer() {
 
@@ -41,11 +42,19 @@ export default function Footer() {
       <div className="container">
         <div className="row">
 
-          {footerMenu.map(footer => (
+          {footerMenu.map((footer, i) => (
             <div className="col-md-4 mb-4 mb-md-0 d-none d-md-block">
               <h4 className="mb-3 text-white">{Object.keys(footer)[0]}</h4>
-
               <nav className="nav flex-column" />
+              {footerMenu[i][Object.keys(footer)[0]].map(link => (
+                <div>
+                  <LinkItem
+                    linkName={link.title}
+                    linkTo={link.linkTo}
+                  />
+
+                </div>
+              ))}
             </div>
           ))}
 
