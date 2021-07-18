@@ -2,11 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './components/home/Home';
 import Login from './components/login/Login';
-import Registration from './components/registration/registrationPage';
+import Registration from './components/registration/Registration';
 import './scss/global.scss';
 
 function App() {
-
   return (
     <>
       <Router>
