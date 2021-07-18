@@ -1,6 +1,6 @@
 import React from 'react';
 import Company from './Company';
-import Navigation from './Navigation';
+/* import Navigation from './Navigation'; */
 
 export default function Footer() {
 
@@ -40,7 +40,16 @@ export default function Footer() {
     <footer className="py-4 text-center text-md-start footer" id="footer">
       <div className="container">
         <div className="row">
-          <Navigation
+
+          {footerMenu.map(footer => (
+            <div className="col-md-4 mb-4 mb-md-0 d-none d-md-block">
+              <h4 className="mb-3 text-white">{Object.keys(footer)[0]}</h4>
+
+              <nav className="nav flex-column" />
+            </div>
+          ))}
+
+          {/* <Navigation
             title="Navigation"
             linkName1="Home"
             linkName2="Login"
@@ -53,7 +62,7 @@ export default function Footer() {
             linkName1="Littel Ltd"
             linkName2="Sigurdsson and Sons"
             linkName3="Thiel-Rodriguez Ltd"
-          />
+          /> */}
           <Company />
         </div>
         <hr className="col-md-12 d-none d-md-block" />
