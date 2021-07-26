@@ -43,11 +43,15 @@ export default function Footer() {
         <div className="row">
 
           {footerMenu.map((footer, i) => (
-            <div className="col-md-4 mb-4 mb-md-0 d-none d-md-block">
+            <div
+              key={`${Object.keys(footer)[0]}_key`}
+              className="col-md-4 mb-4 mb-md-0 d-none d-md-block"
+            >
               <h4 className="mb-3 text-white">{Object.keys(footer)[0]}</h4>
               <nav className="nav flex-column">
                 {footerMenu[i][Object.keys(footer)[0]].map(link => (
                   <LinkItem
+                    key={`linkItem_${link.title}`}
                     linkName={link.title}
                     linkTo={link.linkTo}
                   />
