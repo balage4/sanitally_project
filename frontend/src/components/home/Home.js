@@ -1,9 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Navbar from '../navbars/nonAuthenticatedNavbar/Navbar';
+import AuthenticatedNavbar from '../navbars/authenticatedNavbar/AuthenticatedNavbar';
 import Footer from '../footer/Footer';
 
-export default function Home() {
+// eslint-disable-next-line react/prop-types
+export default function Home({ user, setUser }) {
   const history = useHistory();
 
   function goToRegistration() {
@@ -18,7 +20,8 @@ export default function Home() {
     <>
       <div className="row">
         <div className="col pe-0 ps-4">
-          <Navbar />
+          {!user && <Navbar />}
+          {user && <AuthenticatedNavbar user={user} setUser={setUser} />}
           <div className="header d-flex justify-content-center py-5">
             <div>
               <h1 className="text-center">SanitAlly</h1>
