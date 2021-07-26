@@ -4,36 +4,37 @@ import Dashboard from './components/Dashboard';
 import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
+import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
+import ListOfUsers from './components/admin/users/ListOfUsers';
 import './scss/global.scss';
 
-function App() {
-
-  function getUser() {
-    return localStorage.getItem('user');
+function getUser() {
+  const storageUser = localStorage.getItem('user');
+  if (!storageUser) {
+    return null;
   }
+  return JSON.parse(storageUser);
+}
 
+function App() {
   const [user, setUser] = useState(getUser());
-
 
   return (
     <>
       <Router>
         <Switch>
-          <Route path="/dashboard">
-            <Dashboard
-              user={user}
-              setUser={setUser}
-            />
-          </Route>
-          <Route path="/register">
-            <Registration />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
+          <Route exact path="/"><Home user={user} setUser={setUser} /></Route>
+          <Route path="/register"><Registration user={user} setUser={setUser} /></Route>
+          <Route path="/login"><Login user={user} setUser={setUser} /></Route>
+          <ProtectedRoute
+            path="/dashboard"
+            component={() => <Dashboard user={user} setUser={setUser} />} />
+          <ProtectedRoute
+            path="/dashboard"
+            component={() => <Dashboard user={user} setUser={setUser} />} />
+          <ProtectedRoute
+            path="/admin/users"
+            component={() => <ListOfUsers user={user} setUser={setUser} />} />
         </Switch>
       </Router>
     </>

@@ -3,7 +3,8 @@ import { Redirect } from 'react-router-dom';
 import InputFieldSet from '../InputFieldSet';
 
 
-export default function LoginForm() {
+// eslint-disable-next-line react/prop-types
+export default function LoginForm({ user, setUser }) {
   const [fieldValues, setFieldValues] = useState({
     email: '',
     password: '',
@@ -13,8 +14,6 @@ export default function LoginForm() {
     email: '',
     password: '',
   });
-
-  const [isLoginSuccess, setIsLoginSuccess] = useState(false);
 
   const [formWasValidated, setFormWasValidated] = useState(false);
 
@@ -138,23 +137,25 @@ export default function LoginForm() {
           password: fieldValues.password,
         }),
       })
-        .then(res => res.json())
-        .then(res => {
-          if (res.status < 200 || res.status >= 300) {
-            throw new Error('Incorrect email or password.');
-          } else {
-            localStorage.setItem(
-              'user',
-              JSON.stringify({ token: res.user.token })
-            );
-            setFieldValues({
-              email: '',
-              password: '',
-            });
-            setFormAlertText('');
-            setFormAlertType('');
-            setIsLoginSuccess(true);
+        .then(async (res) => {
+          if (res.status === 400) {
+            const response = await res.json();
+            throw new Error(response?.message);
           }
+          return res.json()
+        })
+        .then(res => {
+          localStorage.setItem(
+            'user',
+            JSON.stringify(res.user)
+          );
+          setFieldValues({
+            email: '',
+            password: '',
+          });
+          setFormAlertText('');
+          setFormAlertType('');
+          setUser(res.user);
         })
         .catch(error => {
           setFormWasValidated(false);
@@ -176,7 +177,7 @@ export default function LoginForm() {
     validateField(fieldName);
   }
 
-  if (isLoginSuccess) {
+  if (user) {
     return <Redirect to="/dashboard" />;
   }
 
@@ -185,9 +186,8 @@ export default function LoginForm() {
       <form
         onSubmit={handleSubmit}
         noValidate
-        className={`login-form needs-validation ${
-          formWasValidated ? 'was-validated' : ''
-        }`}
+        className={`login-form needs-validation ${formWasValidated ? 'was-validated' : ''
+          }`}
       >
         <InputFieldSet
           reference={references.email}

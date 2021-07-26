@@ -4,7 +4,7 @@ h1{
     text-align: center;
 }
 
-.registrate-form{
+.events-form{
         background-color: white;
         border-radius: 50px;
         max-width: 50%;
@@ -15,7 +15,7 @@ h1{
         box-shadow: 5px 5px 8px $darkGray, 10px 10px 8px $green;
 }
 
-.registrate-form input{
+.events-form input{
     background-image: linear-gradient(to right, lightgray, white, lightgray);
     border-radius: 24px;
     flex: 1 1 auto;
@@ -25,18 +25,18 @@ h1{
     color: white;
 }
 
-.registrate-form input:hover {
+.events-form input:hover {
     background-position: right center;
   }
 
   
-  .registrate-form input:focus {
+  .events-form input:focus {
     outline: none ;
     border: none ;
     box-shadow: none ;
 }
 
-button.btn.registrate-btn{
+button.btn.events-btn{
     background-color: $darkGray;
     color: $green;
     border-radius:24px;
@@ -44,19 +44,19 @@ button.btn.registrate-btn{
 }
 
 @media only screen and (max-width: 1024px) {
-    .registrate-form{
+    .events-form{
       max-width: 60%;
     }
   }
 
 @media only screen and (max-width: 768px) {
-    .registrate-form{
+    .events-form{
       max-width: 80%;
     }
   }
 
   @media only screen and (max-width: 425px) {
-    .registrate-form{
+    .events-form{
       max-width: 90%;
     }
   }

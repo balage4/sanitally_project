@@ -1,5 +1,4 @@
 @import '~bootstrap/scss/bootstrap.scss';
-
 @import 'color';
 
 * {
@@ -12,6 +11,7 @@
 body {
   min-width: 200px;
   background: $lightGray;
+  margin-bottom: 50px;
 }
 
 #root {
@@ -41,13 +41,11 @@ body {
 
 .header {
   margin-top: 60px;
-  background-image: url('../assets/sanitally-background.jpg');
-  background-size: cover;
-  span {
+  a {
     color: $green;
+    text-decoration: none;
     &:hover {
       cursor: pointer;
-      text-decoration: underline;
     }
   }
 }

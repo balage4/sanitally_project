@@ -1,13 +1,13 @@
 import React, { useState, useRef } from 'react';
-import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+
 import validator from 'validator';
+
 import InputFieldSet from "../InputFieldSet";
+
 import '../../scss/Registrate.scss'
 
 export default function RegistrationForm() {
-
-  const history = useHistory();
-
   const [fieldValues, setFieldValues] = useState({
     firstName: "",
     lastName: "",
@@ -23,6 +23,7 @@ export default function RegistrationForm() {
   });
 
   const [isRegisterSuccess, setIsRegisterSuccess] = useState(false);
+
   const [formWasValidated, setFormWasValidated] = useState(false);
 
   const [formAlertText, setFormAlertText] = useState('');
@@ -197,10 +198,7 @@ export default function RegistrationForm() {
   }
 
   if (isRegisterSuccess) {
-    setTimeout(() => {
-      history.push('/login');
-      /* return <Redirect to="/login" />; */
-    }, 2000);
+    return <Redirect to="/login" />;
   }
 
   return (
