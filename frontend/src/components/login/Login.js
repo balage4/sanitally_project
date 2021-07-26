@@ -3,7 +3,8 @@ import Navbar from '../navbars/nonAuthenticatedNavbar/Navbar';
 import LoginForm from './LoginForm';
 import "../../scss/login.scss";
 
-export default function Login() {
+// eslint-disable-next-line react/prop-types
+export default function Login({ user, setUser }) {
   return (
     <>
       <div className="row">
@@ -12,7 +13,7 @@ export default function Login() {
           <div className="header d-flex justify-content-center py-5">
             <h1 className="text-center mb-5">Login</h1>
           </div>
-          <LoginForm />
+          <LoginForm user={user} setUser={setUser} />
         </div>
       </div>
     </>
