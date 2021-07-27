@@ -51,7 +51,7 @@ body {
 }
 
 .footer {
-  background: $darkGray;
+  background: $footerBack;
   .container {
     .row nav a {
       color: $white;
@@ -66,4 +66,10 @@ body {
       height: 3px;
     }
   }
+}
+
+.home-main {
+  background-image: url('../assets/sanitally-background.jpg');
+  height: 300px;
+  object-fit: cover;
 }

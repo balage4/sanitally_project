@@ -38,7 +38,7 @@ export default function Footer() {
     }];
 
   return (
-    <footer className="py-4 text-center text-md-start footer" id="footer">
+    <footer className="text-center pt-2 text-md-start footer" id="footer">
       <div className="container">
         <div className="row">
 
@@ -60,14 +60,13 @@ export default function Footer() {
             </div>
           ))}
           <Company />
+
         </div>
         <hr className="col-md-12 d-none d-md-block" />
         <div className="row">
-          <div className="text-center">
-            <h5 className="mt-0 mt-md-3 mb-0 text-white">
-              Copyright © 2021 Sanitally Appointment System
-            </h5>
-          </div>
+          <h5 className="text-white text-center">
+            Copyright © 2021 Sanitally Appointment System
+          </h5>
         </div>
       </div>
     </footer>

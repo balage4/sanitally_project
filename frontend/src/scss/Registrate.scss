@@ -1,62 +1,61 @@
 @import 'color';
 
-h1{
-    text-align: center;
+h1 {
+  text-align: center;
 }
 
-.registrate-form{
-        background-color: white;
-        border-radius: 50px;
-        max-width: 50%;
-        margin: 0 auto;
-        padding: 60px;
-        display: flex;
-        flex-direction: column;
-        box-shadow: 5px 5px 8px $darkGray, 10px 10px 8px $green;
+.registrate-form {
+  background-color: white;
+  border-radius: 50px;
+  max-width: 50%;
+  margin: 0 auto;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 5px 5px 8px $darkGray, 10px 10px 8px $green;
 }
 
-.registrate-form input{
-    background-image: linear-gradient(to right, lightgray, white, lightgray);
-    border-radius: 24px;
-    flex: 1 1 auto;
-    margin: 10px;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: white;
+.registrate-form input {
+  background-image: linear-gradient(to right, lightgray, white, lightgray);
+  border-radius: 24px;
+  flex: 1 1 auto;
+  margin: 10px;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
 }
 
 .registrate-form input:hover {
-    background-position: right center;
-  }
-
-  
-  .registrate-form input:focus {
-    outline: none ;
-    border: none ;
-    box-shadow: none ;
+  background-position: right center;
 }
 
-button.btn.registrate-btn{
-    background-color: $darkGray;
-    color: $green;
-    border-radius:24px;
-    font-weight: bold;
+.registrate-form input:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+button.btn.registrate-btn {
+  background-color: $darkGray;
+  color: $green;
+  border-radius: 24px;
+  font-weight: bold;
 }
 
 @media only screen and (max-width: 1024px) {
-    .registrate-form{
-      max-width: 60%;
-    }
+  .registrate-form {
+    max-width: 60%;
   }
+}
 
 @media only screen and (max-width: 768px) {
-    .registrate-form{
-      max-width: 80%;
-    }
+  .registrate-form {
+    max-width: 80%;
   }
+}
 
-  @media only screen and (max-width: 425px) {
-    .registrate-form{
-      max-width: 90%;
-    }
+@media only screen and (max-width: 425px) {
+  .registrate-form {
+    max-width: 90%;
   }
+}
