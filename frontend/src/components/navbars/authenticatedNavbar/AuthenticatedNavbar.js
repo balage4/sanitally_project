@@ -64,7 +64,8 @@ export default function AuthenticatedNavbar({ user, setUser }) {
               linkClass='link me-3'
             />
 
-            <li className='nav-item d-flex align-items-center'>
+            <li
+              className='nav-item d-flex align-items-center'>
               <button
                 type="button"
                 className="btn btn-info"

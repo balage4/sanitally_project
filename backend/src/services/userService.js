@@ -22,11 +22,25 @@ export const userService = {
         return { status: 400, error: 'Email or password is incorrect' };
       }
 
-      const token = jwt.sign({ email: user.email }, process.env.TOKEN_SECRET, { expiresIn: '1day' });
+      const token = jwt.sign({
+        email: user.email,
+        role: user.role
+      },
+        process.env.TOKEN_SECRET,
+        { expiresIn: '1day' }
+      );
 
-      return { status: 200, email: user.email, role: user.role, token };
+      return {
+        status: 200,
+        user: {
+          email: user.email,
+          role: user.role,
+          firstName: user.firstName,
+          token
+        }
+      };
 
-    } catch(err) {
+    } catch (err) {
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };
     }
@@ -38,8 +52,8 @@ export const userService = {
       if (error) {
         return { status: 400, error: error.details[0].message };
       }
-       
-      const emailExist = await User.findOne({email: data.email}).exec();
+
+      const emailExist = await User.findOne({ email: data.email }).exec();
       if (emailExist) {
         return { status: 400, error: 'Email address is already used' };
       }
@@ -60,7 +74,7 @@ export const userService = {
         message: 'User created'
       };
 
-    } catch(err) {
+    } catch (err) {
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };
     }
