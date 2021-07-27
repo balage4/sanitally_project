@@ -7,6 +7,7 @@ import Registration from './components/registration/Registration';
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 import ListOfUsers from './components/admin/users/ListOfUsers';
 import './scss/global.scss';
+import NewEvent from './components/dashboard/users/NewEvent.js/NewEvent';
 
 function getUser() {
   const storageUser = localStorage.getItem('user');
@@ -35,6 +36,9 @@ function App() {
           <ProtectedRoute
             path="/admin/users"
             component={() => <ListOfUsers user={user} setUser={setUser} />} />
+          <ProtectedRoute
+            path="/events/new"
+            component={() => <NewEvent user={user} setUser={setUser} />} />
         </Switch>
       </Router>
     </>
