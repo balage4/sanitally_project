@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import AuthNavMenu from "./AuthNavMenu";
 
-// eslint-disable-next-line react/prop-types
 export default function AuthenticatedNavbar({ user, setUser }) {
 
   function logoutUser() {
@@ -12,12 +12,6 @@ export default function AuthenticatedNavbar({ user, setUser }) {
   const menusByRoles = {
     participant: [
       'Events',
-      'My appointments',
-      'My Profile'
-    ],
-    facilitator: [
-      'Events',
-      'My appointments',
       'My Profile'
     ],
     admin: [
@@ -28,7 +22,6 @@ export default function AuthenticatedNavbar({ user, setUser }) {
 
   const endpoints = {
     'Events': '/events',
-    'My appointments': '/myappointments',
     'Admin': '/admin',
     'My Profile': '/profile'
   }
@@ -64,6 +57,9 @@ export default function AuthenticatedNavbar({ user, setUser }) {
               linkClass='link me-3'
             />
 
+            <li
+              className="nav-item d-flex align-items-center text-white link me-3">
+              Bejelentkezve: {user.firstName}</li>
             <li
               className='nav-item d-flex align-items-center'>
               <button
