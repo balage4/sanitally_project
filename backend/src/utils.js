@@ -45,8 +45,8 @@ function validateLoginData(data) {
         })
         return errors;
       })
-    });
-  return schema.validate(data, { abortEarly: false }); 
+  });
+  return schema.validate(data, { abortEarly: false });
 }
 
 function validateUserData(data) {
@@ -127,8 +127,52 @@ function validateUserData(data) {
         })
         return errors;
       })
-    });
-  return schema.validate(data, { abortEarly: false }); 
+  });
+  return schema.validate(data, { abortEarly: false });
 }
 
-export { validateLoginData, validateUserData }
+function validateEventData(data) {
+  const schema = Joi.object({
+    eventDate: Joi.date()
+      .required()
+      .error(errors => {
+        errors.forEach(err => {
+          switch (err.code) {
+            case 'any.required':
+              err.message = 'Start date is required';
+              break;
+            case 'date.base':
+              err.message = 'Start date must be a date';
+              break;
+            default:
+              break;
+          }
+        })
+        return errors;
+      }),
+    userEmail: Joi.string()
+      .required()
+      .email()
+      .error(errors => {
+        errors.forEach(err => {
+          switch (err.code) {
+            case 'string.empty':
+              err.message = 'Email is required';
+              break;
+            case 'any.required':
+              err.message = 'Email is required';
+              break;
+            case 'string.email':
+              err.message = 'Invalid email';
+              break;
+            default:
+              break;
+          }
+        })
+        return errors;
+      })
+  });
+  return schema.validate(data, { abortEarly: false });
+}
+
+export { validateLoginData, validateUserData, validateEventData }
