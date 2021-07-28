@@ -9,6 +9,8 @@ import ListOfUsers from './components/admin/users/ListOfUsers';
 import './scss/global.scss';
 import NewEvent from './components/dashboard/users/NewEvent.js/NewEvent';
 import AdminMain from './components/admin/Admin.js/AdminMain';
+import ServicesMain from './components/admin/Services/ServicesMain';
+import NewService from './components/admin/Services/NewService';
 
 function getUser() {
   const storageUser = localStorage.getItem('user');
@@ -32,16 +34,19 @@ function App() {
             path="/dashboard"
             component={() => <Dashboard user={user} setUser={setUser} />} />
           <ProtectedRoute
-            path="/dashboard"
-            component={() => <Dashboard user={user} setUser={setUser} />} />
-          <ProtectedRoute
-            path="/admin/users"
+            exact path="/admin/users"
             component={() => <ListOfUsers user={user} setUser={setUser} />} />
           <ProtectedRoute
-            path="/admin"
+            exact path="/admin/services"
+            component={() => <ServicesMain user={user} setUser={setUser} />} />
+          <ProtectedRoute
+            exact path="/admin/services/new"
+            component={() => <NewService user={user} setUser={setUser} />} />
+          <ProtectedRoute
+            exact path="/admin"
             component={() => <AdminMain user={user} setUser={setUser} />} />
           <ProtectedRoute
-            path="/events/new"
+            exact path="/events/new"
             component={() => <NewEvent user={user} setUser={setUser} />} />
         </Switch>
       </Router>

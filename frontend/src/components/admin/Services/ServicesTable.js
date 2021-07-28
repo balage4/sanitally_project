@@ -1,15 +1,4 @@
 // eslint-disable-next-line react/prop-types
-export default function ServicesTable({ listOfServices }) {
+export default function ServicesTable() {
 
-  const headerMap = [
-    ['_id', 'ID'],
-    ['serviceName', 'Service Name'],
-    ['serviceNote', 'Note'],
-  ]
-
-  return (
-    <div className="container table table-striped">
-
-    </div>
-  )
 }
