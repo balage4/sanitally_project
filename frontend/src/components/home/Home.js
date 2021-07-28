@@ -1,10 +1,10 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Navbar from '../navbars/nonAuthenticatedNavbar/Navbar';
 import AuthenticatedNavbar from '../navbars/authenticatedNavbar/AuthenticatedNavbar';
 import Footer from '../footer/Footer';
 
-// eslint-disable-next-line react/prop-types
 export default function Home({ user, setUser }) {
   const history = useHistory();
 
@@ -26,8 +26,9 @@ export default function Home({ user, setUser }) {
             <h1 className="text-center">SanitAlly</h1>
             <h2 className="text-center text-muted">Medical appointment system</h2>
             <div>
-              <h3 className="text-center mb-3 text-muted">No authenticated user</h3>
-              <h3 className="text-center">
+              {!user && <h3 className="text-center mb-3">No authenticated user</h3>}
+              {user && <h3 className="text-center mb-3">Welcome, {user.email}</h3>}
+              {!user && <h3 className="text-center">
                 Please{' '}
                 <span onClick={goToRegistration} aria-hidden="true">
                   register
@@ -37,7 +38,7 @@ export default function Home({ user, setUser }) {
                   login{' '}
                 </span>
                 to use the application
-              </h3>
+              </h3>}
             </div>
           </div>
         </div>
