@@ -6,8 +6,6 @@ import WelcomeFeed from './WelcomeFeed';
 
 export default function Dashboard({ user, setUser }) {
 
-  console.log(user.role);
-
   return (
     <div className="dashboard">
       <WelcomeFeed firstName={user.firstName} />

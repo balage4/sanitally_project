@@ -8,6 +8,7 @@ import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 import ListOfUsers from './components/admin/users/ListOfUsers';
 import './scss/global.scss';
 import NewEvent from './components/dashboard/users/NewEvent.js/NewEvent';
+import AdminMain from './components/admin/Admin.js/AdminMain';
 
 function getUser() {
   const storageUser = localStorage.getItem('user');
@@ -36,6 +37,9 @@ function App() {
           <ProtectedRoute
             path="/admin/users"
             component={() => <ListOfUsers user={user} setUser={setUser} />} />
+          <ProtectedRoute
+            path="/admin"
+            component={() => <AdminMain user={user} setUser={setUser} />} />
           <ProtectedRoute
             path="/events/new"
             component={() => <NewEvent user={user} setUser={setUser} />} />
