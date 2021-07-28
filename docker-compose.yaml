@@ -1,0 +1,35 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    ports:
+      - 27018:27017
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+    volumes:
+      - ./database:/data/db
+  frontend:
+    build: frontend
+    environment:
+      - REACT_APP_BACKEND_HOST=backend
+      - REACT_APP_BACKEND_PORT=8080
+    ports:
+      - 3000:3000
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+    depends_on:
+      - backend
+  backend:
+    build: backend
+    ports:
+      - 5000:8080
+    environment:
+      - PORT=8080
+      - DB_CONNECT=mongodb://mongo:27017/sanitally_masterwork
+    volumes:
+      - /app/node_modules
+      - ./backend:/app
+    depends_on:
+      mongo:
+        condition: service_healthy
