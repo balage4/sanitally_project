@@ -139,10 +139,10 @@ function validateEventData(data) {
         errors.forEach(err => {
           switch (err.code) {
             case 'any.required':
-              err.message = 'Start date is required';
+              err.message = 'Event date is required';
               break;
             case 'date.base':
-              err.message = 'Start date must be a date';
+              err.message = 'Event date must be a date';
               break;
             default:
               break;
@@ -175,4 +175,50 @@ function validateEventData(data) {
   return schema.validate(data, { abortEarly: false });
 }
 
-export { validateLoginData, validateUserData, validateEventData }
+function validateServiceData(data) {
+  const schema = Joi.object({
+    serviceName: Joi
+      .string()
+      .required()
+      .error(errors => {
+        errors.forEach(err => {
+          switch (err.code) {
+            case 'string.empty':
+              err.message = 'Service name is required';
+              break;
+            case 'any.required':
+              err.message = 'Service name is required';
+              break;
+            default:
+              break;
+          }
+        })
+        return errors;
+      }),
+    serviceNote: Joi
+      .string()
+      .required()
+      .error(errors => {
+        errors.forEach(err => {
+          switch (err.code) {
+            case 'string.empty':
+              err.message = 'Service note is required';
+              break;
+            case 'any.required':
+              err.message = 'Service note is required';
+              break;
+            default:
+              break;
+          }
+        })
+        return errors;
+      })
+  });
+  return schema.validate(data, { abortEarly: false });
+}
+export {
+  validateLoginData,
+  validateUserData,
+  validateEventData,
+  validateServiceData
+}
