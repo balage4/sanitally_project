@@ -103,10 +103,10 @@ export default function NewServiceForm() {
   const backendUrl = `${backend.protocol}://${backend.host}:${backend.port}`;
 
   const endpoint = {
-    login: `${backendUrl}/api/services/new`,
+    newService: `${backendUrl}/api/services/new`,
   };
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     setFormAlertText('');
     setFormAlertType('');
@@ -115,7 +115,7 @@ export default function NewServiceForm() {
     const isValid = isFormValid();
 
     if (isValid) {
-      fetch(endpoint.login, {
+      fetch(endpoint.newService, {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -127,12 +127,11 @@ export default function NewServiceForm() {
           serviceNote: fieldValues.serviceNote,
         }),
       })
-        .then(async (response) => {
-          if (response.status < 200 || response.status >= 300) throw new Error(response.error);
-          else return response.json()
+        .then(res => {
+          if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+          return res.json()
         })
         .then(() => {
-
           setFieldValues({
             serviceName: '',
             serviceNote: '',

@@ -5,6 +5,7 @@ import logger from "../logger";
 export const servService = {
   async createService(data) {
     try {
+
       const { error } = validateServiceData(data);
       if (error) {
         return { status: 400, error: error.details[0].message };
@@ -19,11 +20,10 @@ export const servService = {
         serviceNote: data.serviceNote
       });
       await serv.save();
-
       return {
         status: 204,
-        message: 'Service created'
-      }
+        message: 'Service saved'
+      };
 
     } catch (err) {
       logger.error(err);
