@@ -18,10 +18,10 @@ export default function Home({ user, setUser }) {
 
   return (
     <>
-      <div className="row">
+      <div className="home-main row">
         {!user && <Navbar />}
         {user && <AuthenticatedNavbar user={user} setUser={setUser} />}
-        <div className="home-main header d-flex justify-content-center">
+        <div className=" header d-flex justify-content-center">
           <div>
             <h1 className="text-center">SanitAlly</h1>
             <h2 className="text-center text-muted">Medical appointment system</h2>

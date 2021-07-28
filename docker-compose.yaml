@@ -31,5 +31,4 @@ services:
       - /app/node_modules
       - ./backend:/app
     depends_on:
-      mongo:
-        condition: service_healthy
+      - mongo

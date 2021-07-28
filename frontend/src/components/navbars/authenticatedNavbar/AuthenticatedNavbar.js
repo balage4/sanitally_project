@@ -10,12 +10,13 @@ export default function AuthenticatedNavbar({ user, setUser }) {
   }
 
   const menusByRoles = {
-    participant: [
+    user: [
       'Events',
       'My Profile'
     ],
     admin: [
       'Admin',
+      'Events',
       'My Profile'
     ]
   }

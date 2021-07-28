@@ -140,7 +140,7 @@ export default function LoginForm({ user, setUser }) {
         .then(async (res) => {
           if (res.status === 400) {
             const response = await res.json();
-            throw new Error(response?.message);
+            throw new Error(response?.error);
           }
           return res.json()
         })

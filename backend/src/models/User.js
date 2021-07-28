@@ -20,7 +20,10 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    default: 'participant'
+    default: 'user'
+  },
+  tajNumber: {
+    type: String
   }
 });
 
