@@ -1,5 +1,5 @@
 import express from 'express';
-import { userController, eventController } from '../controllers';
+import { userController, eventController, serviceController } from '../controllers';
 
 const cors = require('cors');
 
@@ -13,6 +13,6 @@ router.post('/login', userController.loginUser);
 router.post('/register', userController.registerUser);
 
 router.post('/events/new', eventController.createNewEvent);
-
+router.post('/services/new', serviceController.createService);
 
 export default router;
