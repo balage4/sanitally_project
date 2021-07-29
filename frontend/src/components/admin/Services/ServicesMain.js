@@ -11,19 +11,12 @@ export default function ServicesMain({ user, setUser }) {
   return (
     <div className="services">
       <AuthenticatedNavbar user={user} setUser={setUser} />
-      <div className="d-flex flex-column align-items-center">
-        <h2>Szolgáltatások listája</h2>
-        {/* {listOfServices && (
-          <ServicesTable listOfServices={listOfServices} />
-        )}
-        {fetchError && (
-          <div className="alert alert-danger" role="alert">
-            {fetchError}
-          </div>
-        )} */}
-      </div>
+
+      <h2>Szolgáltatások listája</h2>
+
+
       <Link
-        to="admin/services/new"
+        to="/admin/services/new"
         className="btn btn-primary">Új szolgáltatás felvitele</Link>
     </div>
   )
