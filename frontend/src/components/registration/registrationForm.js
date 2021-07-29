@@ -210,7 +210,7 @@ export default function RegistrationForm() {
           reference={references.firstName}
           name="firstName"
           labelText="First Name"
-          type="firstName"
+          type="text"
           errors={errors}
           fieldValues={fieldValues}
           handleInputBlur={handleInputBlur}
@@ -221,7 +221,7 @@ export default function RegistrationForm() {
           reference={references.lastName}
           name="lastName"
           labelText="Last Name"
-          type="lastName"
+          type="text"
           errors={errors}
           fieldValues={fieldValues}
           handleInputBlur={handleInputBlur}

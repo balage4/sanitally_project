@@ -5,11 +5,11 @@ import InputFieldSet from "../../../InputFieldSet";
 
 export default function NewEventForm({ user }) {
   const [fieldValues, setFieldValues] = useState({
-    date: "",
+    eventDate: "",
   });
 
   const [errors, setErrors] = useState({
-    date: "",
+    eventDate: "",
   });
 
   const [isRegisterSuccess, setIsRegisterSuccess] = useState(false);
@@ -20,7 +20,7 @@ export default function NewEventForm({ user }) {
   const [formAlertType, setFormAlertType] = useState('');
 
   const references = {
-    date: useRef()
+    eventDate: useRef()
   };
 
   const errorTypes = {
@@ -32,7 +32,7 @@ export default function NewEventForm({ user }) {
   }
 
   const validators = {
-    date: {
+    eventDate: {
       required: isNotEmpty
     }
   }
@@ -109,7 +109,7 @@ export default function NewEventForm({ user }) {
         },
         body: JSON.stringify({
           userEmail: user.email,
-          eventDate: fieldValues.date
+          eventDate: fieldValues.eventDate
         })
       })
         .then((response) => {
@@ -171,8 +171,8 @@ export default function NewEventForm({ user }) {
         className={`text-center my-4 mb-3 needs-validation ${formWasValidated ? 'was-validated' : ''}`}>
 
         <InputFieldSet
-          reference={references.date}
-          name="date"
+          reference={references.eventDate}
+          name="eventDate"
           labelText="Esemény időpontja"
           type="date"
           errors={errors}

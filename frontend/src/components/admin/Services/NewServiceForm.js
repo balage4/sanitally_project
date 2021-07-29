@@ -129,7 +129,7 @@ export default function NewServiceForm({ token }) {
       })
         .then(res => {
           if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
-          return res.json()
+          return res.json();
         })
         .then(() => {
           setFieldValues({
