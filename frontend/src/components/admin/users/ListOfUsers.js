@@ -51,6 +51,7 @@ export default function ListOfUsers({ user, setUser }) {
     if (e.target.name === 'Delete') handleDeleteUser(id);
     else if (e.target.name === 'Edit') handleModifyUser(id);
   }
+
   return (
     <div>
       <AuthenticatedNavbar user={user} setUser={setUser} />
