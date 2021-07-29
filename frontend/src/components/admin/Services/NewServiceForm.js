@@ -1,9 +1,8 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useRef } from 'react';
 import InputFieldSet from '../../InputFieldSet';
 
-
-// eslint-disable-next-line react/prop-types
-export default function NewServiceForm() {
+export default function NewServiceForm({ token }) {
   const [fieldValues, setFieldValues] = useState({
     serviceName: '',
     serviceNote: '',
@@ -96,14 +95,14 @@ export default function NewServiceForm() {
 
   const backend = {
     protocol: 'http',
-    host: '127.0.0.1',
+    host: 'localhost',
     port: 5000,
   };
 
   const backendUrl = `${backend.protocol}://${backend.host}:${backend.port}`;
 
   const endpoint = {
-    newService: `${backendUrl}/api/services/new`,
+    newService: `${backendUrl}/api/admin/services/new`,
   };
 
   function handleSubmit(e) {
@@ -121,6 +120,7 @@ export default function NewServiceForm() {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({
           serviceName: fieldValues.serviceName,
@@ -137,7 +137,7 @@ export default function NewServiceForm() {
             serviceNote: '',
           });
           setFormAlertText('Sikeres mentés');
-          setFormAlertType('info');
+          setFormAlertType('primary');
         })
         .catch(error => {
           setFormWasValidated(false);

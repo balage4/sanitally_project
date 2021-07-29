@@ -3,8 +3,7 @@ import jwt from 'jsonwebtoken';
 // eslint-disable-next-line consistent-return
 export function tokenCheck(req, res, next) {
   const bearerToken = req.headers.authorization;
-
-  if (!bearerToken) return res.status(401).json('Access denied!');
+  if (!bearerToken) return res.status(401).json({ error: 'Unauthorized' });
 
   const authToken = bearerToken.split(' ')[1];
 
