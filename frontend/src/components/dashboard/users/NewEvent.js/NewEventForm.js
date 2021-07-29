@@ -86,7 +86,7 @@ export default function NewEventForm({ user }) {
   const backendUrl = `${backend.protocol}://${backend.host}:${backend.port}`;
 
   const endpoint = {
-    register: `${backendUrl}/api/events/new`,
+    newEvent: `${backendUrl}/api/events/new`,
   };
 
   function handleSubmit(e) {
@@ -100,12 +100,13 @@ export default function NewEventForm({ user }) {
 
 
     if (isValid) {
-      fetch(endpoint.register, {
+      fetch(endpoint.newEvent, {
         method: 'POST',
         mode: 'cors',
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user.token}`
         },
         body: JSON.stringify({
           userEmail: user.email,

@@ -29,5 +29,14 @@ export const servService = {
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };
     }
+  },
+  async getServices() {
+    try {
+      const services = await Service.find({}).exec();
+      return { status: 200, services };
+    } catch (err) {
+      logger.error(err);
+      return { status: 500, error: 'Something went wrong' };
+    }
   }
 }

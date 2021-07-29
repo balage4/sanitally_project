@@ -13,9 +13,10 @@ router.post('/test', userController.test);
 router.post('/login', userController.loginUser);
 router.post('/register', userController.registerUser);
 
-router.post('/events/new', eventController.createNewEvent);
+router.post('/events/new', tokenCheck, eventController.createNewEvent);
 
 router.post('/admin/services/new', tokenCheck, adminCheck, serviceController.createService);
+router.get('/admin/services', tokenCheck, adminCheck, serviceController.getServices);
 
 // router.get('admin/services'),tokenCheck,adminCheck,serviceController.getServices
 
