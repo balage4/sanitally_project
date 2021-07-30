@@ -26,5 +26,14 @@ export const eventService = {
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };
     }
+  },
+  async getEvents() {
+    try {
+      const events = await Event.find();
+      return { status: 200, events };
+    } catch (err) {
+      logger.error(err);
+      return { status: 500, error: 'Something went wrong' };
+    }
   }
 }

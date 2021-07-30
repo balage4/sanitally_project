@@ -9,5 +9,10 @@ export const eventController = {
   async createNewEvent(req, res) {
     const event = await eventService.createEvent(req.body);
     res.status(event.status).json({ event });
+  },
+
+  async getEvents(req, res) {
+    const events = await eventService.getEvents(req.body);
+    res.status(events.status).json({ events });
   }
 }

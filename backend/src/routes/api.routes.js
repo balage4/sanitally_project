@@ -13,6 +13,8 @@ router.post('/test', userController.test);
 router.post('/login', userController.loginUser);
 router.post('/register', userController.registerUser);
 
+router.get('/events', eventController.getEvents);
+
 router.post('/events/new', tokenCheck, eventController.createNewEvent);
 
 router.get('/admin/services', tokenCheck, adminCheck, serviceController.getServices);

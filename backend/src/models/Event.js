@@ -8,6 +8,12 @@ const eventSchema = new mongoose.Schema({
   userEmail: {
     type: String,
     required: true
+  },
+  eventService: {
+    type: String
+  },
+  eventProvider: {
+    type: String
   }
 });
 
