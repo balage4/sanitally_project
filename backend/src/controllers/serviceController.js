@@ -18,6 +18,7 @@ export const serviceController = {
   },
 
   async updateService(req, res) {
+    console.log('controller:', req.body);
     const updatedService = await servService.updateService(req.body);
     res.status(updatedService.status).json(updatedService);
   },

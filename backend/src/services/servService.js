@@ -50,8 +50,13 @@ export const servService = {
   },
   async updateService(data) {
     try {
-      await Service.findByIdAndUpdate(`{${data.id}},{${data.updateData}`);
-      return { status: 200, message: 'Successful update!' };
+      const updateResponse = await Service.findByIdAndUpdate(data.id, {
+        $set: {
+          serviceName: data.updateData.serviceName,
+          serviceNote: data.updateData.serviceNote
+        }
+      });
+      return { status: 200, message: updateResponse };
     } catch (err) {
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };
