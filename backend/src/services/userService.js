@@ -78,5 +78,20 @@ export const userService = {
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };
     }
+  },
+
+  async getUsers() {
+    try {
+      const users = await User.find()
+
+      return {
+        status: 200,
+        users
+      }
+
+    } catch (err) {
+      logger.error(err);
+      return { status: 500, error: 'Something went wrong' };
+    }
   }
 }

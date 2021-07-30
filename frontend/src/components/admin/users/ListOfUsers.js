@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import Table from "./Table";
@@ -36,13 +37,23 @@ export default function ListOfUsers({ user, setUser }) {
   }
 
   useEffect(() => {
-    fetch(backend.users)
+    fetch(backend.users, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      },
+    })
       .then(response => response.json())
       .then(response => {
         if (response.status < 200 || response.status >= 300) throw new Error(response.error);
         else setListOfUsers(response.users);
+
       })
       .catch(err => setFetchError(err.message))
+
   }, []);
 
 
@@ -51,7 +62,6 @@ export default function ListOfUsers({ user, setUser }) {
     if (e.target.name === 'Delete') handleDeleteUser(id);
     else if (e.target.name === 'Edit') handleModifyUser(id);
   }
-
   return (
     <div>
       <AuthenticatedNavbar user={user} setUser={setUser} />

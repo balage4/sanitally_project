@@ -14,5 +14,10 @@ export const userController = {
   async registerUser(req, res) {
     const user = await userService.createUser(req.body);
     res.status(user.status).json(user);
+  },
+
+  async getUsers(req, res) {
+    const users = await userService.getUsers();
+    res.status(users.status).json(users);
   }
 }

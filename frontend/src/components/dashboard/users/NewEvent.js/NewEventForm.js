@@ -5,7 +5,7 @@ import InputFieldSet from "../../../InputFieldSet";
 
 export default function NewEventForm({ user }) {
 
-  const [providerList, setProviderList] = useState([]);
+  const [serviceList, setServiceList] = useState([]);
   const [fetchError, setFetchError] = useState(null);
 
   async function getServiceList() {
@@ -27,7 +27,7 @@ export default function NewEventForm({ user }) {
         res.services.forEach(service => {
           servicesArray.push(service.serviceName)
         });
-        setProviderList(servicesArray);
+        setServiceList(servicesArray);
       }).catch(err => setFetchError(err.message));
   }
 
@@ -225,7 +225,7 @@ export default function NewEventForm({ user }) {
           handleInputBlur={handleInputBlur}
           handleInputChange={handleInputChange}
           required
-          optionsarray={providerList}
+          optionsarray={serviceList}
         />
         <InputFieldSet
           reference={references.eventProvider}

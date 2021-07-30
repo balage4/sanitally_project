@@ -24,7 +24,7 @@ export default function Table({ listOfUsers, handleActionButtons }) {
           <th>Actions</th>
         </thead>
         <tbody>
-          {listOfUsers.users.map(user => (
+          {listOfUsers.map(user => (
             <tr key={user._id}>
               {headerMap.map((headerName, i) => {
                 if (headerMap[i][0] === '_id') {
