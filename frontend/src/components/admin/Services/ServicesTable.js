@@ -15,23 +15,25 @@ export default function ServicesTable({ listOfServices, handleActionButtons }) {
     <div className="container">
       <table className="table table-striped">
         <thead>
-          {headerMap.map((header, i) => (
-            <th
-              key={header[i]}
-            >{headerMap[i][1]}</th>
-          ))}
-          <th>Actions</th>
+          <tr>
+            {headerMap.map((header, i) => (
+              <th
+                key={`header_${i + 1}`}
+              >{headerMap[i][1]}</th>
+            ))}
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody>
           {listOfServices.services.map((service, servIndex) => (
-            <tr key={service._id}>
+            <tr key={`tr_${servIndex + 1}`}>
               {headerMap.map((headerName, tdIndex) => {
                 if (headerMap[tdIndex][0] === '_id') {
                   return (
-                    <td key={service._id}>{servIndex + 1}</td>
+                    <td>{servIndex + 1}</td>
                   )
                 }
-                return (<td key={service._id}>{service[headerName[0]]}</td>)
+                return (<td key={`td_${tdIndex + 1}`}>{service[headerName[0]]}</td>)
 
               })}
               <td><ActionButtons
