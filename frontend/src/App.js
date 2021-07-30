@@ -43,6 +43,9 @@ function App() {
             exact path="/admin/services/new"
             component={() => <NewService user={user} setUser={setUser} />} />
           <ProtectedRoute
+            exact path="/admin/services/:id"
+            component={() => <NewService user={user} setUser={setUser} />} />
+          <ProtectedRoute
             exact path="/admin"
             component={() => <AdminMain user={user} setUser={setUser} />} />
           <ProtectedRoute

@@ -1,14 +1,17 @@
 /* import { useState } from "react"; */
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar";
 import ServicesTable from "./ServicesTable";
+
 /* eslint-disable react/prop-types */
 export default function ServicesMain({ user, setUser }) {
 
   const [listOfServices, setListOfServices] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [fetchError, setFetchError] = useState(null);
+
+  const history = useHistory();
 
   async function fetchServices() {
     fetch('http://localhost:5000/api/admin/services', {
@@ -56,10 +59,16 @@ export default function ServicesMain({ user, setUser }) {
       .catch(err => setFetchError(err.message));
   }
 
+  function handleModifyService(id) {
+    history.push(`/admin/services/${id}`);
+  }
+
+
   function handleActionButtons(e) {
     const { id } = e.target.dataset;
+
     if (e.target.name === 'Törlés') handleDeleteService(id);
-    /*  else if (e.target.name === 'Edit') handleModifyUser(id); */
+    else if (e.target.name === 'Módosítás') handleModifyService(id);
   }
 
 
@@ -79,7 +88,7 @@ export default function ServicesMain({ user, setUser }) {
         </div>
       )}
       {successMessage && (
-        <div className="container text-center col-4 alert alert-info" role="alert">
+        <div className="container text-center col-4 alert alert-danger" role="alert">
           {successMessage}
         </div>
       )}
