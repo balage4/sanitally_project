@@ -21,7 +21,7 @@ export const servService = {
       });
       await serv.save();
       return {
-        status: 204,
+        status: 201,
         message: 'Service saved'
       };
 
@@ -34,6 +34,15 @@ export const servService = {
     try {
       const services = await Service.find({}).exec();
       return { status: 200, services };
+    } catch (err) {
+      logger.error(err);
+      return { status: 500, error: 'Something went wrong' };
+    }
+  },
+  async deleteService(id) {
+    try {
+      await Service.findByIdAndRemove(id);
+      return { status: 200 };
     } catch (err) {
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };
