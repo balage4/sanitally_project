@@ -2,7 +2,7 @@ import ActionButtons from "../users/ActionButtons";
 
 /* eslint-disable react/prop-types */
 export default function ServicesTable({ listOfServices, handleActionButtons }) {
-  const buttonsArray = ['Edit', 'Delete'];
+  const buttonsArray = ['Módosítás', 'Törlés'];
 
   const headerMap = [
     ['_id', 'ID'],
@@ -23,13 +23,12 @@ export default function ServicesTable({ listOfServices, handleActionButtons }) {
           <th>Actions</th>
         </thead>
         <tbody>
-          {listOfServices.services.map(service => (
+          {listOfServices.services.map((service, servIndex) => (
             <tr key={service._id}>
               {headerMap.map((headerName, tdIndex) => {
-
                 if (headerMap[tdIndex][0] === '_id') {
                   return (
-                    <td key={service._id}>{(tdIndex) + 1}</td>
+                    <td key={service._id}>{servIndex + 1}</td>
                   )
                 }
                 return (<td key={service._id}>{service[headerName[0]]}</td>)
