@@ -62,11 +62,11 @@ export default function InputFieldSet({
           ref={reference}
         >
           <option value=''>Válassz!</option>
-          {optionsArray.map(option => (
+          {optionsArray && (optionsArray.map(option => (
             <option
               key={option}
               value={option}>{option}</option>
-          ))}
+          )))}
         </select>
       </>)
   } else if (type === 'checkbox') {

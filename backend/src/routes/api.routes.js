@@ -17,7 +17,7 @@ router.get('/events', eventController.getEvents);
 
 router.post('/events/new', tokenCheck, eventController.createNewEvent);
 
-router.get('/admin/services', tokenCheck, adminCheck, serviceController.getServices);
+router.get('/services', tokenCheck, serviceController.getServices);
 router.get('/admin/services/:id', tokenCheck, adminCheck, serviceController.getServiceById);
 
 router.post('/admin/services/new', tokenCheck, adminCheck, serviceController.createService);

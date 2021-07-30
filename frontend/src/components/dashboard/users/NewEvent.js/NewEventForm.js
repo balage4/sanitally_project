@@ -1,15 +1,53 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Redirect } from "react-router-dom";
 import InputFieldSet from "../../../InputFieldSet";
 
 export default function NewEventForm({ user }) {
+
+  const [providerList, setProviderList] = useState([]);
+
+  async function getServiceList() {
+    const options = {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`
+      },
+      body: null,
+    }
+    fetch('http://localhost:5000/api/services', options)
+      .then(res => res.json())
+      .then(res => {
+        if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+        const servicesArray = [];
+        res.services.forEach(service => {
+          servicesArray.push(service.serviceName)
+        });
+
+        setProviderList(servicesArray);
+      }).catch(err => {
+        console.log(err);
+      })
+  }
+
+  useEffect(() => {
+    getServiceList();
+  }, [])
+
+
   const [fieldValues, setFieldValues] = useState({
-    eventDate: "",
+    eventDate: '',
+    eventService: '',
+    eventProvider: ''
   });
 
   const [errors, setErrors] = useState({
-    eventDate: "",
+    eventDate: '',
+    eventService: '',
+    eventProvider: ''
   });
 
   const [isRegisterSuccess, setIsRegisterSuccess] = useState(false);
@@ -20,7 +58,9 @@ export default function NewEventForm({ user }) {
   const [formAlertType, setFormAlertType] = useState('');
 
   const references = {
-    eventDate: useRef()
+    eventDate: useRef(),
+    eventService: useRef(),
+    eventProvider: useRef()
   };
 
   const errorTypes = {
@@ -33,6 +73,12 @@ export default function NewEventForm({ user }) {
 
   const validators = {
     eventDate: {
+      required: isNotEmpty
+    },
+    eventService: {
+      required: isNotEmpty
+    },
+    eventProvider: {
       required: isNotEmpty
     }
   }
@@ -171,6 +217,29 @@ export default function NewEventForm({ user }) {
       <form onSubmit={handleSubmit} noValidate
         className={`text-center my-4 mb-3 needs-validation ${formWasValidated ? 'was-validated' : ''}`}>
 
+        <InputFieldSet
+          reference={references.eventService}
+          name="eventService"
+          labelText="Szolgáltatás típusa"
+          type="select"
+          errors={errors}
+          fieldValues={fieldValues}
+          handleInputBlur={handleInputBlur}
+          handleInputChange={handleInputChange}
+          required
+          optionsArray={providerList}
+        />
+        <InputFieldSet
+          reference={references.eventProvider}
+          name="eventProvider"
+          labelText="Szakember kiválasztása"
+          type="select"
+          errors={errors}
+          fieldValues={fieldValues}
+          handleInputBlur={handleInputBlur}
+          handleInputChange={handleInputChange}
+          required
+        />
         <InputFieldSet
           reference={references.eventDate}
           name="eventDate"
