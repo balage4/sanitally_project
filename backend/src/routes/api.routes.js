@@ -16,7 +16,10 @@ router.post('/register', userController.registerUser);
 router.post('/events/new', tokenCheck, eventController.createNewEvent);
 
 router.get('/admin/services', tokenCheck, adminCheck, serviceController.getServices);
+router.get('/admin/services/:id', tokenCheck, adminCheck, serviceController.getServiceById);
+
 router.post('/admin/services/new', tokenCheck, adminCheck, serviceController.createService);
+router.put('/admin/services/:id', tokenCheck, adminCheck, serviceController.updateService);
 router.delete('/admin/services/:id', tokenCheck, adminCheck, serviceController.deleteService);
 
 export default router;

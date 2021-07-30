@@ -39,6 +39,24 @@ export const servService = {
       return { status: 500, error: 'Something went wrong' };
     }
   },
+  async getServiceById(id) {
+    try {
+      const serviceData = await Service.findById(id).exec();
+      return { status: 200, serviceData };
+    } catch (err) {
+      logger.error(err);
+      return { status: 500, error: 'Something went wrong' };
+    }
+  },
+  async updateService(data) {
+    try {
+      await Service.findByIdAndUpdate(`{${data.id}},{${data.updateData}`);
+      return { status: 200, message: 'Successful update!' };
+    } catch (err) {
+      logger.error(err);
+      return { status: 500, error: 'Something went wrong' };
+    }
+  },
   async deleteService(id) {
     try {
       await Service.findByIdAndRemove(id);

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom"
 import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar"
 import NewServiceForm from "./NewServiceForm";
@@ -7,26 +7,31 @@ import NewServiceForm from "./NewServiceForm";
 
 export default function NewService({ user, setUser }) {
   const { id } = useParams();
+
   const [serviceData, setServiceData] = useState(null);
   const [fetchError, setFetchError] = useState(null);
 
-  if (id) {
-    fetch(`http://localhost:5000/admin/services/${id}`, {
-      method: 'GET',
-      mode: 'cors',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${user.token}`
-      },
-      body: null,
-    })
-      .then(res => res.json())
-      .then(res => {
-        if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
-        setServiceData(res.service);
-      }).catch(err => setFetchError(err.message));
-  }
+  useEffect(() => {
+    if (id) {
+      fetch(`http://localhost:5000/api/admin/services/${id}`, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user.token}`
+        },
+        body: null,
+      })
+        .then(res => res.json())
+        .then(res => {
+          if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+          setServiceData(res.serviceData);
+        }).catch(err => setFetchError(err.message));
+    }
+
+  }, [])
+
 
   return (
     <div className="new-service">
@@ -38,7 +43,12 @@ export default function NewService({ user, setUser }) {
           {fetchError}
         </div>
       )}
-      <NewServiceForm token={user.token} serviceData={serviceData} />
+      {!serviceData && <NewServiceForm
+        token={user.token} />}
+      {serviceData && <NewServiceForm
+        token={user.token}
+        id={id}
+        serviceData={serviceData} />}
     </div>
   )
 }

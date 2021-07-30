@@ -2,11 +2,19 @@
 import React, { useState, useRef } from 'react';
 import InputFieldSet from '../../InputFieldSet';
 
-export default function NewServiceForm({ token }) {
-  const [fieldValues, setFieldValues] = useState({
-    serviceName: '',
-    serviceNote: '',
-  });
+export default function NewServiceForm({ token, id, serviceData }) {
+  const [fieldValues, setFieldValues] = useState(() => {
+    if (serviceData) {
+      return {
+        serviceName: serviceData.serviceName,
+        serviceNote: serviceData.serviceNote,
+      };
+    } return {
+      serviceName: '',
+      serviceNote: '',
+    }
+  }
+  );
 
   const [errors, setErrors] = useState({
     serviceName: '',
@@ -103,6 +111,7 @@ export default function NewServiceForm({ token }) {
 
   const endpoint = {
     newService: `${backendUrl}/api/admin/services/new`,
+    editService: `${backendUrl}/api/admin/services/${id}`
   };
 
   function handleSubmit(e) {
@@ -111,41 +120,79 @@ export default function NewServiceForm({ token }) {
     setFormAlertType('');
     setFormWasValidated(false);
 
-    const isValid = isFormValid();
+    if (isFormValid()) {
 
-    if (isValid) {
-      fetch(endpoint.newService, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          serviceName: fieldValues.serviceName,
-          serviceNote: fieldValues.serviceNote,
-        }),
-      })
-        .then(res => res.json())
-        .then(res => {
-          if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
-          setFieldValues({
-            serviceName: '',
-            serviceNote: '',
-          });
-          setFormAlertText('Sikeres mentés');
-          setFormAlertType('primary');
+      if (id) {
+        fetch(endpoint.editService, {
+          method: 'PUT',
+          mode: 'cors',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            id,
+            updateData: {
+              serviceName: fieldValues.serviceName,
+              serviceNote: fieldValues.serviceNote,
+            }
+          }),
         })
-        .catch(error => {
-          setFormWasValidated(false);
-          setFormAlertText(error.message);
-          setFormAlertType('danger');
-          setFieldValues({
-            serviceName: '',
-            serviceNote: '',
+          .then(res => res.json())
+          .then(res => {
+            if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+            setFieldValues({
+              serviceName: '',
+              serviceNote: '',
+            });
+            setFormAlertText('Sikeres módosítás');
+            setFormAlertType('primary');
+          })
+          .catch(error => {
+            setFormWasValidated(false);
+            setFormAlertText(error.message);
+            setFormAlertType('danger');
+            setFieldValues({
+              serviceName: '',
+              serviceNote: '',
+            });
           });
-        });
+      } else {
+        fetch(endpoint.newService, {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            serviceName: fieldValues.serviceName,
+            serviceNote: fieldValues.serviceNote,
+          }),
+        })
+          .then(res => res.json())
+          .then(res => {
+            if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+            setFieldValues({
+              serviceName: '',
+              serviceNote: '',
+            });
+            setFormAlertText('Sikeres mentés');
+            setFormAlertType('primary');
+          })
+          .catch(error => {
+            setFormWasValidated(false);
+            setFormAlertText(error.message);
+            setFormAlertType('danger');
+            setFieldValues({
+              serviceName: '',
+              serviceNote: '',
+            });
+          });
+      }
+
     }
     setFormWasValidated(true);
     setFormAlertText('');
@@ -158,7 +205,7 @@ export default function NewServiceForm({ token }) {
   }
 
   return (
-    <main className="d-flex justify-content-center py-5">
+    <main className="d-flex justify-content-center">
       <form
         onSubmit={handleSubmit}
         noValidate
@@ -188,7 +235,7 @@ export default function NewServiceForm({ token }) {
           required
         />
         <button type="submit" className="btn login-btn">
-          Rögzítés
+          {serviceData ? 'Módosítás' : 'Rögzítés'}
         </button>
         {formAlertText && (
           <div className={`alert mt-3 alert-${formAlertType}`} role="alert">
