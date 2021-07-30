@@ -9,7 +9,7 @@ export default function InputFieldSet({
   handleInputBlur,
   required,
   reference,
-  optionsArray
+  optionsarray
 }) {
   const label = (<label htmlFor={name}>{labelText}</label>);
   let input;
@@ -56,13 +56,13 @@ export default function InputFieldSet({
           id={name}
           value={fieldValues[name]}
           onChange={handleInputChange}
-          optionsArray={optionsArray}
+          optionsarray={optionsarray}
           onBlur={handleInputBlur}
           required={required}
           ref={reference}
         >
           <option value=''>Válassz!</option>
-          {optionsArray && (optionsArray.map(option => (
+          {optionsarray && (optionsarray.map(option => (
             <option
               key={option}
               value={option}>{option}</option>
@@ -73,7 +73,7 @@ export default function InputFieldSet({
     input = (
       <div className="form-group" data-checkboxgroup={name}>
         <label htmlFor={name}>{labelText}</label>
-        {optionsArray.map(option => (
+        {optionsarray.map(option => (
           <div className="form-check">
             <input
               className="form-check-input"
@@ -95,7 +95,7 @@ export default function InputFieldSet({
     input = (
       <>
         <label htmlFor={name}>{labelText}</label>
-        {optionsArray.map(option => (
+        {optionsarray.map(option => (
           <div className="form-check">
             <input
               className="form-check-input"

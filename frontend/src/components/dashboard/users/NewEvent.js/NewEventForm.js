@@ -225,7 +225,7 @@ export default function NewEventForm({ user }) {
           handleInputBlur={handleInputBlur}
           handleInputChange={handleInputChange}
           required
-          optionsArray={providerList}
+          optionsarray={providerList}
         />
         <InputFieldSet
           reference={references.eventProvider}
