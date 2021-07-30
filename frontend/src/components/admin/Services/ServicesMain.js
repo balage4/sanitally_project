@@ -1,7 +1,7 @@
 /* import { useState } from "react"; */
 import { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import fetchWithAuth from "../../../utilities";
+/* import fetchWithAuth from "../../../utilities"; */
 import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar";
 import ServicesTable from "./ServicesTable";
 
@@ -15,7 +15,18 @@ export default function ServicesMain({ user, setUser }) {
   const history = useHistory();
 
   async function fetchServices() {
-    fetchWithAuth('http://localhost:5000/api/admin/services', user.token, 'GET', null)
+    const options = {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`
+      },
+      body: null,
+    }
+    fetch('http://localhost:5000/api/services', options)
+      .then(res => res.json())
       .then(res => {
         if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
         setListOfServices(res);
