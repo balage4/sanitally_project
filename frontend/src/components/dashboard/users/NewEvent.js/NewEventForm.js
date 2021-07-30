@@ -6,6 +6,7 @@ import InputFieldSet from "../../../InputFieldSet";
 export default function NewEventForm({ user }) {
 
   const [providerList, setProviderList] = useState([]);
+  const [fetchError, setFetchError] = useState(null);
 
   async function getServiceList() {
     const options = {
@@ -26,11 +27,8 @@ export default function NewEventForm({ user }) {
         res.services.forEach(service => {
           servicesArray.push(service.serviceName)
         });
-
         setProviderList(servicesArray);
-      }).catch(err => {
-        console.log(err);
-      })
+      }).catch(err => setFetchError(err.message));
   }
 
   useEffect(() => {
@@ -259,6 +257,11 @@ export default function NewEventForm({ user }) {
             {formAlertText}
           </div>
         }
+        {fetchError && (
+          <div className="alert alert-danger" role="alert">
+            {fetchError}
+          </div>
+        )}
 
       </form>
     </main>
