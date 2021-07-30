@@ -70,7 +70,7 @@ export const userService = {
       await user.save();
 
       return {
-        status: 204,
+        status: 201,
         message: 'User created'
       };
 

@@ -60,7 +60,7 @@ export const servService = {
   async deleteService(id) {
     try {
       await Service.findByIdAndRemove(id);
-      return { status: 200 };
+      return { status: 202 };
     } catch (err) {
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };
