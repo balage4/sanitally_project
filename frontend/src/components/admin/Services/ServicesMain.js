@@ -32,13 +32,37 @@ export default function ServicesMain({ user, setUser }) {
       .catch(err => setFetchError(err.message));
 
 
-  }, [])
+  }, []);
+
+  function handleDeleteService(id) {
+    fetch('http://localhost:5000/api/admin/services/delete', {
+      method: 'DELETE',
+      mode: 'cors',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`
+      },
+      body: {
+        id
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+
+        if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+
+        setListOfServices(res);
+
+      })
+      .catch(err => setFetchError(err.message));
+  }
 
   function handleActionButtons(e) {
     const { id } = e.target.dataset;
-    /*     if (e.target.name === 'Delete') handleDeleteUser(id);
-        else if (e.target.name === 'Edit') handleModifyUser(id);
-     */
+    if (e.target.name === 'Delete') handleDeleteService(id);
+    /*  else if (e.target.name === 'Edit') handleModifyUser(id); */
+
     console.log(e.target.name, id);
   }
 
