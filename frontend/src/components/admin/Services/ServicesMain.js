@@ -7,10 +7,10 @@ import ServicesTable from "./ServicesTable";
 export default function ServicesMain({ user, setUser }) {
 
   const [listOfServices, setListOfServices] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
   const [fetchError, setFetchError] = useState(null);
 
-  useEffect(() => {
-
+  async function fetchServices() {
     fetch('http://localhost:5000/api/admin/services', {
       method: 'GET',
       mode: 'cors',
@@ -23,19 +23,18 @@ export default function ServicesMain({ user, setUser }) {
     })
       .then(res => res.json())
       .then(res => {
-
         if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
-
         setListOfServices(res);
-
       })
       .catch(err => setFetchError(err.message));
+  }
 
-
+  useEffect(() => {
+    fetchServices();
   }, []);
 
-  function handleDeleteService(id) {
-    fetch('http://localhost:5000/api/admin/services/delete', {
+  async function handleDeleteService(id) {
+    fetch(`http://localhost:5000/api/admin/services/${id}`, {
       method: 'DELETE',
       mode: 'cors',
       headers: {
@@ -43,27 +42,24 @@ export default function ServicesMain({ user, setUser }) {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${user.token}`
       },
-      body: {
-        id
-      },
+      body: null
     })
       .then(res => res.json())
       .then(res => {
-
         if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
-
-        setListOfServices(res);
-
+        setSuccessMessage('Delete service successful!');
+        fetchServices();
+        setTimeout(() => {
+          setSuccessMessage(null);
+        }, 2000);
       })
       .catch(err => setFetchError(err.message));
   }
 
   function handleActionButtons(e) {
     const { id } = e.target.dataset;
-    if (e.target.name === 'Delete') handleDeleteService(id);
+    if (e.target.name === 'Törlés') handleDeleteService(id);
     /*  else if (e.target.name === 'Edit') handleModifyUser(id); */
-
-    console.log(e.target.name, id);
   }
 
 
@@ -80,6 +76,11 @@ export default function ServicesMain({ user, setUser }) {
       {fetchError && (
         <div className="alert alert-danger" role="alert">
           {fetchError}
+        </div>
+      )}
+      {successMessage && (
+        <div className="container text-center col-4 alert alert-info" role="alert">
+          {successMessage}
         </div>
       )}
 

@@ -127,11 +127,9 @@ export default function NewServiceForm({ token }) {
           serviceNote: fieldValues.serviceNote,
         }),
       })
+        .then(res => res.json())
         .then(res => {
           if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
-          return res.json();
-        })
-        .then(() => {
           setFieldValues({
             serviceName: '',
             serviceNote: '',
@@ -182,7 +180,7 @@ export default function NewServiceForm({ token }) {
           reference={references.serviceNote}
           name="serviceNote"
           labelText="Szolgáltatás rövid leírása"
-          type="text"
+          type="textarea"
           errors={errors}
           fieldValues={fieldValues}
           handleInputBlur={handleInputBlur}

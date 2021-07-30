@@ -30,7 +30,7 @@ export default function ServicesTable({ listOfServices, handleActionButtons }) {
               {headerMap.map((headerName, tdIndex) => {
                 if (headerMap[tdIndex][0] === '_id') {
                   return (
-                    <td>{servIndex + 1}</td>
+                    <td key={`td_${tdIndex + 1}`}>{servIndex + 1}</td>
                   )
                 }
                 return (<td key={`td_${tdIndex + 1}`}>{service[headerName[0]]}</td>)
