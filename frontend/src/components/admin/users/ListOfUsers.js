@@ -10,6 +10,7 @@ export default function ListOfUsers({ user, setUser }) {
 
   const [listOfUsers, setListOfUsers] = useState(null);
   const [fetchError, setFetchError] = useState(null);
+  const [fetchMessage, setFetchMessage] = useState(null);
 
   const {
     REACT_APP_BACKEND_PROTOCOL,
@@ -23,16 +24,20 @@ export default function ListOfUsers({ user, setUser }) {
   }
 
   async function handleDeleteUser(id) {
-    await fetch(`${backend.users}/${id}`, {
-      method: 'DELETE',
-      mode: 'cors',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: null
-    })
+    try {
+      const response = await fetchWithAuth(`${backend.users}/${id}`, user.token, 'DELETE', null)
+      setFetchMessage(response.message);
+      setTimeout(() => {
+        setFetchMessage(null);
+      }, 2000);
+    } catch (err) {
+      setFetchError(err.message);
+      setTimeout(() => {
+        setFetchError(null);
+      }, 2000);
+    }
   }
+
   function handleModifyUser(id) {
     return <Redirect to={`/users/${id}`} />
   }
@@ -67,6 +72,11 @@ export default function ListOfUsers({ user, setUser }) {
         {fetchError && (
           <div className="alert alert-danger" role="alert">
             {fetchError}
+          </div>
+        )}
+        {fetchMessage && (
+          <div className="alert alert-info" role="alert">
+            {fetchMessage}
           </div>
         )}
       </div>
