@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import Table from "./Table";
 import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar";
+import fetchWithAuth from "../../../utilities";
 
 // eslint-disable-next-line react/prop-types
 export default function ListOfUsers({ user, setUser }) {
@@ -36,24 +37,14 @@ export default function ListOfUsers({ user, setUser }) {
     return <Redirect to={`/users/${id}`} />
   }
 
-  useEffect(() => {
-    fetch(backend.users, {
-      method: 'GET',
-      mode: 'cors',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.token}`
-      },
-    })
-      .then(response => response.json())
-      .then(response => {
-        if (response.status < 200 || response.status >= 300) throw new Error(response.error);
-        else setListOfUsers(response.users);
 
-      })
-      .catch(err => setFetchError(err.message))
-
+  useEffect(async () => {
+    try {
+      const response = await fetchWithAuth(backend.users, user.token, 'GET', null);
+      setListOfUsers(response.users);
+    } catch (err) {
+      setFetchError(err.message);
+    }
   }, []);
 
 
