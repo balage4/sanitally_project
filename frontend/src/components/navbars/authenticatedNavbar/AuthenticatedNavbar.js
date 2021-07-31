@@ -5,7 +5,7 @@ import AuthNavMenu from "./AuthNavMenu";
 export default function AuthenticatedNavbar({ user, setUser }) {
 
   function logoutUser() {
-    localStorage.clear();
+    localStorage.removeItem('user');
     setUser(null);
   }
 

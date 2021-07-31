@@ -1,14 +1,16 @@
-const fetchWithAuth = async (url, token, method, body) => {
-  fetch(url, {
-    method,
+const fetchWithAuth = async (url, token, requestMethod, requestBody) => {
+  const response = await fetch(url, {
+    method: requestMethod,
     mode: 'cors',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
-    body
-  }).then(res => res.json());
+    body: requestBody
+  });
+  const jsonResponse = await response.json();
+  return jsonResponse;
 }
 
 export default fetchWithAuth;

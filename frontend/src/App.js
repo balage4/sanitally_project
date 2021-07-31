@@ -7,7 +7,7 @@ import Registration from './components/registration/Registration';
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 import ListOfUsers from './components/admin/users/ListOfUsers';
 import './scss/global.scss';
-import NewEvent from './components/dashboard/users/NewEvent.js/NewEvent';
+import NewEvent from './components/dashboard/users/NewEvent/NewEvent';
 import AdminMain from './components/admin/Admin.js/AdminMain';
 import ServicesMain from './components/admin/Services/ServicesMain';
 import NewService from './components/admin/Services/NewService';
