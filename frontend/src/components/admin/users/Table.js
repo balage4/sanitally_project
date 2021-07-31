@@ -16,23 +16,25 @@ export default function Table({ listOfUsers, handleActionButtons }) {
     <div className="container">
       <table className="table table-striped">
         <thead>
-          {headerMap.map((header, i) => (
-            <th
-              key={header[i]}
-            >{headerMap[i][1]}</th>
-          ))}
-          <th>Actions</th>
+          <tr>
+            {headerMap.map((header, i) => (
+              <th
+                key={`th_${i + 1}`}
+              >{headerMap[i][1]}</th>
+            ))}
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody>
-          {listOfUsers.map(user => (
-            <tr key={`tr_${user._id}`}>
+          {listOfUsers.map((user, userIndex) => (
+            <tr key={`tr_${userIndex + 1}`}>
               {headerMap.map((headerName, i) => {
                 if (headerMap[i][0] === '_id') {
                   return (
-                    <td key={`td_${user._id}`}>{i + 1}</td>
+                    <td key={`td_${i + 1}`}>{i + 1}</td>
                   )
                 }
-                return (<td key={`td_${user._id}`}>{user[headerName[0]]}</td>)
+                return (<td key={`td_${i + 1}`}>{user[headerName[0]]}</td>)
 
               })}
               <td><ActionButtons
