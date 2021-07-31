@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: 'user'
   },
-  provider: {
+  providerTitle: {
     type: String
   }
 });

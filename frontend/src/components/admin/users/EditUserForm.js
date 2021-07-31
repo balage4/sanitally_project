@@ -11,7 +11,7 @@ export default function EditUserForm({ user }) {
     firstName: '',
     lastName: '',
     role: '',
-    provider: ''
+    providerTitle: ''
   });
 
   const [formAlertText, setFormAlertText] = useState('');
@@ -25,7 +25,7 @@ export default function EditUserForm({ user }) {
         firstName: res.userData.firstName,
         lastName: res.userData.lastName,
         role: res.userData.role,
-        provider: res.userData.provider
+        providerTitle: res.userData.providerTitle
       });
     } catch (err) { setFormAlertText(err.message); }
   }
@@ -39,7 +39,7 @@ export default function EditUserForm({ user }) {
     firstName: '',
     lastName: '',
     role: '',
-    provider: ''
+    providerTitle: ''
   });
 
   const [formWasValidated, setFormWasValidated] = useState(false);
@@ -48,7 +48,7 @@ export default function EditUserForm({ user }) {
     firstName: useRef(),
     lastName: useRef(),
     role: useRef(),
-    provider: useRef()
+    providerTitle: useRef()
   };
 
   function isNotEmpty(value) {
@@ -196,9 +196,9 @@ export default function EditUserForm({ user }) {
           required
         />
         <InputFieldSet
-          reference={references.provider}
-          name="provider"
-          labelText="Provider"
+          reference={references.providerTitle}
+          name="providerTitle"
+          labelText="Provider title"
           type="text"
           errors={errors}
           fieldValues={fieldValues}
