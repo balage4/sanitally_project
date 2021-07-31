@@ -43,14 +43,12 @@ export default function ServicesMain({ user, setUser }) {
     history.push(`/admin/services/${id}`);
   }
 
-
   function handleActionButtons(e) {
     const { id } = e.target.dataset;
 
     if (e.target.name === 'Törlés') handleDeleteService(id);
     else if (e.target.name === 'Módosítás') handleModifyService(id);
   }
-
 
   return (
     <div className="services">

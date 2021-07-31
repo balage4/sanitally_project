@@ -36,7 +36,6 @@ export default function ListOfUsers({ user, setUser }) {
     fetchUsers();
   }, []);
 
-
   async function handleDeleteUser(id) {
     try {
       const response = await fetchWithAuth(`${backend.users}/${id}`, user.token, 'DELETE', null)

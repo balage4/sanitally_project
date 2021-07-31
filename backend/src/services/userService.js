@@ -97,7 +97,6 @@ export const userService = {
 
   async deleteUser(id) {
     try {
-      console.log(id);
       await User.findByIdAndRemove(id);
       return { status: 202, message: 'Successful delete' };
     } catch (err) {
