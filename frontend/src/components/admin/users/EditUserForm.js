@@ -205,6 +205,7 @@ export default function EditUserForm({ user }) {
           handleInputBlur={handleInputBlur}
           handleInputChange={handleInputChange}
           required
+          disabled={fieldValues.role !== 'provider'}
         />
         <button type="submit" className="btn login-btn">
           Módosítás

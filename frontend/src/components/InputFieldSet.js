@@ -9,7 +9,8 @@ export default function InputFieldSet({
   handleInputBlur,
   required,
   reference,
-  optionsarray
+  optionsarray,
+  disabled,
 }) {
   const label = (<label htmlFor={name}>{labelText}</label>);
   let input;
@@ -28,6 +29,7 @@ export default function InputFieldSet({
           onBlur={handleInputBlur}
           required={required}
           ref={reference}
+          disabled={disabled}
         />
       </>)
   } else if (type === 'textarea') {
