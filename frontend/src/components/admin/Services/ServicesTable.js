@@ -25,7 +25,7 @@ export default function ServicesTable({ listOfServices, handleActionButtons }) {
           </tr>
         </thead>
         <tbody>
-          {listOfServices.services.map((service, servIndex) => (
+          {listOfServices.map((service, servIndex) => (
             <tr key={`tr_${servIndex + 1}`}>
               {headerMap.map((headerName, tdIndex) => {
                 if (headerMap[tdIndex][0] === '_id') {

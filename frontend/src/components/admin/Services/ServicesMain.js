@@ -1,6 +1,7 @@
 /* import { useState } from "react"; */
 import { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import fetchWithAuth from "../../../utilities";
 /* import fetchWithAuth from "../../../utilities"; */
 import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar";
 import ServicesTable from "./ServicesTable";
@@ -15,23 +16,11 @@ export default function ServicesMain({ user, setUser }) {
   const history = useHistory();
 
   async function fetchServices() {
-    const options = {
-      method: 'GET',
-      mode: 'cors',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${user.token}`
-      },
-      body: null,
-    }
-    fetch('http://localhost:5000/api/services', options)
-      .then(res => res.json())
-      .then(res => {
-        if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
-        setListOfServices(res);
-      })
-      .catch(err => setFetchError(err.message));
+    try {
+      const res = await fetchWithAuth('http://localhost:5000/api/services', user.token, 'GET', null);
+      if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+      setListOfServices(res.services);
+    } catch (err) { setFetchError(err.message) };
   }
 
   useEffect(() => {
@@ -39,26 +28,15 @@ export default function ServicesMain({ user, setUser }) {
   }, []);
 
   async function handleDeleteService(id) {
-    fetch(`http://localhost:5000/api/admin/services/${id}`, {
-      method: 'DELETE',
-      mode: 'cors',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${user.token}`
-      },
-      body: null
-    })
-      .then(res => res.json())
-      .then(res => {
-        if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
-        setSuccessMessage('Delete service successful!');
-        fetchServices();
-        setTimeout(() => {
-          setSuccessMessage(null);
-        }, 2000);
-      })
-      .catch(err => setFetchError(err.message));
+    try {
+      const res = await fetchWithAuth(`http://localhost:5000/api/admin/services/${id}`, user.token, 'DELETE', null);
+      if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+      setSuccessMessage('Delete service successful!');
+      fetchServices();
+      setTimeout(() => {
+        setSuccessMessage(null);
+      }, 2000);
+    } catch (err) { setFetchError(err.message) };
   }
 
   function handleModifyService(id) {

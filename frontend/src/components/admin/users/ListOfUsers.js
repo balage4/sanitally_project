@@ -23,10 +23,25 @@ export default function ListOfUsers({ user, setUser }) {
     users: `${REACT_APP_BACKEND_PROTOCOL}://${REACT_APP_BACKEND_HOST}:${REACT_APP_BACKEND_PORT}/${REACT_APP_BACKEND_ROUTE}/admin/users`,
   }
 
+  async function fetchUsers() {
+    try {
+      const response = await fetchWithAuth(backend.users, user.token, 'GET', null);
+      setListOfUsers(response.users);
+    } catch (err) {
+      setFetchError(err.message);
+    }
+  }
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+
   async function handleDeleteUser(id) {
     try {
       const response = await fetchWithAuth(`${backend.users}/${id}`, user.token, 'DELETE', null)
       setFetchMessage(response.message);
+      fetchUsers();
       setTimeout(() => {
         setFetchMessage(null);
       }, 2000);
@@ -41,17 +56,6 @@ export default function ListOfUsers({ user, setUser }) {
   function handleModifyUser(id) {
     return <Redirect to={`/users/${id}`} />
   }
-
-
-  useEffect(async () => {
-    try {
-      const response = await fetchWithAuth(backend.users, user.token, 'GET', null);
-      setListOfUsers(response.users);
-    } catch (err) {
-      setFetchError(err.message);
-    }
-  }, []);
-
 
   function handleActionButtons(e) {
     const { id } = e.target.dataset;
