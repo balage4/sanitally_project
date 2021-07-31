@@ -20,6 +20,8 @@ router.post('/events/new', tokenCheck, eventController.createNewEvent);
 router.get('/services', tokenCheck, serviceController.getServices);
 
 router.get('/admin/users', tokenCheck, adminCheck, userController.getUsers);
+router.delete('/admin/users/:id', tokenCheck, adminCheck, userController.deleteUser);
+
 router.get('/admin/services/:id', tokenCheck, adminCheck, serviceController.getServiceById);
 router.post('/admin/services/new', tokenCheck, adminCheck, serviceController.createService);
 router.put('/admin/services/:id', tokenCheck, adminCheck, serviceController.updateService);

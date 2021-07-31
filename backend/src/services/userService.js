@@ -93,5 +93,16 @@ export const userService = {
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };
     }
+  },
+
+  async deleteUser(id) {
+    try {
+      console.log(id);
+      await User.findByIdAndRemove(id);
+      return { status: 202, message: 'Successful delete' };
+    } catch (err) {
+      logger.error(err);
+      return { status: 500, error: 'Something went wrong' };
+    }
   }
 }

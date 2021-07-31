@@ -19,5 +19,9 @@ export const userController = {
   async getUsers(req, res) {
     const users = await userService.getUsers();
     res.status(users.status).json(users);
+  },
+  async deleteUser(req, res) {
+    const users = await userService.deleteUser(req.params.id);
+    res.status(users.status).json(users);
   }
 }

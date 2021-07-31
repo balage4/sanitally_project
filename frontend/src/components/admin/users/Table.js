@@ -25,14 +25,14 @@ export default function Table({ listOfUsers, handleActionButtons }) {
         </thead>
         <tbody>
           {listOfUsers.map(user => (
-            <tr key={user._id}>
+            <tr key={`tr_${user._id}`}>
               {headerMap.map((headerName, i) => {
                 if (headerMap[i][0] === '_id') {
                   return (
-                    <td key={user._id}>{i + 1}</td>
+                    <td key={`td_${user._id}`}>{i + 1}</td>
                   )
                 }
-                return (<td key={user._id}>{user[headerName[0]]}</td>)
+                return (<td key={`td_${user._id}`}>{user[headerName[0]]}</td>)
 
               })}
               <td><ActionButtons
