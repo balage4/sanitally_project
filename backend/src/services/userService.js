@@ -95,6 +95,23 @@ export const userService = {
     }
   },
 
+  async updateUser(data) {
+    try {
+      const updateResponse = await User.findByIdAndUpdate(data.id, {
+        $set: {
+          firstName: data.updateData.serviceName,
+          lastName: data.updateData.serviceNote,
+          role: data.updateData.role,
+          providerTitle: data.updateData.providerTitle
+        }
+      });
+      return { status: 200, message: updateResponse };
+    } catch (err) {
+      logger.error(err);
+      return { status: 500, error: 'Something went wrong' };
+    }
+  },
+
   async deleteUser(id) {
     try {
       await User.findByIdAndRemove(id);

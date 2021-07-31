@@ -24,8 +24,8 @@ export default function EditUserForm({ user }) {
       setFieldValues({
         firstName: res.userData.firstName,
         lastName: res.userData.lastName,
-        role: res.userData.role,
-        providerTitle: res.userData.providerTitle
+        role: res.userData.role ? res.userData.role : '',
+        providerTitle: res.userData.providerTitle ? res.userData.providerTitle : ''
       });
     } catch (err) { setFormAlertText(err.message); }
   }
@@ -121,18 +121,6 @@ export default function EditUserForm({ user }) {
     }));
   }
 
-  const backend = {
-    protocol: 'http',
-    host: 'localhost',
-    port: 5000,
-  };
-
-  const backendUrl = `${backend.protocol}://${backend.host}:${backend.port}`;
-
-  const endpoint = {
-    editUser: `${backendUrl}/api/admin/users/${id}`
-  };
-
   function handleSubmit(e) {
     e.preventDefault();
     setFormAlertText('');
@@ -140,7 +128,10 @@ export default function EditUserForm({ user }) {
 
     if (isFormValid()) {
       try {
-        fetchWithAuth(endpoint.editUser, user.token, 'PUT', fieldValues);
+        fetchWithAuth('http://localhost:5000/api/admin/users', user.token, 'PUT', JSON.stringify({
+          id,
+          updateData: fieldValues
+        }));
       } catch (err) {
         setFormAlertText(err.message);
       }

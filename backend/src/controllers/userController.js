@@ -20,6 +20,10 @@ export const userController = {
     const users = await userService.getUsers();
     res.status(users.status).json(users);
   },
+  async updateUser(req, res) {
+    const users = await userService.updateUser(req.body);
+    res.status(users.status).json(users);
+  },
   async deleteUser(req, res) {
     const users = await userService.deleteUser(req.params.id);
     res.status(users.status).json(users);
