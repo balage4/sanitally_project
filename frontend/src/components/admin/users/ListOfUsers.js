@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Table from "./Table";
 import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar";
 import fetchWithAuth from "../../../utilities";
 
 // eslint-disable-next-line react/prop-types
 export default function ListOfUsers({ user, setUser }) {
+
+  const history = useHistory();
 
   const [listOfUsers, setListOfUsers] = useState(null);
   const [fetchError, setFetchError] = useState(null);
@@ -53,7 +55,7 @@ export default function ListOfUsers({ user, setUser }) {
   }
 
   function handleModifyUser(id) {
-    return <Redirect to={`/users/${id}`} />
+    history.push(`/admin/users/${id}`);
   }
 
   function handleActionButtons(e) {

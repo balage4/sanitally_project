@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import fetchWithAuth from "../../../utilities";
-/* import fetchWithAuth from "../../../utilities"; */
 import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar";
 import ServicesTable from "./ServicesTable";
 
