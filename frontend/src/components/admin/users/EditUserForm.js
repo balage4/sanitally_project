@@ -177,7 +177,7 @@ export default function EditUserForm({ user }) {
           reference={references.lastName}
           name="lastName"
           labelText="Last Name"
-          type="textarea"
+          type="text"
           errors={errors}
           fieldValues={fieldValues}
           handleInputBlur={handleInputBlur}
@@ -188,7 +188,7 @@ export default function EditUserForm({ user }) {
           reference={references.role}
           name="role"
           labelText="Role"
-          type="textarea"
+          type="text"
           errors={errors}
           fieldValues={fieldValues}
           handleInputBlur={handleInputBlur}
@@ -199,7 +199,7 @@ export default function EditUserForm({ user }) {
           reference={references.provider}
           name="provider"
           labelText="Provider"
-          type="textarea"
+          type="text"
           errors={errors}
           fieldValues={fieldValues}
           handleInputBlur={handleInputBlur}
