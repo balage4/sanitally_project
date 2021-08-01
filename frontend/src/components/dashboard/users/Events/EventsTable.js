@@ -1,15 +1,11 @@
-import ActionButtons from "./ActionButtons"
-
 /* eslint-disable react/prop-types */
-export default function Table({ listOfUsers, handleActionButtons }) {
+export default function EventsTable({ listOfEvents }) {
 
-  const buttonsArray = ['Edit', 'Delete'];
   const headerMap = [
     ['_id', 'ID'],
-    ['lastName', 'Last Name'],
-    ['firstName', 'First Name'],
-    ['email', 'Email'],
-    ['role', 'Role'],
+    ['eventDate', 'Date'],
+    ['eventService', 'Service'],
+    ['eventProvider', 'Provider'],
     ['providerTitle', 'Provider Title']
   ];
 
@@ -27,23 +23,16 @@ export default function Table({ listOfUsers, handleActionButtons }) {
           </tr>
         </thead>
         <tbody>
-          {listOfUsers.map((user, userIndex) => (
-            <tr key={`tr_${userIndex + 1}`}>
+          {listOfEvents.map((event, eventIndex) => (
+            <tr key={`tr_${eventIndex + 1}`}>
               {headerMap.map((headerName, i) => {
                 if (headerMap[i][0] === '_id') {
                   return (
-                    <td key={`td_${i + 1}`}>{userIndex + 1}</td>
+                    <td key={`td_${i + 1}`}>{eventIndex + 1}</td>
                   )
                 }
-                return (<td key={`td_${i + 1}`}>{user[headerName[0]]}</td>)
-
+                return (<td key={`td_${i + 1}`}>{event[headerName[0]]}</td>)
               })}
-              <td><ActionButtons
-                buttonsArray={buttonsArray}
-                actionId={user._id}
-                handleActionButtons={handleActionButtons}
-              /></td>
-
             </tr>
           ))}
         </tbody>

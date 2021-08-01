@@ -36,5 +36,14 @@ export const eventService = {
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };
     }
+  },
+  async getEventsByUserEmail(email) {
+    try {
+      const events = await Event.find({ "userEmail": email });
+      return { status: 200, events };
+    } catch (err) {
+      logger.error(err);
+      return { status: 500, error: 'Something went wrong' };
+    }
   }
 }

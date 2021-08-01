@@ -5,7 +5,6 @@ import Table from "./Table";
 import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar";
 import fetchWithAuth from "../../../utilities";
 
-// eslint-disable-next-line react/prop-types
 export default function ListOfUsers({ user, setUser }) {
 
   const history = useHistory();
