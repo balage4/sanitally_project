@@ -13,6 +13,7 @@ import ServicesMain from './components/admin/Services/ServicesMain';
 import NewService from './components/admin/Services/NewService';
 import EditUserForm from './components/admin/users/EditUserForm';
 import EventsMain from './components/dashboard/users/Events/EventsMain';
+import PrescriptionsMain from './components/Provider/Prescriptions/PrescriptionsMain';
 
 function getUser() {
   const storageUser = localStorage.getItem('user');
@@ -59,6 +60,9 @@ function App() {
           <ProtectedRoute
             exact path="/events/new"
             component={() => <NewEvent user={user} setUser={setUser} />} />
+          <ProtectedRoute
+            exact path="/provider/prescriptions"
+            component={() => <PrescriptionsMain user={user} setUser={setUser} />} />
         </Switch>
       </Router>
     </>

@@ -11,24 +11,26 @@ export default function AuthenticatedNavbar({ user, setUser }) {
 
   const menusByRoles = {
     user: [
-      'Events',
-      'My Profile'
+      'Események',
+      'Profil'
     ],
     admin: [
       'Admin',
-      'Events',
-      'My Profile'
+      'Események',
+      'Profil'
     ],
     provider: [
-      'Events',
-      'My profile'
+      'Események',
+      'Receptek',
+      'Profil'
     ]
   }
 
   const endpoints = {
-    'Events': '/events',
+    'Események': '/events',
     'Admin': '/admin',
-    'My Profile': '/profile'
+    'Receptek': '/provider/prescriptions',
+    'Profil': '/profile'
   }
 
   return (
