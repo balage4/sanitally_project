@@ -14,6 +14,7 @@ import NewService from './components/admin/Services/NewService';
 import EditUserForm from './components/admin/users/EditUserForm';
 import EventsMain from './components/dashboard/users/Events/EventsMain';
 import PrescriptionsMain from './components/Provider/Prescriptions/PrescriptionsMain';
+import NewPrescription from './components/Provider/Prescriptions/NewPrescription';
 
 function getUser() {
   const storageUser = localStorage.getItem('user');
@@ -63,6 +64,9 @@ function App() {
           <ProtectedRoute
             exact path="/provider/prescriptions"
             component={() => <PrescriptionsMain user={user} setUser={setUser} />} />
+          <ProtectedRoute
+            exact path="/provider/prescriptions/new"
+            component={() => <NewPrescription user={user} setUser={setUser} />} />
         </Switch>
       </Router>
     </>
