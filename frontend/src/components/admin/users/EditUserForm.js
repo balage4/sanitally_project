@@ -3,8 +3,9 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import fetchWithAuth from "../../../utilities";
 import InputFieldSet from "../../InputFieldSet";
+import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar";
 
-export default function EditUserForm({ user }) {
+export default function EditUserForm({ user, setUser }) {
   const { id } = useParams();
 
   const [fieldValues, setFieldValues] = useState({
@@ -16,16 +17,22 @@ export default function EditUserForm({ user }) {
 
   const [formAlertText, setFormAlertText] = useState('');
 
+  const rolesArray = [
+    'user',
+    'provider',
+    'admin',
+  ];
+
 
   async function getUserData() {
     try {
-      const res = fetchWithAuth(`http://localhost:5000/api/admin/users/${id}`);
+      const res = await fetchWithAuth(`http://localhost:5000/api/admin/users/${id}`, user.token, 'GET', null);
       if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
       setFieldValues({
-        firstName: res.userData.firstName,
-        lastName: res.userData.lastName,
-        role: res.userData.role ? res.userData.role : '',
-        providerTitle: res.userData.providerTitle ? res.userData.providerTitle : ''
+        firstName: res.singleUser.firstName ? res.singleUser.firstName : '',
+        lastName: res.singleUser.lastName ? res.singleUser.lastName : '',
+        role: res.singleUser.role ? res.singleUser.role : '',
+        providerTitle: res.singleUser.providerTitle ? res.singleUser.providerTitle : ''
       });
     } catch (err) { setFormAlertText(err.message); }
   }
@@ -147,6 +154,7 @@ export default function EditUserForm({ user }) {
 
   return (
     <main className="d-flex justify-content-center">
+      <AuthenticatedNavbar user={user} setUser={setUser} />
       <form
         onSubmit={handleSubmit}
         noValidate
@@ -179,11 +187,12 @@ export default function EditUserForm({ user }) {
           reference={references.role}
           name="role"
           labelText="Role"
-          type="text"
+          type="select"
           errors={errors}
           fieldValues={fieldValues}
           handleInputBlur={handleInputBlur}
           handleInputChange={handleInputChange}
+          optionsarray={rolesArray}
           required
         />
         <InputFieldSet
@@ -207,6 +216,6 @@ export default function EditUserForm({ user }) {
           </div>
         )}
       </form>
-    </main>
+    </main >
   );
 }

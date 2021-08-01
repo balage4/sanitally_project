@@ -95,16 +95,28 @@ export const userService = {
     }
   },
 
-  async updateUser(data) {
+  async getUserById(id) {
     try {
-      const updateResponse = await User.findByIdAndUpdate(data.id, {
-        $set: {
-          firstName: data.updateData.serviceName,
-          lastName: data.updateData.serviceNote,
+      const singleUser = await User.findById(id).exec();
+      return { status: 200, singleUser };
+    } catch (err) {
+      logger.error(err);
+      return { status: 500, error: 'Something went wrong' };
+    }
+  },
+
+  async updateUser(data) {
+    console.log(data.updateData)
+    try {
+      const updateResponse = await User.findByIdAndUpdate(data.id,
+        {
+          firstName: data.updateData.firstName,
+          lastName: data.updateData.lastName,
           role: data.updateData.role,
           providerTitle: data.updateData.providerTitle
-        }
-      });
+
+        }, { new: true }
+      );
       return { status: 200, message: updateResponse };
     } catch (err) {
       logger.error(err);
