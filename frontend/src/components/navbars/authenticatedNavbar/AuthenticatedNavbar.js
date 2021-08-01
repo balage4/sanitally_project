@@ -34,50 +34,48 @@ export default function AuthenticatedNavbar({ user, setUser }) {
   }
 
   return (
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <div className="container-fluid bg-dark">
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavDropdown"
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul className="navbar-nav me-auto">
-            <li className="nav-item d-flex align-items-center">
-              <Link className="link me-3" to="/dashboard">
-                Dashboard
-              </Link>
-            </li>
-          </ul>
+    <nav className="navbar navbar-expand-md">
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNavDropdown"
+      >
+        <span className="navbar-toggler-icon" />
+      </button>
+      <div className="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul className="navbar-nav me-auto">
+          <li className="nav-item d-flex align-items-center">
+            <Link className="link me-3" to="/dashboard">
+              Dashboard
+            </Link>
+          </li>
+        </ul>
 
 
-          <ul className="navbar-nav ms-auto">
+        <ul className="navbar-nav ms-auto">
 
-            <AuthNavMenu
-              // eslint-disable-next-line react/prop-types
-              menus={menusByRoles[user.role]}
-              endpoints={endpoints}
-              liClass='nav-item d-flex align-items-center'
-              linkClass='link me-3'
-            />
+          <AuthNavMenu
+            // eslint-disable-next-line react/prop-types
+            menus={menusByRoles[user.role]}
+            endpoints={endpoints}
+            liClass='nav-item d-flex align-items-center'
+            linkClass='link me-3'
+          />
 
-            <li
-              className="nav-item d-flex align-items-center text-white link me-3">
-              Bejelentkezve: {user.firstName}</li>
-            <li
-              className='nav-item d-flex align-items-center'>
-              <button
-                type="button"
-                className="btn btn-info"
-                onClick={logoutUser}
-              >Logout</button></li>
+          <li
+            className="nav-item d-flex align-items-center text-white link me-3">
+            Bejelentkezve: {user.firstName}</li>
+          <li
+            className='nav-item d-flex align-items-center'>
+            <button
+              type="button"
+              className="btn btn-info"
+              onClick={logoutUser}
+            >Logout</button></li>
 
-          </ul>
+        </ul>
 
-        </div>
       </div>
     </nav>
   );
