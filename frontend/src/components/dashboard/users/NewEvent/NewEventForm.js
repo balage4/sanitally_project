@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useRef, useEffect } from 'react';
-import { Redirect } from "react-router-dom";
 import fetchWithAuth from '../../../../utilities';
 import InputFieldSet from "../../../InputFieldSet";
 
@@ -68,11 +67,7 @@ export default function NewEventForm({ user }) {
     }
   }
 
-
-  const [isRegisterSuccess, setIsRegisterSuccess] = useState(false);
-
   const [formWasValidated, setFormWasValidated] = useState(false);
-
   const [formAlertText, setFormAlertText] = useState('');
   const [formAlertType, setFormAlertType] = useState('');
 
@@ -142,70 +137,24 @@ export default function NewEventForm({ user }) {
     return isValid;
   }
 
-  const backend = {
-    protocol: 'http',
-    host: '127.0.0.1',
-    port: 5000,
-  };
-
-  const backendUrl = `${backend.protocol}://${backend.host}:${backend.port}`;
-
-  const endpoint = {
-    newEvent: `${backendUrl}/api/events/new`,
-  };
-
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     setFormAlertText('');
     setFormAlertType('');
     setFormWasValidated(false);
 
-    const isValid = isFormValid();
-
-
-    if (isValid) {
-      fetch(endpoint.newEvent, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${user.token}`
-        },
-        body: JSON.stringify({
+    if (isFormValid()) {
+      try {
+        const res = await fetchWithAuth('http://localhost:5000/api/events/new', user.token, 'POST', JSON.stringify({
           userEmail: user.email,
-          eventDate: fieldValues.eventDate
-        })
-      })
-        .then((response) => {
-          if (response.status < 200 || response.status >= 300) {
-            const err = new Error();
-            err.response = response;
-            throw err;
-          }
-          if (response.status === 204) {
-            setFormWasValidated(true);
-            setFormAlertText('');
-            setFormAlertType('');
-            setIsRegisterSuccess(true);
-          }
-        })
-        .catch((error) => {
-          if (error.response) {
-            error.response.json().then(data => {
-              setFormWasValidated(false);
-              setFormAlertText(data.error);
-              setFormAlertType('danger');
-              setIsRegisterSuccess(false);
-            })
-          } else {
-            setFormWasValidated(false);
-            setFormAlertText("unknown error");
-            setFormAlertType('danger');
-            setIsRegisterSuccess(false);
-          }
-        })
+          eventDate: fieldValues.eventDate,
+          eventService: fieldValues.eventService,
+          eventProvider: fieldValues.eventProvider
+        }));
+        if (res.status < 200 || res.status >= 300) throw new Error(res.message);
+        setFormAlertText('Event Succesfully saved.');
+      } catch (err) { setFormAlertText(err.message) }
     }
   }
 
@@ -226,10 +175,6 @@ export default function NewEventForm({ user }) {
     const { name } = e.target;
     validateField(name);
     getProviderListByService();
-  }
-
-  if (isRegisterSuccess) {
-    return <Redirect to="/login" />;
   }
 
   return (

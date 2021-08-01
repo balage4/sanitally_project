@@ -12,6 +12,7 @@ import AdminMain from './components/admin/Admin.js/AdminMain';
 import ServicesMain from './components/admin/Services/ServicesMain';
 import NewService from './components/admin/Services/NewService';
 import EditUserForm from './components/admin/users/EditUserForm';
+import EventsMain from './components/dashboard/users/Events/EventsMain';
 
 function getUser() {
   const storageUser = localStorage.getItem('user');
@@ -52,6 +53,9 @@ function App() {
           <ProtectedRoute
             exact path="/admin"
             component={() => <AdminMain user={user} setUser={setUser} />} />
+          <ProtectedRoute
+            exact path="/events"
+            component={() => <EventsMain user={user} setUser={setUser} />} />
           <ProtectedRoute
             exact path="/events/new"
             component={() => <NewEvent user={user} setUser={setUser} />} />

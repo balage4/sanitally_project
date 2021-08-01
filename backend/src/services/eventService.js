@@ -10,15 +10,16 @@ export const eventService = {
       if (error) {
         return { status: 400, error: error.details[0].message }
       }
-
       const event = await new Event({
         userEmail: data.userEmail,
-        eventDate: data.eventDate
+        eventDate: data.eventDate,
+        eventService: data.eventService,
+        eventProvider: data.eventProvider
       });
       await event.save();
 
       return {
-        status: 204,
+        status: 201,
         message: 'Event created'
       }
 

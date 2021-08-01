@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import Joi, { required } from 'joi';
 /* eslint no-param-reassign: "error" */
 
 function validateLoginData(data) {
@@ -170,7 +170,9 @@ function validateEventData(data) {
           }
         })
         return errors;
-      })
+      }),
+    eventService: Joi.string().required(),
+    eventProvider: Joi.string().required()
   });
   return schema.validate(data, { abortEarly: false });
 }
