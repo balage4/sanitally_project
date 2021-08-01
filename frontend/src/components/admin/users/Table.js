@@ -9,7 +9,8 @@ export default function Table({ listOfUsers, handleActionButtons }) {
     ['lastName', 'Last Name'],
     ['firstName', 'First Name'],
     ['email', 'Email'],
-    ['role', 'Role']
+    ['role', 'Role'],
+    ['providerTitle', 'Provider Title']
   ];
 
   return (

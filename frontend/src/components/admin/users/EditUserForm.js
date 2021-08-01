@@ -15,7 +15,22 @@ export default function EditUserForm({ user, setUser }) {
     providerTitle: ''
   });
 
+  const [servicesArray, setServicesArray] = useState([]);
   const [formAlertText, setFormAlertText] = useState('');
+
+  async function getServicesArray() {
+    try {
+      const res = await fetchWithAuth(
+        'http://localhost:5000/api/services',
+        user.token, 'GET', null);
+      if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+      const servicesList = [];
+      res.services.forEach(service => {
+        servicesList.push(service.serviceName)
+      });
+      setServicesArray(servicesList);
+    } catch (err) { setFormAlertText(err.message) }
+  }
 
   const rolesArray = [
     'user',
@@ -39,6 +54,7 @@ export default function EditUserForm({ user, setUser }) {
 
   useEffect(() => {
     getUserData();
+    getServicesArray();
   }, []);
 
 
@@ -199,12 +215,12 @@ export default function EditUserForm({ user, setUser }) {
           reference={references.providerTitle}
           name="providerTitle"
           labelText="Provider title"
-          type="text"
+          type="select"
           errors={errors}
           fieldValues={fieldValues}
           handleInputBlur={handleInputBlur}
           handleInputChange={handleInputChange}
-          required
+          optionsarray={servicesArray}
           disabled={fieldValues.role !== 'provider'}
         />
         <button type="submit" className="btn login-btn">
