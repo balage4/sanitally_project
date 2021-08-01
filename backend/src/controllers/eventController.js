@@ -16,7 +16,7 @@ export const eventController = {
     res.status(events.status).json(events);
   },
   async getEventsByUserEmail(req, res) {
-    const events = await eventService.getEvents(req.params.useremail);
+    const events = await eventService.getEventsByUserEmail(req.params.useremail);
     res.status(events.status).json(events);
   }
 }

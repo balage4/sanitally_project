@@ -45,6 +45,7 @@ export default function InputFieldSet({
           onBlur={handleInputBlur}
           required={required}
           ref={reference}
+          disabled={disabled}
         />
       </>)
   } else if (type === 'select') {
@@ -62,6 +63,7 @@ export default function InputFieldSet({
           onBlur={handleInputBlur}
           required={required}
           ref={reference}
+          disabled={disabled}
         >
           <option value=''>Válassz!</option>
           {optionsarray && (optionsarray.map(option => (

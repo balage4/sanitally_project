@@ -18,6 +18,10 @@ export default function AuthenticatedNavbar({ user, setUser }) {
       'Admin',
       'Events',
       'My Profile'
+    ],
+    provider: [
+      'Events',
+      'My profile'
     ]
   }
 

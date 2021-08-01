@@ -7,8 +7,7 @@ export default function EventsTable({ listOfEvents }) {
     ['_id', 'ID'],
     ['eventDate', 'Date'],
     ['eventService', 'Service'],
-    ['eventProvider', 'Provider'],
-    ['providerTitle', 'Provider Title']
+    ['eventProvider', 'Provider']
   ];
 
   return (

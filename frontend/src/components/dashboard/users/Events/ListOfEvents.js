@@ -23,6 +23,7 @@ export default function ListOfEvents({ user }) {
     try {
       const res = await fetchWithAuth(backend.events, user.token, 'GET', null);
       if (res.status < 200 || res.status >= 300 || !res) throw new Error(res?.error);
+      console.log(res.events);
       setListOfEvents(res.events);
     } catch (err) {
       setFetchError(err.message);
@@ -35,7 +36,7 @@ export default function ListOfEvents({ user }) {
 
   return (
     <div>
-      {!listOfEvents && (
+      {listOfEvents && (
         <div>
           Nincs rögzített esemény
         </div>
