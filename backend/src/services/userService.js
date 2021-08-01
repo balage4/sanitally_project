@@ -94,6 +94,15 @@ export const userService = {
       return { status: 500, error: 'Something went wrong' };
     }
   },
+  async getUsersByService(service) {
+    try {
+      const providers = await User.find({ "providerTitle": service });
+      return { status: 200, providers }
+    } catch (err) {
+      logger.error(err);
+      return { status: 500, error: 'Something went wrong' };
+    }
+  },
 
   async getUserById(id) {
     try {

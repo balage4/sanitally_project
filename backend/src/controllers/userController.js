@@ -16,6 +16,11 @@ export const userController = {
     res.status(user.status).json(user);
   },
 
+  async getUsersByService(req, res) {
+    const usersByProvider = await userService.getUsersByService(req.params.service);
+    res.status(usersByProvider.status).json(usersByProvider);
+  },
+
   async getUsers(req, res) {
     const users = await userService.getUsers();
     res.status(users.status).json(users);

@@ -16,6 +16,7 @@ router.post('/register', userController.registerUser);
 router.get('/events', eventController.getEvents);
 router.post('/events/new', tokenCheck, eventController.createNewEvent);
 
+router.get('/users/:service', tokenCheck, userController.getUsersByService);
 router.get('/admin/users', tokenCheck, adminCheck, userController.getUsers);
 router.put('/admin/users', tokenCheck, adminCheck, userController.updateUser);
 router.get('/admin/users/:id', tokenCheck, adminCheck, userController.getUserById);

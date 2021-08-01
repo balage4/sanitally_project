@@ -7,6 +7,8 @@ import InputFieldSet from "../../../InputFieldSet";
 export default function NewEventForm({ user }) {
 
   const [servicesArray, setServicesArray] = useState([]);
+  const [providersArray, setProvidersArray] = useState([]);
+
   const [fetchError, setFetchError] = useState(null);
 
 
@@ -43,6 +45,29 @@ export default function NewEventForm({ user }) {
     eventService: '',
     eventProvider: ''
   });
+
+  async function getProviderListByService() {
+    const choosedService = fieldValues.eventService;
+    if (choosedService) {
+      try {
+        const res = await fetchWithAuth(
+          `http://localhost:5000/api/users/${choosedService}`,
+          user.token,
+          'GET', null
+        );
+        if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+
+        const providers = [];
+
+        res.providers.forEach(provider => {
+          providers.push(`${provider.lastName} ${provider.firstName}`)
+        })
+
+        setProvidersArray(providers);
+      } catch (err) { setFetchError(err.message) };
+    }
+  }
+
 
   const [isRegisterSuccess, setIsRegisterSuccess] = useState(false);
 
@@ -200,6 +225,7 @@ export default function NewEventForm({ user }) {
   function handleInputBlur(e) {
     const { name } = e.target;
     validateField(name);
+    getProviderListByService();
   }
 
   if (isRegisterSuccess) {
@@ -232,6 +258,7 @@ export default function NewEventForm({ user }) {
           fieldValues={fieldValues}
           handleInputBlur={handleInputBlur}
           handleInputChange={handleInputChange}
+          optionsarray={providersArray}
           required
         />
         <InputFieldSet
