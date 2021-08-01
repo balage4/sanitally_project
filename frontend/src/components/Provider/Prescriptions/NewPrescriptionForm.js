@@ -1,10 +1,13 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import fetchWithAuth from '../../../utilities';
 import InputFieldSet from '../../InputFieldSet';
 
 // eslint-disable-next-line no-unused-vars
 export default function NewPrescriptionForm({ user }) {
+
+  const [usersFullNameArray, setUsersFullName] = useState(null);
+
   const [fieldValues, setFieldValues] = useState({
     prescriptionFor: '',
     prescriptionVaccine: '',
@@ -47,6 +50,23 @@ export default function NewPrescriptionForm({ user }) {
   const errorTypes = {
     required: 'Value is missing'
   };
+
+
+  async function fetchUserNames() {
+    try {
+      const res = await fetchWithAuth('http://localhost:5000/api/admin/users', user.token, 'GET', null);
+      if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+      const usersFullName = [];
+      res.users.forEach(resUser => {
+        usersFullName.push(`${resUser.lastName} ${resUser.firstName}`)
+      });
+      setUsersFullName(usersFullName);
+    } catch (err) { setFormAlertText(err.message) }
+  }
+
+  useEffect(() => {
+    fetchUserNames();
+  }, []);
 
   function validateField(fieldName) {
     const value = fieldValues[fieldName];
@@ -163,11 +183,12 @@ export default function NewPrescriptionForm({ user }) {
           reference={references.prescriptionFor}
           name="prescriptionFor"
           labelText="Páciens neve"
-          type="text"
+          type="select"
           errors={errors}
           fieldValues={fieldValues}
           handleInputBlur={handleInputBlur}
           handleInputChange={handleInputChange}
+          optionsarray={usersFullNameArray}
           required
         />
         <InputFieldSet
