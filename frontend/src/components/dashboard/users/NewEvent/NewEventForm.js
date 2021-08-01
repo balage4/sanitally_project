@@ -1,34 +1,30 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useRef, useEffect } from 'react';
 import { Redirect } from "react-router-dom";
+import fetchWithAuth from '../../../../utilities';
 import InputFieldSet from "../../../InputFieldSet";
 
 export default function NewEventForm({ user }) {
 
-  const [serviceList, setServiceList] = useState([]);
+  const [servicesArray, setServicesArray] = useState([]);
   const [fetchError, setFetchError] = useState(null);
 
+
   async function getServiceList() {
-    const options = {
-      method: 'GET',
-      mode: 'cors',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${user.token}`
-      },
-      body: null,
-    }
-    fetch('http://localhost:5000/api/services', options)
-      .then(res => res.json())
-      .then(res => {
-        if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
-        const servicesArray = [];
-        res.services.forEach(service => {
-          servicesArray.push(service.serviceName)
-        });
-        setServiceList(servicesArray);
-      }).catch(err => setFetchError(err.message));
+    try {
+      const res = await fetchWithAuth(
+        'http://localhost:5000/api/services',
+        user.token,
+        'GET',
+        null
+      );
+      if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+      const servicesList = [];
+      res.services.forEach(service => {
+        servicesList.push(service.serviceName)
+      });
+      setServicesArray(servicesList);
+    } catch (err) { setFetchError(err.message) };
   }
 
   useEffect(() => {
@@ -225,7 +221,7 @@ export default function NewEventForm({ user }) {
           handleInputBlur={handleInputBlur}
           handleInputChange={handleInputChange}
           required
-          optionsarray={serviceList}
+          optionsarray={servicesArray}
         />
         <InputFieldSet
           reference={references.eventProvider}
