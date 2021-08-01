@@ -1,4 +1,4 @@
-import Joi, { required } from 'joi';
+import Joi from 'joi';
 /* eslint no-param-reassign: "error" */
 
 function validateLoginData(data) {
