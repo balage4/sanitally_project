@@ -106,7 +106,6 @@ export const userService = {
   },
 
   async updateUser(data) {
-    console.log(data.updateData)
     try {
       const updateResponse = await User.findByIdAndUpdate(data.id,
         {
