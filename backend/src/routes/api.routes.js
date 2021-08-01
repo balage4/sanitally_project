@@ -1,6 +1,6 @@
 import express from 'express';
-import { userController, eventController, serviceController } from '../controllers';
-import { tokenCheck, adminCheck } from '../middlewares';
+import { userController, eventController, serviceController, prescriptionController } from '../controllers';
+import { tokenCheck, adminCheck, providerCheck } from '../middlewares';
 
 const cors = require('cors');
 
@@ -24,6 +24,7 @@ router.put('/admin/users', tokenCheck, adminCheck, userController.updateUser);
 router.get('/admin/users/:id', tokenCheck, adminCheck, userController.getUserById);
 router.delete('/admin/users/:id', tokenCheck, adminCheck, userController.deleteUser);
 
+router.post('/provider/prescription/new', tokenCheck, providerCheck, prescriptionController.createNewPrescription);
 
 router.get('/services', tokenCheck, serviceController.getServices);
 router.get('/admin/services/:id', tokenCheck, adminCheck, serviceController.getServiceById);
