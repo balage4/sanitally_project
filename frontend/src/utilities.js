@@ -13,4 +13,20 @@ const fetchWithAuth = async (url, token, requestMethod, requestBody) => {
   return jsonResponse;
 }
 
+const months = [
+  'január',
+  'február',
+  'március',
+  'április',
+  'május',
+  'június',
+  'július',
+  'augusztus',
+  'szeptember',
+  'október',
+  'november',
+  'december'
+]
+
 export default fetchWithAuth;
+export { months };

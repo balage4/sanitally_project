@@ -1,3 +1,5 @@
+import { months } from "../../../../utilities";
+
 /* eslint-disable react/prop-types */
 export default function EventsTable({ listOfEvents }) {
 
@@ -29,6 +31,13 @@ export default function EventsTable({ listOfEvents }) {
                 if (headerMap[i][0] === '_id') {
                   return (
                     <td key={`td_${i + 1}`}>{eventIndex + 1}</td>
+                  )
+                }
+                if (headerMap[i][0] === 'eventDate') {
+                  const date = new Date(event.eventDate);
+                  const dateString = `${date.getFullYear()}. ${months[date.getMonth()]} ${date.getDate()}.`;
+                  return (
+                    <td key={`td_${i + 1}`}>{dateString}</td>
                   )
                 }
                 return (<td key={`td_${i + 1}`}>{event[headerName[0]]}</td>)
