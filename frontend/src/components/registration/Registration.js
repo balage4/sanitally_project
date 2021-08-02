@@ -7,16 +7,10 @@ import RegistrationForm from './RegistrationForm';
 export default function Registration({ user, logoutUser }) {
   return (
     <>
-      <div className="row">
-        <div className="col">
-          {!user && <Navbar />}
-          {user && <AuthenticatedNavbar user={user} logoutUser={logoutUser} />}
-          <div className="header d-flex justify-content-center py-5">
-            <h1 className="text-center mb-0">Registration</h1>
-          </div>
-          <RegistrationForm />
-        </div>
-      </div>
+      {!user && <Navbar />}
+      {user && <AuthenticatedNavbar user={user} logoutUser={logoutUser} />}
+      <h1 className="text-center">Registration</h1>
+      <RegistrationForm />
     </>
   );
 }

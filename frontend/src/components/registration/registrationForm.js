@@ -1,11 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { Redirect } from "react-router-dom";
-
 import validator from 'validator';
-
 import InputFieldSet from "../InputFieldSet";
 
-import '../../scss/Registrate.scss'
 
 export default function RegistrationForm() {
   const [fieldValues, setFieldValues] = useState({
