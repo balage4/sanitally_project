@@ -144,7 +144,8 @@ export default function NewPrescriptionForm({ user }) {
       const prescriptionData = {
         prescriptionFor: fieldValues.prescriptionFor,
         prescriptionVaccine: fieldValues.prescriptionVaccine,
-        prescriptionDosage: fieldValues.prescriptionDosage
+        prescriptionDosage: fieldValues.prescriptionDosage,
+        prescriptionFrom: user.email
       }
       try {
         const res = await fetchWithAuth(

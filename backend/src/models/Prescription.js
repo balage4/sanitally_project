@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const userSchema = new mongoose.Schema({
+const prescriptionSchema = new mongoose.Schema({
   prescriptionFor: {
     type: String,
     required: true
@@ -12,7 +12,11 @@ const userSchema = new mongoose.Schema({
   prescriptionDosage: {
     type: String,
     required: true
+  },
+  prescriptionFrom: {
+    type: String,
+    required: true
   }
 });
 
-export default mongoose.model('Prescription', userSchema);
+export default mongoose.model('Prescription', prescriptionSchema);
