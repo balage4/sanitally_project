@@ -4,32 +4,4 @@ info:
   version: 1.0.0
   description: Medical appointment system
 servers:
-  - url: 'http://localhost:4000'
-tags:
-  - name: pet
-    description: Everything about your Pets
-    externalDocs:
-      description: Find out more
-      url: 'http://swagger.io'
-  - name: store
-    description: Access to Petstore orders
-  - name: user
-    description: Operations about user
-    externalDocs:
-      description: Find out more about our store
-      url: 'http://swagger.io'
-paths:
-  /register:
-    summary: User can register to the app
-    post:
-      summary: Single post fetch with register data
-      description: ''
-      operationId: ''
-      responses:
-        default:
-          description: Default error sample response
-          content:
-            application/json:
-              examples:
-                User created successful.:
-                  value: '{"response":"Successful created"}'
+  - url: 'http://localhost:5000/api'

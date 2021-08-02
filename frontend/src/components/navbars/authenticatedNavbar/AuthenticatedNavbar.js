@@ -64,8 +64,11 @@ export default function AuthenticatedNavbar({ user, setUser }) {
           />
 
           <li
-            className="nav-item d-flex align-items-center text-white link me-3">
-            Bejelentkezve: {user.firstName}</li>
+            className="nav-item d-flex align-items-center link me-3">
+            <div>
+              Bejelentkezve:<br /> {user.firstName}
+            </div>
+          </li>
           <li
             className='nav-item d-flex align-items-center'>
             <button

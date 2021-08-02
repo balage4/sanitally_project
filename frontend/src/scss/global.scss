@@ -2,6 +2,7 @@
 @import 'color';
 nav,
 footer {
+  width: 100vw;
   background-color: $navbackground;
   height: 3rem;
   li,
@@ -19,7 +20,7 @@ footer {
           $navbackground
         );
         background-color: $navBackgroundHover;
-        border-radius: 18px;
+        border-radius: 22px;
         color: $linkColorMainHover;
       }
       transition: 0.5s;
