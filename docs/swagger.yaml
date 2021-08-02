@@ -1,0 +1,7 @@
+openapi: 3.0.1
+info:
+  title: Sanitally webapp
+  version: 1.0.0
+  description: Medical appointment system
+servers:
+  - url: 'http://localhost:5000/api'

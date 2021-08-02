@@ -169,69 +169,71 @@ export default function EditUserForm({ user, setUser }) {
   }
 
   return (
-    <main className="d-flex justify-content-center">
+    <>
       <AuthenticatedNavbar user={user} setUser={setUser} />
-      <form
-        onSubmit={handleSubmit}
-        noValidate
-        className={`needs-validation ${formWasValidated ? 'was-validated' : ''
-          }`}
-      >
-        <InputFieldSet
-          reference={references.firstName}
-          name="firstName"
-          labelText="First Name"
-          type="text"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          required
-        />
-        <InputFieldSet
-          reference={references.lastName}
-          name="lastName"
-          labelText="Last Name"
-          type="text"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          required
-        />
-        <InputFieldSet
-          reference={references.role}
-          name="role"
-          labelText="Role"
-          type="select"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          optionsarray={rolesArray}
-          required
-        />
-        <InputFieldSet
-          reference={references.providerTitle}
-          name="providerTitle"
-          labelText="Provider title"
-          type="select"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          optionsarray={servicesArray}
-          disabled={fieldValues.role !== 'provider'}
-        />
-        <button type="submit" className="btn login-btn">
-          Módosítás
-        </button>
-        {formAlertText && (
-          <div className="alert mt-3 alert-danger" role="alert">
-            {formAlertText}
-          </div>
-        )}
-      </form>
-    </main >
+      <main className="d-flex justify-content-center">
+        <form
+          onSubmit={handleSubmit}
+          noValidate
+          className={`needs-validation ${formWasValidated ? 'was-validated' : ''
+            }`}
+        >
+          <InputFieldSet
+            reference={references.firstName}
+            name="firstName"
+            labelText="First Name"
+            type="text"
+            errors={errors}
+            fieldValues={fieldValues}
+            handleInputBlur={handleInputBlur}
+            handleInputChange={handleInputChange}
+            required
+          />
+          <InputFieldSet
+            reference={references.lastName}
+            name="lastName"
+            labelText="Last Name"
+            type="text"
+            errors={errors}
+            fieldValues={fieldValues}
+            handleInputBlur={handleInputBlur}
+            handleInputChange={handleInputChange}
+            required
+          />
+          <InputFieldSet
+            reference={references.role}
+            name="role"
+            labelText="Role"
+            type="select"
+            errors={errors}
+            fieldValues={fieldValues}
+            handleInputBlur={handleInputBlur}
+            handleInputChange={handleInputChange}
+            optionsarray={rolesArray}
+            required
+          />
+          <InputFieldSet
+            reference={references.providerTitle}
+            name="providerTitle"
+            labelText="Provider title"
+            type="select"
+            errors={errors}
+            fieldValues={fieldValues}
+            handleInputBlur={handleInputBlur}
+            handleInputChange={handleInputChange}
+            optionsarray={servicesArray}
+            disabled={fieldValues.role !== 'provider'}
+          />
+          <button type="submit" className="btn btn-primary">
+            Módosítás
+          </button>
+          {formAlertText && (
+            <div className="alert mt-3 alert-danger" role="alert">
+              {formAlertText}
+            </div>
+          )}
+        </form>
+      </main >
+    </>
   );
 }

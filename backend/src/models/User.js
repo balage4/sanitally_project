@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     default: 'user'
   },
   providerTitle: {
-    type: String
+    type: String // should have service ID here
   }
 });
 
