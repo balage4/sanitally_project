@@ -2,7 +2,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import logger from '../logger';
-import Service from '../models/Service';
 import User from '../models/User';
 import { validateLoginData, validateUserData } from '../utils';
 
@@ -84,22 +83,7 @@ export const userService = {
 
   async getUsers() {
     try {
-      const usersResponse = await User.find();
-      const serviceResponse = await Service.find();
-
-      const users = []
-
-      usersResponse.forEach((user, i) => {
-        if (usersResponse[i].providerTitle) {
-          serviceResponse.forEach(service => {
-            if ((usersResponse[i].providerTitle === service._id)) {
-              usersResponse[i].providerTitle = service.serviceName;
-            }
-          })
-        }
-        users.push(user);
-      });
-
+      const users = await User.find();
       return {
         status: 200,
         users

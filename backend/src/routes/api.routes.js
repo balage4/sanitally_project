@@ -24,7 +24,9 @@ router.put('/admin/users', tokenCheck, adminCheck, userController.updateUser);
 router.get('/admin/users/:id', tokenCheck, adminCheck, userController.getUserById);
 router.delete('/admin/users/:id', tokenCheck, adminCheck, userController.deleteUser);
 
-router.post('/provider/prescription/new', tokenCheck, providerCheck, prescriptionController.createNewPrescription);
+router.post('/provider/prescriptions/new', tokenCheck, providerCheck, prescriptionController.createNewPrescription);
+
+router.get('/prescriptions/:email', tokenCheck, prescriptionController.getPrescriptionsByUser);
 
 router.get('/services', tokenCheck, serviceController.getServices);
 router.get('/admin/services/:id', tokenCheck, adminCheck, serviceController.getServiceById);

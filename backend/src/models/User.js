@@ -23,7 +23,8 @@ const userSchema = new mongoose.Schema({
     default: 'user'
   },
   providerTitle: {
-    type: String // should have service ID here
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'providerTitle'
   }
 });
 
