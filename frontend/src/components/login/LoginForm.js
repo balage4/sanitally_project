@@ -182,7 +182,7 @@ export default function LoginForm({ user, setUser }) {
   }
 
   return (
-    <main className="d-flex justify-content-center py-5">
+    <div className="d-flex justify-content-center">
       <form
         onSubmit={handleSubmit}
         noValidate
@@ -220,6 +220,6 @@ export default function LoginForm({ user, setUser }) {
           </div>
         )}
       </form>
-    </main>
+    </div>
   );
 }
