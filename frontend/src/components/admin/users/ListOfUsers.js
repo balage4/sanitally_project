@@ -35,8 +35,6 @@ export default function ListOfUsers({ user, setUser }) {
     }
   }
 
-  console.log(listOfServices);
-
   useEffect(() => {
     fetchUsers();
   }, []);
