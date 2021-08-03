@@ -1,10 +1,12 @@
+
 /* eslint-disable no-underscore-dangle */
+import mongoose from "mongoose";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import logger from '../logger';
-import Service from '../models/Service';
 import User from '../models/User';
 import { validateLoginData, validateUserData } from '../utils';
+import Service from "../models/Service";
 
 export const userService = {
   async loginUser(data) {
@@ -84,25 +86,12 @@ export const userService = {
 
   async getUsers() {
     try {
-      const usersResponse = await User.find();
-      const serviceResponse = await Service.find();
-
-      const users = []
-
-      usersResponse.forEach((user, i) => {
-        if (usersResponse[i].providerTitle) {
-          serviceResponse.forEach(service => {
-            if ((usersResponse[i].providerTitle === service._id)) {
-              usersResponse[i].providerTitle = service.serviceName;
-            }
-          })
-        }
-        users.push(user);
-      });
-
+      const users = await User.find();
+      const services = await Service.find();
       return {
         status: 200,
-        users
+        users,
+        services
       }
 
     } catch (err) {
@@ -132,17 +121,20 @@ export const userService = {
 
   async updateUser(data) {
     try {
+      const serviceId = mongoose.Types.ObjectId(data.updateData.providerTitle);
+
       const updateResponse = await User.findByIdAndUpdate(data.id,
         {
           firstName: data.updateData.firstName,
           lastName: data.updateData.lastName,
           role: data.updateData.role,
-          providerTitle: data.updateData.providerTitle
+          providerTitle: serviceId
 
         }, { new: true }
       );
       return { status: 200, message: updateResponse };
     } catch (err) {
+      console.log(err);
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };
     }

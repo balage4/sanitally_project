@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useRef } from 'react';
 import InputFieldSet from '../../InputFieldSet';
+import fetchWithAuth, { backend } from '../../../utilities';
 
 export default function NewServiceForm({ token, id, serviceData }) {
   const [fieldValues, setFieldValues] = useState(() => {
@@ -45,7 +46,7 @@ export default function NewServiceForm({ token, id, serviceData }) {
   };
 
   const errorTypes = {
-    required: 'Value is missing'
+    required: 'Hiányzó adat!'
   };
 
   function validateField(fieldName) {
@@ -101,102 +102,54 @@ export default function NewServiceForm({ token, id, serviceData }) {
     }));
   }
 
-  const backend = {
-    protocol: 'http',
-    host: 'localhost',
-    port: 5000,
-  };
-
-  const backendUrl = `${backend.protocol}://${backend.host}:${backend.port}`;
-
-  const endpoint = {
-    newService: `${backendUrl}/api/admin/services/new`,
-    editService: `${backendUrl}/api/admin/services/${id}`
-  };
-
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setFormAlertText('');
-    setFormAlertType('');
     setFormWasValidated(false);
 
     if (isFormValid()) {
 
-      if (id) {
-        fetch(endpoint.editService, {
-          method: 'PUT',
-          mode: 'cors',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
-          },
-          body: JSON.stringify({
-            id,
-            updateData: {
-              serviceName: fieldValues.serviceName,
-              serviceNote: fieldValues.serviceNote,
-            }
-          }),
-        })
-          .then(res => res.json())
-          .then(res => {
-            if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
-            setFieldValues({
-              serviceName: '',
-              serviceNote: '',
-            });
-            setFormAlertText('Sikeres módosítás');
-            setFormAlertType('primary');
-          })
-          .catch(error => {
-            setFormWasValidated(false);
-            setFormAlertText(error.message);
-            setFormAlertType('danger');
-            setFieldValues({
-              serviceName: '',
-              serviceNote: '',
-            });
-          });
-      } else {
-        fetch(endpoint.newService, {
-          method: 'POST',
-          mode: 'cors',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
-          },
-          body: JSON.stringify({
+      const fetchBody = {
+        new: {
+          serviceName: fieldValues.serviceName,
+          serviceNote: fieldValues.serviceNote,
+        },
+        update: {
+          id,
+          updateData: {
             serviceName: fieldValues.serviceName,
             serviceNote: fieldValues.serviceNote,
-          }),
-        })
-          .then(res => res.json())
-          .then(res => {
-            if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
-            setFieldValues({
-              serviceName: '',
-              serviceNote: '',
-            });
-            setFormAlertText('Sikeres mentés');
-            setFormAlertType('primary');
-          })
-          .catch(error => {
-            setFormWasValidated(false);
-            setFormAlertText(error.message);
-            setFormAlertType('danger');
-            setFieldValues({
-              serviceName: '',
-              serviceNote: '',
-            });
-          });
+          }
+        }
       }
 
+      try {
+        const fetchData = {
+          url: id ? `${backend.endpoint}/admin/services/${id}` : `${backend.endpoint}/admin/services/new`,
+          method: id ? 'PUT' : 'POST',
+          body: id ? fetchBody.update : fetchBody.new
+        }
+        const res = await fetchWithAuth(
+          fetchData.url,
+          token,
+          fetchData.method,
+          JSON.stringify(id ? fetchBody.update : fetchBody.new));
+        if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+        setFieldValues({
+          serviceName: '',
+          serviceNote: '',
+        });
+        setFormAlertText(id ? 'Sikeres módosítás' : 'Sikeres mentés');
+        setFormAlertType('primary');
+      } catch (err) {
+        setFormWasValidated(false);
+        setFormAlertText(err.message);
+        setFormAlertType('danger');
+        setFieldValues({
+          serviceName: '',
+          serviceNote: '',
+        });
+      }
     }
-    setFormWasValidated(true);
-    setFormAlertText('');
-    setFormAlertType('');
   }
 
   function handleInputBlur(e) {

@@ -8,7 +8,13 @@ const userSchema = new mongoose.Schema({
   serviceNote: {
     type: String,
     required: true
+  },
+  providers: [
+    {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }
+]
 });
 
 export default mongoose.model('Service', userSchema);

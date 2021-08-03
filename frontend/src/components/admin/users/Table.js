@@ -1,7 +1,7 @@
 import ActionButtons from "./ActionButtons"
 
 /* eslint-disable react/prop-types */
-export default function Table({ listOfUsers, handleActionButtons }) {
+export default function Table({ listOfUsers, listOfServices, handleActionButtons }) {
 
   const buttonsArray = ['Edit', 'Delete'];
   const headerMap = [
@@ -35,8 +35,18 @@ export default function Table({ listOfUsers, handleActionButtons }) {
                     <td key={`td_${i + 1}`}>{userIndex + 1}</td>
                   )
                 }
+                if (headerMap[i][0] === 'providerTitle') {
+                  let providerString;
+                  listOfServices.forEach(service => {
+                    if (service._id === user[headerName[0]]) {
+                      providerString = service.serviceName
+                    }
+                  })
+                  return (
+                    <td key={`td_${i + 1}`}>{providerString}</td>
+                  )
+                }
                 return (<td key={`td_${i + 1}`}>{user[headerName[0]]}</td>)
-
               })}
               <td><ActionButtons
                 buttonsArray={buttonsArray}

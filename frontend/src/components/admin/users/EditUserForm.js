@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import fetchWithAuth from "../../../utilities";
+import fetchWithAuth, { backend, getServiceIdByName } from "../../../utilities";
 import InputFieldSet from "../../InputFieldSet";
 import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar";
 
@@ -16,12 +16,13 @@ export default function EditUserForm({ user, setUser }) {
   });
 
   const [servicesArray, setServicesArray] = useState([]);
+  const [servicesResponse, setServicesResponse] = useState(null);
   const [formAlertText, setFormAlertText] = useState('');
 
   async function getServicesArray() {
     try {
       const res = await fetchWithAuth(
-        'http://localhost:5000/api/services',
+        `${backend.endpoint}/services`,
         user.token, 'GET', null);
       if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
       const servicesList = [];
@@ -29,6 +30,7 @@ export default function EditUserForm({ user, setUser }) {
         servicesList.push(service.serviceName)
       });
       setServicesArray(servicesList);
+      setServicesResponse(res.services);
     } catch (err) { setFormAlertText(err.message) }
   }
 
@@ -41,7 +43,7 @@ export default function EditUserForm({ user, setUser }) {
 
   async function getUserData() {
     try {
-      const res = await fetchWithAuth(`http://localhost:5000/api/admin/users/${id}`, user.token, 'GET', null);
+      const res = await fetchWithAuth(`${backend.endpoint}/admin/users/${id}`, user.token, 'GET', null);
       if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
       setFieldValues({
         firstName: res.singleUser.firstName ? res.singleUser.firstName : '',
@@ -151,7 +153,11 @@ export default function EditUserForm({ user, setUser }) {
 
     if (isFormValid()) {
       try {
-        fetchWithAuth('http://localhost:5000/api/admin/users', user.token, 'PUT', JSON.stringify({
+        const serviceId = getServiceIdByName(servicesResponse, fieldValues.providerTitle);
+
+        fieldValues.providerTitle = serviceId;
+
+        fetchWithAuth(`${backend.endpoint}/admin/users`, user.token, 'PUT', JSON.stringify({
           id,
           updateData: fieldValues
         }));
