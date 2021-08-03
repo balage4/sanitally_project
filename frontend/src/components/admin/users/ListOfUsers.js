@@ -10,6 +10,7 @@ export default function ListOfUsers({ user, setUser }) {
   const history = useHistory();
 
   const [listOfUsers, setListOfUsers] = useState(null);
+  const [listOfServices, setListOfServices] = useState(null);
   const [fetchError, setFetchError] = useState(null);
   const [fetchMessage, setFetchMessage] = useState(null);
 
@@ -28,10 +29,13 @@ export default function ListOfUsers({ user, setUser }) {
     try {
       const response = await fetchWithAuth(backend.users, user.token, 'GET', null);
       setListOfUsers(response.users);
+      setListOfServices(response.services);
     } catch (err) {
       setFetchError(err.message);
     }
   }
+
+  console.log(listOfServices);
 
   useEffect(() => {
     fetchUsers();
@@ -67,9 +71,10 @@ export default function ListOfUsers({ user, setUser }) {
       <AuthenticatedNavbar user={user} setUser={setUser} />
       <div className="d-flex flex-column align-items-center">
         <h2>List of users</h2>
-        {listOfUsers && (
+        {listOfUsers && listOfServices && (
           <Table
             listOfUsers={listOfUsers}
+            listOfServices={listOfServices}
             handleActionButtons={handleActionButtons}
           />
         )}

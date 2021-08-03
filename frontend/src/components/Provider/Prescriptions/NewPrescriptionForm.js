@@ -130,7 +130,7 @@ export default function NewPrescriptionForm({ user }) {
   const backendUrl = `${backend.protocol}://${backend.host}:${backend.port}`;
 
   const endpoint = {
-    newPrescription: `${backendUrl}/api/provider/prescription/new`,
+    newPrescription: `${backendUrl}/api/provider/prescriptions/new`,
   };
 
   async function handleSubmit(e) {

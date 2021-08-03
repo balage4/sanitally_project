@@ -9,10 +9,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  providers: [{
+  providers: [
+    {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'providers'
-  }]
+    ref: 'User'
+  }
+]
 });
 
 export default mongoose.model('Service', userSchema);

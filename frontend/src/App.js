@@ -62,10 +62,10 @@ function App() {
             exact path="/events/new"
             component={() => <NewEvent user={user} setUser={setUser} />} />
           <ProtectedRoute
-            exact path="/provider/prescriptions"
+            exact path="/prescriptions"
             component={() => <PrescriptionsMain user={user} setUser={setUser} />} />
           <ProtectedRoute
-            exact path="/provider/prescriptions/new"
+            exact path="/prescriptions/new"
             component={() => <NewPrescription user={user} setUser={setUser} />} />
         </Switch>
       </Router>

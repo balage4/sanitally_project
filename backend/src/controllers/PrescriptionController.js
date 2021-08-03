@@ -6,6 +6,7 @@ export const prescriptionController = {
     res.status(prescription.status).json(prescription);
   },
   async getPrescriptionsByUser(req, res) {
+    console.log(req.params.email)
     const prescriptions = await prescriptrionService.getPrescriptionsByUser(req.params.email);
     res.status(prescriptions.status).json(prescriptions);
   }
