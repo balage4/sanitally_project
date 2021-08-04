@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 const userSchema = new mongoose.Schema({
   serviceName: {
     type: String,
-    required: true
+    required: true,
+    ref: 'User'
   },
   serviceNote: {
     type: String,
@@ -11,10 +12,10 @@ const userSchema = new mongoose.Schema({
   },
   providers: [
     {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }
-]
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ]
 });
 
 export default mongoose.model('Service', userSchema);

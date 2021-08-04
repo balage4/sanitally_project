@@ -1,5 +1,5 @@
 import express from 'express';
-import { userController, eventController, serviceController, prescriptionController } from '../controllers';
+import { userController, eventController, serviceController, prescriptionController, categoryController } from '../controllers';
 import { tokenCheck, adminCheck, providerCheck } from '../middlewares';
 
 const cors = require('cors');
@@ -33,5 +33,8 @@ router.get('/admin/services/:id', tokenCheck, adminCheck, serviceController.getS
 router.post('/admin/services/new', tokenCheck, adminCheck, serviceController.createService);
 router.put('/admin/services/:id', tokenCheck, adminCheck, serviceController.updateService);
 router.delete('/admin/services/:id', tokenCheck, adminCheck, serviceController.deleteService);
+
+router.get('/categories', categoryController.getCategories);
+router.post('/categories', tokenCheck, adminCheck, categoryController.createCategory);
 
 export default router;

@@ -1,4 +1,5 @@
 export * from './userController';
 export * from './eventController';
 export * from './serviceController';
-export * from './PrescriptionController';
+export * from './prescriptionController';
+export * from './categoryController';

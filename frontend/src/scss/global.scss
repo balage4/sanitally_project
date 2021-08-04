@@ -32,4 +32,44 @@ footer {
   height: 100vh;
   background-image: url('../assets/sanitally-background.jpg');
   background-size: cover;
+  h1,
+  h2 {
+    color: $headerColor;
+  }
+  h1 {
+    border: 1px solid $headerColor;
+  }
+  span {
+    color: $headerColor;
+    font-weight: bold;
+    &:hover {
+      transition: 0.5s;
+    }
+  }
+}
+
+.categories {
+  margin-top: 100px;
+  padding: 10px;
+  background-color: $navbackground;
+  text-align: center;
+  div {
+    padding: 10px;
+    &:hover {
+      border-radius: 20%;
+      background-color: $catBackHover;
+      transition: 1s;
+    }
+    &:after {
+      transition: 1s;
+    }
+  }
+  h4 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+    font-weight: bold;
+  }
+  p {
+    padding: 10px;
+  }
 }
