@@ -60,7 +60,7 @@ export default function Home({ user, setUser }) {
 
           </div>
           <div>
-            <h4 className="text-center mt-3">Ismerkedj meg szolgáltatásainkkal</h4>
+            <h4 className="text-center mt-5">Ismerkedj meg szolgáltatásainkkal:</h4>
             {categories && (<Categories categories={categories} />)}
 
           </div>
