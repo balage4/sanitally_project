@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../navbars/nonAuthenticatedNavbar/Navbar';
 import LoginForm from './LoginForm';
-import "../../scss/login.scss";
+
 
 // eslint-disable-next-line react/prop-types
 export default function Login({ user, setUser }) {
