@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { Redirect } from 'react-router-dom';
 import InputFieldSet from '../InputFieldSet';
 
-
 // eslint-disable-next-line react/prop-types
 export default function LoginForm({ user, setUser }) {
   const [fieldValues, setFieldValues] = useState({

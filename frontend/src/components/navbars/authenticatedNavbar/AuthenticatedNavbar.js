@@ -12,8 +12,7 @@ export default function AuthenticatedNavbar({ user, setUser }) {
   const menusByRoles = {
     user: [
       'Események',
-      'Receptek',
-      'Profil'
+      'Receptek'
     ],
     admin: [
       'Admin',
@@ -43,6 +42,9 @@ export default function AuthenticatedNavbar({ user, setUser }) {
       </button>
       <div className="collapse navbar-collapse" id="navbarNavDropdown">
         <ul className="navbar-nav me-auto">
+          <li className="nav-item d-flex align-items-center nav-title-li">
+            Sanitally
+          </li>
           <li className="nav-item d-flex align-items-center">
             <Link className="link me-3" to="/dashboard">
               Dashboard
@@ -62,10 +64,8 @@ export default function AuthenticatedNavbar({ user, setUser }) {
           />
 
           <li
-            className="nav-item d-flex align-items-center link me-3">
-            <div>
-              Bejelentkezve:<br /> {user.firstName}
-            </div>
+            className="nav-item d-flex align-items-center link me-3 text-center">
+            Bejelentkezve:<br /> {user.firstName}
           </li>
           <li
             className='nav-item d-flex align-items-center'>

@@ -2,7 +2,7 @@
 export default function WelcomeFeed({ firstName }) {
   return (
     <>
-      <p>Welcome,{firstName}</p>
+      <p>Üdvözlünk újra, {firstName}!</p>
     </>
   )
 }

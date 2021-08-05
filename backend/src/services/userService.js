@@ -134,7 +134,6 @@ export const userService = {
       );
       return { status: 200, message: updateResponse };
     } catch (err) {
-      console.log(err);
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };
     }

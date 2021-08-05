@@ -8,8 +8,8 @@ export default function Dashboard({ user, setUser }) {
   return (
     <div className="dashboard">
       <AuthenticatedNavbar user={user} setUser={setUser} />
+      <h1 className="text-center">Dashboard</h1>
       <WelcomeFeed firstName={user.firstName} />
-      <h1>Dashboard</h1>
 
     </div>
   )
