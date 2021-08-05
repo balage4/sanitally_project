@@ -55,13 +55,10 @@ footer {
   text-align: center;
   div {
     padding: 10px;
+    transition: all 0.4s ease-out;
     &:hover {
-      border-radius: 20%;
+      border-radius: 12px;
       background-color: $catBackHover;
-      transition: 1s;
-    }
-    &:after {
-      transition: 1s;
     }
   }
   h4 {
