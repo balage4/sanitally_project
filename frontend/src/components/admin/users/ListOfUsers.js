@@ -67,7 +67,7 @@ export default function ListOfUsers({ user, setUser }) {
   return (
     <div>
       <AuthenticatedNavbar user={user} setUser={setUser} />
-      <div className="d-flex flex-column align-items-center">
+      <div className="admin-background d-flex flex-column align-items-center">
         <h2>List of users</h2>
         {listOfUsers && listOfServices && (
           <Table
