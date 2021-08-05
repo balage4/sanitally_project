@@ -79,3 +79,12 @@ footer {
     padding: 10px;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .categories {
+    flex-direction: column;
+    .categories div {
+      width: 80%;
+    }
+  }
+}
