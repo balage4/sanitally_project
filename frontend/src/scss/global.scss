@@ -68,7 +68,16 @@ footer {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: large;
     font-weight: bold;
+    background-image: linear-gradient(#614a00, #a3935f);
+    background-size: 0 2px, auto;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    transition: all 0.4s ease-out;
+    &:hover {
+      background-size: 75% 2px, auto;
+    }
   }
+
   p {
     padding: 10px;
   }

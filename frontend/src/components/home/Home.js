@@ -46,7 +46,7 @@ export default function Home({ user, setUser }) {
               </>
             )}
 
-            {!user && <h3 className="text-center">
+            {!user && <h3 className="text-center mt-4">
               Az alkalmazás használatához{' '}
               <span onClick={goToRegistration} aria-hidden="true">
                 regisztrálj
