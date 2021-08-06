@@ -24,6 +24,7 @@ export default function PrescriptionList({ user }) {
   }, [])
   return (
     <div>
+      <p className="m-3">Önnek nincs megtekinthető receptje!</p>
       {console.log(prescriptions)}
     </div>
   )

@@ -3,11 +3,11 @@ import logger from "../logger";
 import User from "../models/User";
 
 export const prescriptrionService = {
+
   async createNewPrescription(data) {
     try {
 
       const userName = data.prescriptionFor.split(' ');
-
 
       const userFor = await User.find({
         and: [
@@ -28,6 +28,7 @@ export const prescriptrionService = {
       return { status: 500, error: 'Something went wrong.' };
     }
   },
+
   async getPrescriptionsByUser(userEmail) {
     try {
       const pres = await Prescription.find({ prescriptionFor: userEmail });
