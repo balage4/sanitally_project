@@ -5,9 +5,9 @@ export default function ServicesTable({ listOfServices, handleActionButtons }) {
   const buttonsArray = ['Módosítás', 'Törlés'];
 
   const headerMap = [
-    ['_id', 'ID'],
-    ['serviceName', 'Service Name'],
-    ['serviceNote', 'Service Note'],
+    ['_id', 'Sorszám'],
+    ['serviceName', 'Szolgáltatás neve'],
+    ['serviceNote', 'Rövid leírás'],
 
   ];
 
@@ -19,9 +19,12 @@ export default function ServicesTable({ listOfServices, handleActionButtons }) {
             {headerMap.map((header, i) => (
               <th
                 key={`header_${i + 1}`}
+                className="text-center"
               >{headerMap[i][1]}</th>
             ))}
-            <th>Actions</th>
+            <th
+              className="text-center"
+            >Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -30,7 +33,9 @@ export default function ServicesTable({ listOfServices, handleActionButtons }) {
               {headerMap.map((headerName, tdIndex) => {
                 if (headerMap[tdIndex][0] === '_id') {
                   return (
-                    <td key={`td_${tdIndex + 1}`}>{servIndex + 1}</td>
+                    <td key={`td_${tdIndex + 1}`}
+                      className="text-center"
+                    >{servIndex + 1}</td>
                   )
                 }
                 return (<td key={`td_${tdIndex + 1}`}>{service[headerName[0]]}</td>)
