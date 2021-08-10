@@ -61,8 +61,8 @@ export default function ListOfUsers({ user, setUser }) {
 
   function handleActionButtons(e) {
     const { id } = e.target.dataset;
-    if (e.target.name === 'Delete') handleDeleteUser(id);
-    else if (e.target.name === 'Edit') handleModifyUser(id);
+    if (e.target.name === 'Törlés') handleDeleteUser(id);
+    else if (e.target.name === 'Módosítás') handleModifyUser(id);
   }
   return (
     <div>

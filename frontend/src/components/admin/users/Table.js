@@ -3,14 +3,14 @@ import ActionButtons from "./ActionButtons"
 /* eslint-disable react/prop-types */
 export default function Table({ listOfUsers, listOfServices, handleActionButtons }) {
 
-  const buttonsArray = ['Edit', 'Delete'];
+  const buttonsArray = ['Módosítás', 'Törlés'];
   const headerMap = [
     ['_id', 'ID'],
-    ['lastName', 'Last Name'],
-    ['firstName', 'First Name'],
-    ['email', 'Email'],
-    ['role', 'Role'],
-    ['providerTitle', 'Provider Title']
+    ['lastName', 'Vezetéknév'],
+    ['firstName', 'Keresztnév'],
+    ['email', 'E-mail'],
+    ['role', 'Jogosultság'],
+    ['providerTitle', 'szolgáltató']
   ];
 
   return (
