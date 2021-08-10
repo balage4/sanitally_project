@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
   },
   providerTitle: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Service'
+    ref: 'User'
   }
 });
 

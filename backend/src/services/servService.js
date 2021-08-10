@@ -32,7 +32,7 @@ export const servService = {
   },
   async getServices() {
     try {
-      const services = await Service.find({}).exec();
+      const services = await Service.find();
       return { status: 200, services };
     } catch (err) {
       logger.error(err);
@@ -41,7 +41,7 @@ export const servService = {
   },
   async getServiceById(id) {
     try {
-      const serviceData = await Service.findById(id).exec();
+      const serviceData = await Service.findById(id);
       return { status: 200, serviceData };
     } catch (err) {
       logger.error(err);

@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
   providers: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'Service'
     }
   ]
 });
