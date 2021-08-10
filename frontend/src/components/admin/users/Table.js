@@ -5,7 +5,7 @@ export default function Table({ listOfUsers, listOfServices, handleActionButtons
 
   const buttonsArray = ['Módosítás', 'Törlés'];
   const headerMap = [
-    ['_id', 'ID'],
+    ['_id', 'Sorszám'],
     ['lastName', 'Vezetéknév'],
     ['firstName', 'Keresztnév'],
     ['email', 'E-mail'],
@@ -18,12 +18,15 @@ export default function Table({ listOfUsers, listOfServices, handleActionButtons
       <table className="table table-striped">
         <thead>
           <tr>
-            {headerMap.map((header, i) => (
+            {headerMap.map((header, headerIndex) => (
               <th
-                key={`th_${i + 1}`}
-              >{headerMap[i][1]}</th>
+                key={`th_${headerIndex + 1}`}
+                className="text-center"
+              >{headerMap[headerIndex][1]}</th>
             ))}
-            <th>Actions</th>
+            <th
+              className="text-center"
+            >Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -32,7 +35,8 @@ export default function Table({ listOfUsers, listOfServices, handleActionButtons
               {headerMap.map((headerName, i) => {
                 if (headerMap[i][0] === '_id') {
                   return (
-                    <td key={`td_${i + 1}`}>{userIndex + 1}</td>
+                    <td key={`td_${i + 1}`}
+                      className="text-center">{userIndex + 1}</td>
                   )
                 }
                 if (headerMap[i][0] === 'providerTitle') {
