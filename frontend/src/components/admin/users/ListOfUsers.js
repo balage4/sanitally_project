@@ -3,33 +3,22 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Table from "./Table";
 import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar";
-import fetchWithAuth from "../../../utilities";
+import fetchWithAuth, { backend } from "../../../utilities";
 
 export default function ListOfUsers({ user, setUser }) {
 
   const history = useHistory();
 
   const [listOfUsers, setListOfUsers] = useState(null);
-  const [listOfServices, setListOfServices] = useState(null);
+
   const [fetchError, setFetchError] = useState(null);
   const [fetchMessage, setFetchMessage] = useState(null);
 
-  const {
-    REACT_APP_BACKEND_PROTOCOL,
-    REACT_APP_BACKEND_HOST,
-    REACT_APP_BACKEND_PORT,
-    REACT_APP_BACKEND_ROUTE
-  } = process.env;
-
-  const backend = {
-    users: `${REACT_APP_BACKEND_PROTOCOL}://${REACT_APP_BACKEND_HOST}:${REACT_APP_BACKEND_PORT}/${REACT_APP_BACKEND_ROUTE}/admin/users`,
-  }
-
   async function fetchUsers() {
     try {
-      const response = await fetchWithAuth(backend.users, user.token, 'GET', null);
+      const response = await fetchWithAuth(`${backend.endpoint}/admin/users`, user.token, 'GET', null);
       setListOfUsers(response.users);
-      setListOfServices(response.services);
+      /*       setListOfServices(response.services); */
     } catch (err) {
       setFetchError(err.message);
     }
@@ -41,7 +30,7 @@ export default function ListOfUsers({ user, setUser }) {
 
   async function handleDeleteUser(id) {
     try {
-      const response = await fetchWithAuth(`${backend.users}/${id}`, user.token, 'DELETE', null)
+      const response = await fetchWithAuth(`${backend.endpoint}/admin/users/${id}`, user.token, 'DELETE', null)
       setFetchMessage(response.message);
       fetchUsers();
       setTimeout(() => {
@@ -69,10 +58,9 @@ export default function ListOfUsers({ user, setUser }) {
       <AuthenticatedNavbar user={user} setUser={setUser} />
       <div className="admin-background d-flex flex-column align-items-center">
         <h2>List of users</h2>
-        {listOfUsers && listOfServices && (
+        {listOfUsers && (
           <Table
             listOfUsers={listOfUsers}
-            listOfServices={listOfServices}
             handleActionButtons={handleActionButtons}
           />
         )}

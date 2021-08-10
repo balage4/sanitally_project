@@ -50,5 +50,15 @@ function getServiceIdByName(servicesArray, serviceName) {
   return serviceId;
 }
 
+function getServiceNameById(serviceArray, serviceId) {
+  let serviceName;
+  serviceArray.forEach(service => {
+    if (serviceId === service._id) {
+      serviceName = service.serviceName;
+    }
+  });
+  return serviceName;
+}
+
 export default fetchWithAuth;
-export { months, backend, getServiceIdByName };
+export { months, backend, getServiceIdByName, getServiceNameById };

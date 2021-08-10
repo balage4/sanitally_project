@@ -1,7 +1,7 @@
 import ActionButtons from "./ActionButtons"
 
 /* eslint-disable react/prop-types */
-export default function Table({ listOfUsers, listOfServices, handleActionButtons }) {
+export default function Table({ listOfUsers, handleActionButtons }) {
 
   const buttonsArray = ['Módosítás', 'Törlés'];
   const headerMap = [
@@ -10,7 +10,7 @@ export default function Table({ listOfUsers, listOfServices, handleActionButtons
     ['firstName', 'Keresztnév'],
     ['email', 'E-mail'],
     ['role', 'Jogosultság'],
-    ['providerTitle', 'szolgáltató']
+    ['providerTitle', 'Szolgáltató']
   ];
 
   return (
@@ -40,15 +40,10 @@ export default function Table({ listOfUsers, listOfServices, handleActionButtons
                   )
                 }
                 if (headerMap[i][0] === 'providerTitle') {
-                  let providerString;
-                  listOfServices.forEach(service => {
-                    if (service._id === user[headerName[0]]) {
-                      providerString = service.serviceName
-                    }
-                  })
-                  return (
-                    <td key={`td_${i + 1}`}>{providerString}</td>
-                  )
+                  if (user.providerTitle) {
+                    return <td key={`td_${i + 1}`}>{user.providerTitle.serviceName}</td>
+                  }
+                  return <td key={`td_${i + 1}`} />
                 }
                 return (<td key={`td_${i + 1}`}>{user[headerName[0]]}</td>)
               })}

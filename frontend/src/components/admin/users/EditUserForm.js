@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import fetchWithAuth, { backend, getServiceIdByName } from "../../../utilities";
+import fetchWithAuth, { backend, getServiceIdByName, /* getServiceNameById */ } from "../../../utilities";
 import InputFieldSet from "../../InputFieldSet";
 import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar";
 
@@ -14,25 +14,25 @@ export default function EditUserForm({ user, setUser }) {
     role: '',
     providerTitle: ''
   });
-
-  const [servicesArray, setServicesArray] = useState([]);
-  const [servicesResponse, setServicesResponse] = useState(null);
+  /* 
+    const [servicesArray, setServicesArray] = useState([]);
+    const [servicesResponse, setServicesResponse] = useState(null); */
   const [formAlertText, setFormAlertText] = useState('');
 
-  async function getServicesArray() {
-    try {
-      const res = await fetchWithAuth(
-        `${backend.endpoint}/services`,
-        user.token, 'GET', null);
-      if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
-      const servicesList = [];
-      res.services.forEach(service => {
-        servicesList.push(service.serviceName)
-      });
-      setServicesArray(servicesList);
-      setServicesResponse(res.services);
-    } catch (err) { setFormAlertText(err.message) }
-  }
+  /*   async function getServicesArray() {
+      try {
+        const res = await fetchWithAuth(
+          `${backend.endpoint}/services`,
+          user.token, 'GET', null);
+        if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+        const servicesList = [];
+        res.services.forEach(service => {
+          servicesList.push(service.serviceName)
+        });
+        setServicesArray(servicesList);
+        setServicesResponse(res.services);
+      } catch (err) { setFormAlertText(err.message) }
+    } */
 
   const rolesArray = [
     'user',
@@ -40,23 +40,24 @@ export default function EditUserForm({ user, setUser }) {
     'admin',
   ];
 
-
   async function getUserData() {
     try {
       const res = await fetchWithAuth(`${backend.endpoint}/admin/users/${id}`, user.token, 'GET', null);
       if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+
       setFieldValues({
         firstName: res.singleUser.firstName ? res.singleUser.firstName : '',
         lastName: res.singleUser.lastName ? res.singleUser.lastName : '',
         role: res.singleUser.role ? res.singleUser.role : '',
-        providerTitle: res.singleUser.providerTitle ? res.singleUser.providerTitle : ''
+        providerTitle: res.singleUser.providerTitle ? res.singleUser.providerTitle.serviceName : ''
       });
-    } catch (err) { setFormAlertText(err.message); }
+    } catch (err) {
+      setFormAlertText(err.message);
+    }
   }
 
   useEffect(() => {
     getUserData();
-    getServicesArray();
   }, []);
 
 
@@ -153,7 +154,7 @@ export default function EditUserForm({ user, setUser }) {
 
     if (isFormValid()) {
       try {
-        const serviceId = getServiceIdByName(servicesResponse, fieldValues.providerTitle);
+        const serviceId = getServiceIdByName(/* servicesResponse */ fieldValues.providerTitle);
 
         fieldValues.providerTitle = serviceId;
 
@@ -227,7 +228,7 @@ export default function EditUserForm({ user, setUser }) {
             fieldValues={fieldValues}
             handleInputBlur={handleInputBlur}
             handleInputChange={handleInputChange}
-            optionsarray={servicesArray}
+            optionsarray={/* servicesArray */null}
             disabled={fieldValues.role !== 'provider'}
           />
           <button type="submit" className="btn btn-primary">
