@@ -23,6 +23,10 @@ export default function AdminMain({ user, setUser }) {
           className="btn btn-secondary m-3"
           to="/admin/services" >Szolgáltatások listázása
         </Link>
+        <Link
+          className="btn btn-info m-3"
+          to="/admin/categories" >Főoldali lista szerkesztése
+        </Link>
       </div>
 
     </div>
