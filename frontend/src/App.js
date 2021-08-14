@@ -15,6 +15,7 @@ import EditUserForm from './components/admin/users/EditUserForm';
 import EventsMain from './components/dashboard/users/Events/EventsMain';
 import PrescriptionsMain from './components/Provider/Prescriptions/PrescriptionsMain';
 import NewPrescription from './components/Provider/Prescriptions/NewPrescription';
+import CategoriesMain from './components/admin/Categories/CategoriesMain';
 
 function getUser() {
   const storageUser = localStorage.getItem('user');
@@ -52,6 +53,9 @@ function App() {
           <ProtectedRoute
             exact path="/admin/services/:id"
             component={() => <NewService user={user} setUser={setUser} />} />
+          <ProtectedRoute
+            exact path="/admin/categories"
+            component={() => <CategoriesMain user={user} setUser={setUser} />} />
           <ProtectedRoute
             exact path="/admin"
             component={() => <AdminMain user={user} setUser={setUser} />} />

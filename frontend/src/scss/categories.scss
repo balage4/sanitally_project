@@ -1,0 +1,13 @@
+@import '~bootstrap/scss/bootstrap.scss';
+@import 'color';
+
+.categories-main {
+  .categories-box {
+    display: flex;
+    div {
+      flex: 1;
+      height: 60vh;
+      border: 1px solid $linkColorMain;
+    }
+  }
+}
