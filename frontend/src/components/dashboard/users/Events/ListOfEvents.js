@@ -12,7 +12,16 @@ export default function ListOfEvents({ user }) {
 
   async function fetchEvents() {
     try {
-      const eventsResponse = await fetchWithAuth(`${backend.endpoint}/events`, user.token, 'GET', null);
+      let eventsEndpoint;
+      if (user.role === 'admin') {
+        eventsEndpoint = `${backend.endpoint}/events`
+      } else {
+        eventsEndpoint = `${backend.endpoint}/events/${user.email}`;
+      }
+
+      const eventsResponse = await fetchWithAuth(eventsEndpoint,
+        user.token,
+        'GET', null);
       const userResponse = await fetchWithAuth(`${backend.endpoint}/admin/users`, user.token, 'GET', null);
 
       if (eventsResponse.status < 200 || eventsResponse.status >= 300 || !eventsResponse) throw new Error(eventsResponse.error);
@@ -49,7 +58,8 @@ export default function ListOfEvents({ user }) {
 
   return (
     <div>
-      <h3 className="text-center m-3">A rendszerben rögzített események</h3>
+      {user.role === 'admin' && (<h3 className="text-center m-3">A rendszerben rögzített események</h3>)}
+      {user.role !== 'admin' && (<h3 className="text-center m-3">A rendszerben rögzített eseményeim</h3>)}
       {listOfEvents && (
         <EventsTable listOfEvents={listOfEvents}
         />
