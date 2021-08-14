@@ -123,7 +123,7 @@ export const userService = {
     try {
       const serviceId = mongoose.Types.ObjectId(data.updateData.providerTitle);
 
-      const updateResponse = await User.findByIdAndUpdate(data.id,
+      await User.findByIdAndUpdate(data.id,
         {
           firstName: data.updateData.firstName,
           lastName: data.updateData.lastName,
@@ -132,7 +132,7 @@ export const userService = {
 
         }, { new: true }
       );
-      return { status: 200, message: updateResponse };
+      return { status: 200, message: 'Sikeres frissítés' };
     } catch (err) {
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };

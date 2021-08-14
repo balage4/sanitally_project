@@ -16,8 +16,8 @@ export default function EditUserForm({ user, setUser }) {
   });
 
   const [servicesArray, setServicesArray] = useState([]);
-  /*  const [servicesResponse, setServicesResponse] = useState(null); */
-  const [formAlertText, setFormAlertText] = useState('');
+  const [servicesResponse, setServicesResponse] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   async function getServicesArray() {
     try {
@@ -30,8 +30,8 @@ export default function EditUserForm({ user, setUser }) {
         servicesList.push(service.serviceName)
       });
       setServicesArray(servicesList);
-      /*  setServicesResponse(res.services); */
-    } catch (err) { setFormAlertText(err.message) }
+      setServicesResponse(res.services);
+    } catch (err) { setSuccessMessage(err.message) }
   }
 
   const rolesArray = [
@@ -52,7 +52,7 @@ export default function EditUserForm({ user, setUser }) {
         providerTitle: res.singleUser.providerTitle ? res.singleUser.providerTitle.serviceName : ''
       });
     } catch (err) {
-      setFormAlertText(err.message);
+      setSuccessMessage(err.message);
     }
   }
 
@@ -148,27 +148,28 @@ export default function EditUserForm({ user, setUser }) {
     }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setFormAlertText('');
     setFormWasValidated(false);
 
     if (isFormValid()) {
       try {
-        const serviceId = getServiceIdByName(fieldValues.providerTitle);
-
+        const { providerTitle } = fieldValues;
+        const serviceId = getServiceIdByName(servicesResponse, providerTitle);
         fieldValues.providerTitle = serviceId;
-
-        fetchWithAuth(`${backend.endpoint}/admin/users`, user.token, 'PUT', JSON.stringify({
-          id,
-          updateData: fieldValues
-        }));
+        const res = await fetchWithAuth(`${backend.endpoint}/admin/users`,
+          user.token,
+          'PUT', JSON.stringify({
+            id,
+            updateData: fieldValues
+          }));
+        setSuccessMessage(res.message);
       } catch (err) {
-        setFormAlertText(err.message);
+        setSuccessMessage(err.message);
       }
     }
     setFormWasValidated(true);
-    setFormAlertText('');
+    setSuccessMessage('');
   }
 
   function handleInputBlur(e) {
@@ -235,9 +236,9 @@ export default function EditUserForm({ user, setUser }) {
           <button type="submit" className="btn btn-primary">
             Módosítás
           </button>
-          {formAlertText && (
+          {successMessage && (
             <div className="alert mt-3 alert-danger" role="alert">
-              {formAlertText}
+              {successMessage}
             </div>
           )}
         </form>
