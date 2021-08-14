@@ -99,6 +99,7 @@ export const userService = {
       return { status: 500, error: 'Something went wrong' };
     }
   },
+
   async getUsersByService(service) {
     try {
       const providers = await User.find({ "providerTitle": service });
@@ -123,7 +124,7 @@ export const userService = {
     try {
       const serviceId = mongoose.Types.ObjectId(data.updateData.providerTitle);
 
-      await User.findByIdAndUpdate(data.id,
+      const responseUser = await User.findByIdAndUpdate(data.id,
         {
           firstName: data.updateData.firstName,
           lastName: data.updateData.lastName,
@@ -132,6 +133,19 @@ export const userService = {
 
         }, { new: true }
       );
+
+      if (!(responseUser.providerTitle === serviceId) && (data.updateData.providerTitle)) {
+        const userId = mongoose.Types.ObjectId(data.id);
+
+        await Service.findByIdAndUpdate(data.updateData.providerTitle,
+          { $push: { "providers": userId } },
+          { safe: true, upsert: true, new: true }
+        );
+      }
+
+      await Service.findByIdAndUpdate()
+
+
       return { status: 200, message: 'Sikeres frissítés' };
     } catch (err) {
       logger.error(err);
