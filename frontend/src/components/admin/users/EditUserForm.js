@@ -14,25 +14,25 @@ export default function EditUserForm({ user, setUser }) {
     role: '',
     providerTitle: ''
   });
-  /* 
-    const [servicesArray, setServicesArray] = useState([]);
-    const [servicesResponse, setServicesResponse] = useState(null); */
+
+  const [servicesArray, setServicesArray] = useState([]);
+  /*  const [servicesResponse, setServicesResponse] = useState(null); */
   const [formAlertText, setFormAlertText] = useState('');
 
-  /*   async function getServicesArray() {
-      try {
-        const res = await fetchWithAuth(
-          `${backend.endpoint}/services`,
-          user.token, 'GET', null);
-        if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
-        const servicesList = [];
-        res.services.forEach(service => {
-          servicesList.push(service.serviceName)
-        });
-        setServicesArray(servicesList);
-        setServicesResponse(res.services);
-      } catch (err) { setFormAlertText(err.message) }
-    } */
+  async function getServicesArray() {
+    try {
+      const res = await fetchWithAuth(
+        `${backend.endpoint}/services`,
+        user.token, 'GET', null);
+      if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+      const servicesList = [];
+      res.services.forEach(service => {
+        servicesList.push(service.serviceName)
+      });
+      setServicesArray(servicesList);
+      /*  setServicesResponse(res.services); */
+    } catch (err) { setFormAlertText(err.message) }
+  }
 
   const rolesArray = [
     'user',
@@ -58,6 +58,7 @@ export default function EditUserForm({ user, setUser }) {
 
   useEffect(() => {
     getUserData();
+    getServicesArray();
   }, []);
 
 
@@ -154,7 +155,7 @@ export default function EditUserForm({ user, setUser }) {
 
     if (isFormValid()) {
       try {
-        const serviceId = getServiceIdByName(/* servicesResponse */ fieldValues.providerTitle);
+        const serviceId = getServiceIdByName(fieldValues.providerTitle);
 
         fieldValues.providerTitle = serviceId;
 
@@ -228,7 +229,7 @@ export default function EditUserForm({ user, setUser }) {
             fieldValues={fieldValues}
             handleInputBlur={handleInputBlur}
             handleInputChange={handleInputChange}
-            optionsarray={/* servicesArray */null}
+            optionsarray={servicesArray}
             disabled={fieldValues.role !== 'provider'}
           />
           <button type="submit" className="btn btn-primary">

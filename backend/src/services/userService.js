@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 import logger from '../logger';
 import User from '../models/User';
 import { validateLoginData, validateUserData } from '../utils';
-/* import Service from "../models/Service"; */
+import Service from "../models/Service";
 
 export const userService = {
   async loginUser(data) {
@@ -87,9 +87,11 @@ export const userService = {
   async getUsers() {
     try {
       const users = await User.find().populate('providerTitle');
+      const services = await Service.find();
       return {
         status: 200,
-        users
+        users,
+        services
       }
 
     } catch (err) {
