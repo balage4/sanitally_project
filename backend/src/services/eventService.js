@@ -50,8 +50,11 @@ export const eventService = {
     }
   },
   async getEventsByUserEmail(email) {
+
     try {
-      const events = await Event.find({ "userEmail": email });
+      const userObject = await User.findOne({ email });
+
+      const events = await Event.find({ "userId": userObject._id });
       return { status: 200, events };
     } catch (err) {
       logger.error(err);
