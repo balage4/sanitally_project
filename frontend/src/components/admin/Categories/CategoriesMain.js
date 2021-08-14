@@ -30,6 +30,7 @@ export default function CategoriesMain({ user, setUser }) {
       <AuthenticatedNavbar user={user} setUser={setUser} />
 
       <h2 className="text-center m-3">Kategória leírások listája</h2>
+      <h4 className="text-center mb-3">A Főoldalon megjelenő kategória-lista (szolgálatások) frissítése </h4>
 
       <div className="categories-box mt-2">
 
