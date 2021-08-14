@@ -64,7 +64,6 @@ export const eventService = {
   async getEventsByProvider(userEmail) {
     try {
       const userObject = await User.findOne({ email: userEmail });
-      console.log(userObject);
       const events = await Event.find({ "eventProvider": userObject._id });
       return { status: 200, events };
     } catch (err) {
