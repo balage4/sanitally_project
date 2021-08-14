@@ -37,9 +37,9 @@ export default function Home({ user, setUser }) {
       <div className="main d-flex justify-content-center">
         <div>
           <h1 className="text-center">SanitAlly</h1>
-          <h4 className="text-center">Medical appointment system</h4>
+          <h4 className="text-center">Egészségügyi foglalási rendszer</h4>
           <div>
-            {!user && <h3 className="text-center text-danger mb-3">No authenticated user</h3>}
+            {!user && <h3 className="text-center text-danger mb-3">Nincs bejelentkezett felhasználó</h3>}
             {user && (
               <>
                 <h3 className="text-center mb-3">Üdvözlünk, {user.firstName}</h3>
@@ -62,7 +62,9 @@ export default function Home({ user, setUser }) {
           <div>
             <h4 className="text-center mt-5">Ismerkedj meg szolgáltatásainkkal:</h4>
             {categories && (<Categories categories={categories} />)}
-
+            {!categories && (
+              <div className="text-center text-danger mt-3">Szolgáltatási ismertető pillanatnyilag nem érhető el! :(</div>
+            )}
           </div>
         </div>
       </div>
