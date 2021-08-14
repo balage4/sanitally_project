@@ -114,6 +114,9 @@ export default function CategoryForm({ token, category }) {
           token,
           'PUT',
           JSON.stringify(fetchBody));
+        setTimeout(() => {
+          setSuccessMessage(null);
+        }, 1500);
         setSuccessMessage(response.message);
       } catch (err) {
         setFetchError(err.message);
@@ -158,9 +161,9 @@ export default function CategoryForm({ token, category }) {
         />
         <button type="submit" className="btn btn-primary">
           Módosítás</button>
+        {successMessage && <div className="alert alert-info mt-2">{successMessage}</div>}
+        {fetchError && <div className="alert alert-danger mt-2">{fetchError}</div>}
       </form>
-      {successMessage && <div className="alert alert-info">{successMessage}</div>}
-      {fetchError && <div className="alert alert-danger">{fetchError}</div>}
     </main>
   );
 }
