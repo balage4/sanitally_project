@@ -101,16 +101,11 @@ export const userService = {
   },
 
   async getUsersByService(serviceName) {
-
-
     const servicesArray = await Service.find();
-
     let serviceId;
     servicesArray.forEach(service => {
       if (serviceName === service.serviceName) serviceId = service._id;
     });
-
-
     try {
       const providers = await User.find({ "providerTitle": serviceId });
       return { status: 200, providers }
