@@ -5,15 +5,17 @@ const eventSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
-  userEmail: {
-    type: String,
-    required: true
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   },
   eventService: {
-    type: String
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Service'
   },
   eventProvider: {
-    type: String
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }
 });
 

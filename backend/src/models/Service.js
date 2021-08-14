@@ -4,7 +4,6 @@ const userSchema = new mongoose.Schema({
   serviceName: {
     type: String,
     required: true,
-    ref: 'User'
   },
   serviceNote: {
     type: String,

@@ -146,12 +146,14 @@ export default function NewEventForm({ user }) {
 
     if (isFormValid()) {
       try {
-        const res = await fetchWithAuth('http://localhost:5000/api/events/new', user.token, 'POST', JSON.stringify({
-          userEmail: user.email,
-          eventDate: fieldValues.eventDate,
-          eventService: fieldValues.eventService,
-          eventProvider: fieldValues.eventProvider
-        }));
+        const res = await fetchWithAuth(`${backend.endpoint}/events/new`,
+          user.token,
+          'POST', JSON.stringify({
+            userEmail: user.email,
+            eventDate: fieldValues.eventDate,
+            eventService: fieldValues.eventService,
+            eventProvider: fieldValues.eventProvider
+          }));
         if (res.status < 200 || res.status >= 300) throw new Error(res.message);
         setFormAlertText('Event Succesfully saved.');
       } catch (err) { setFormAlertText(err.message) }
