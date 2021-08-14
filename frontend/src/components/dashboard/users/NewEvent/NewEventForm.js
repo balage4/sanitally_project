@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useRef, useEffect } from 'react';
-import fetchWithAuth from '../../../../utilities';
+import fetchWithAuth, { backend } from '../../../../utilities';
 import InputFieldSet from "../../../InputFieldSet";
 
 export default function NewEventForm({ user }) {
@@ -14,7 +14,7 @@ export default function NewEventForm({ user }) {
   async function getServiceList() {
     try {
       const res = await fetchWithAuth(
-        'http://localhost:5000/api/services',
+        `${backend.endpoint}/services`,
         user.token,
         'GET',
         null
@@ -50,7 +50,7 @@ export default function NewEventForm({ user }) {
     if (choosedService) {
       try {
         const res = await fetchWithAuth(
-          `http://localhost:5000/api/users/${choosedService}`,
+          `${backend.endpoint}/users/${choosedService}`,
           user.token,
           'GET', null
         );

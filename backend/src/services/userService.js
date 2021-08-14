@@ -100,9 +100,19 @@ export const userService = {
     }
   },
 
-  async getUsersByService(service) {
+  async getUsersByService(serviceName) {
+
+
+    const servicesArray = await Service.find();
+
+    let serviceId;
+    servicesArray.forEach(service => {
+      if (serviceName === service.serviceName) serviceId = service._id;
+    });
+
+
     try {
-      const providers = await User.find({ "providerTitle": service });
+      const providers = await User.find({ "providerTitle": serviceId });
       return { status: 200, providers }
     } catch (err) {
       logger.error(err);
@@ -142,9 +152,6 @@ export const userService = {
           { safe: true, upsert: true, new: true }
         );
       }
-
-      await Service.findByIdAndUpdate()
-
 
       return { status: 200, message: 'Sikeres frissítés' };
     } catch (err) {
