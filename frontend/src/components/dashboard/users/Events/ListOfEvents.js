@@ -15,7 +15,10 @@ export default function ListOfEvents({ user }) {
       let eventsEndpoint;
       if (user.role === 'admin') {
         eventsEndpoint = `${backend.endpoint}/events`
-      } else {
+      } else if (user.role === 'provider') {
+        eventsEndpoint = `${backend.endpoint}/events`
+      }
+      else {
         eventsEndpoint = `${backend.endpoint}/events/${user.email}`;
       }
 
@@ -59,7 +62,8 @@ export default function ListOfEvents({ user }) {
   return (
     <div>
       {user.role === 'admin' && (<h3 className="text-center m-3">A rendszerben rögzített események</h3>)}
-      {user.role !== 'admin' && (<h3 className="text-center m-3">A rendszerben rögzített eseményeim</h3>)}
+      {user.role === 'user' && (<h3 className="text-center m-3">A rendszerben rögzített eseményeim</h3>)}
+      {user.role === 'provider' && (<h3 className="text-center m-3">A szolgáltatásomra rögzített események</h3>)}
       {listOfEvents && (
         <EventsTable listOfEvents={listOfEvents}
         />
