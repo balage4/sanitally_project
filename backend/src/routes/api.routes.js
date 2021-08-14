@@ -15,7 +15,7 @@ router.post('/register', userController.registerUser);
 
 router.get('/events', eventController.getEvents);
 router.get('/events/:useremail', tokenCheck, eventController.getEventsByUserEmail);
-router.get('/events/provider/:provideremail', tokenCheck, providerCheck, eventController.getEventsByProvider);
+router.get('/provider/events/:provideremail', tokenCheck, providerCheck, eventController.getEventsByProvider);
 router.post('/events/new', tokenCheck, eventController.createNewEvent);
 
 router.get('/admin/users', tokenCheck, userController.getUsers);

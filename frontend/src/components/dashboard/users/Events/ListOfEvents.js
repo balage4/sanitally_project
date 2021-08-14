@@ -16,9 +16,8 @@ export default function ListOfEvents({ user }) {
       if (user.role === 'admin') {
         eventsEndpoint = `${backend.endpoint}/events`
       } else if (user.role === 'provider') {
-        eventsEndpoint = `${backend.endpoint}/events`
-      }
-      else {
+        eventsEndpoint = `${backend.endpoint}/provider/events/${user.email}`;
+      } else {
         eventsEndpoint = `${backend.endpoint}/events/${user.email}`;
       }
 

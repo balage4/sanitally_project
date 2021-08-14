@@ -49,12 +49,23 @@ export const eventService = {
       return { status: 500, error: 'Something went wrong' };
     }
   },
-  async getEventsByUserEmail(email) {
+  async getEventsByUserEmail(userEmail) {
 
     try {
-      const userObject = await User.findOne({ email });
+      const userObject = await User.findOne({ email: userEmail });
 
       const events = await Event.find({ "userId": userObject._id });
+      return { status: 200, events };
+    } catch (err) {
+      logger.error(err);
+      return { status: 500, error: 'Something went wrong' };
+    }
+  },
+  async getEventsByProvider(userEmail) {
+    try {
+      const userObject = await User.findOne({ email: userEmail });
+      console.log(userObject);
+      const events = await Event.find({ "eventProvider": userObject._id });
       return { status: 200, events };
     } catch (err) {
       logger.error(err);
