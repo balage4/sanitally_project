@@ -14,7 +14,7 @@ export const categoryService = {
   },
   async updateCategory(data) {
     try {
-      const updateResponse = await Category.findByIdAndUpdate(data.id, {
+      await Category.findByIdAndUpdate(data.id, {
         $set: {
           categoryName: data.updateData.categoryName,
           categoryNotes: data.updateData.categoryNotes
@@ -22,7 +22,7 @@ export const categoryService = {
       });
       return {
         status: 200,
-        message: updateResponse
+        message: 'Sikeres frissítés'
       }
     } catch (err) {
       logger.error(err);

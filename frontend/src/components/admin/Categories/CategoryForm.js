@@ -1,13 +1,17 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useRef } from 'react';
+import fetchWithAuth, { backend } from '../../../utilities';
 import InputFieldSet from '../../InputFieldSet';
 
-export default function CategoryForm({ category }) {
+export default function CategoryForm({ token, category }) {
 
   const [fieldValues, setFieldValues] = useState({
     categoryName: category.categoryName,
     categoryNotes: category.categoryNotes
   });
+
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [fetchError, setFetchError] = useState(null);
 
   const [errors, setErrors] = useState({
     categoryName: '',
@@ -97,10 +101,23 @@ export default function CategoryForm({ category }) {
 
     if (isFormValid()) {
 
-      console.log({
-        category,
-        fieldvalues: fieldValues
-      });
+      const fetchBody = {
+        id: category._id,
+        updateData: {
+          categoryName: fieldValues.categoryName,
+          categoryNotes: fieldValues.categoryNotes,
+        }
+      }
+
+      try {
+        const response = await fetchWithAuth(`${backend.endpoint}/admin/categories`,
+          token,
+          'PUT',
+          JSON.stringify(fetchBody));
+        setSuccessMessage(response.message);
+      } catch (err) {
+        setFetchError(err.message);
+      }
     }
   }
 
@@ -141,8 +158,9 @@ export default function CategoryForm({ category }) {
         />
         <button type="submit" className="btn btn-primary">
           Módosítás</button>
-
       </form>
+      {successMessage && <div className="alert alert-info">{successMessage}</div>}
+      {fetchError && <div className="alert alert-danger">{fetchError}</div>}
     </main>
   );
 }

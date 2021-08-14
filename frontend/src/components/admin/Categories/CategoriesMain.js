@@ -37,6 +37,7 @@ export default function CategoriesMain({ user, setUser }) {
           editCategories.map(category => (
             <CategoryForm
               key={category._id}
+              token={user.token}
               category={category} />
           ))
         )}
