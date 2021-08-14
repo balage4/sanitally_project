@@ -1,6 +1,7 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import fetchWithAuth from "../../../../utilities";
+import fetchWithAuth, { backend } from "../../../../utilities";
 import EventsTable from "./EventsTable";
 
 export default function ListOfEvents({ user }) {
@@ -8,22 +9,35 @@ export default function ListOfEvents({ user }) {
   const [listOfEvents, setListOfEvents] = useState(null);
   const [fetchError, setFetchError] = useState(null);
 
-  const {
-    REACT_APP_BACKEND_PROTOCOL,
-    REACT_APP_BACKEND_HOST,
-    REACT_APP_BACKEND_PORT,
-    REACT_APP_BACKEND_ROUTE
-  } = process.env;
-
-  const backend = {
-    events: `${REACT_APP_BACKEND_PROTOCOL}://${REACT_APP_BACKEND_HOST}:${REACT_APP_BACKEND_PORT}/${REACT_APP_BACKEND_ROUTE}/events/${user.email}`,
-  }
 
   async function fetchEvents() {
     try {
-      const res = await fetchWithAuth(backend.events, user.token, 'GET', null);
-      if (res.status < 200 || res.status >= 300 || !res) throw new Error(res?.error);
-      setListOfEvents(res.events);
+      const eventsResponse = await fetchWithAuth(`${backend.endpoint}/events`, user.token, 'GET', null);
+      const userResponse = await fetchWithAuth(`${backend.endpoint}/admin/users`, user.token, 'GET', null);
+
+      if (eventsResponse.status < 200 || eventsResponse.status >= 300 || !eventsResponse) throw new Error(eventsResponse.error);
+      if (userResponse.status < 200 || userResponse.status >= 300 || !userResponse) throw new Error(userResponse.error);
+
+
+      await eventsResponse.events.forEach(event => {
+        userResponse.users.forEach(userResp => {
+          if (event.userId === userResp._id) {
+            event.userName = `${userResp.lastName} ${userResp.firstName}`;
+          }
+          if (event.eventProvider === userResp._id) {
+            event.eventProvider = `${userResp.lastName} ${userResp.firstName}`;
+          }
+        })
+        userResponse.services.forEach(serviceResp => {
+          if (event.eventService === serviceResp._id) {
+            event.eventService = serviceResp.serviceName;
+          }
+        })
+      });
+
+      await setListOfEvents(eventsResponse.events);
+
+
     } catch (err) {
       setFetchError(err.message);
     }
@@ -35,11 +49,7 @@ export default function ListOfEvents({ user }) {
 
   return (
     <div>
-      {listOfEvents && (
-        <div>
-          Nincs rögzített esemény
-        </div>
-      )}
+      <h3 className="text-center m-3">A rendszerben rögzített események</h3>
       {listOfEvents && (
         <EventsTable listOfEvents={listOfEvents}
         />
