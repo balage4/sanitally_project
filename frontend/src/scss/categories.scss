@@ -18,7 +18,13 @@
 
 @media only screen and (max-width: 768px) {
   .categories-box {
+    margin-top: 5px;
     flex-direction: column;
+    form {
+      margin: 10px 0px;
+      border-top: 2px solid $linkColorMain;
+    }
+
     .categories div {
       width: 80%;
     }
