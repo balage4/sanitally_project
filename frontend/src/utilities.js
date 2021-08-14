@@ -41,7 +41,6 @@ const months = [
 ]
 
 function getServiceIdByName(servicesArray, serviceName) {
-  console.log(servicesArray, serviceName);
   let serviceId;
   servicesArray.forEach(service => {
     if (service.serviceName === serviceName) {
