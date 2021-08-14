@@ -139,7 +139,7 @@ export default function CategoryForm({ category }) {
           handleInputChange={handleInputChange}
           required
         />
-        <button type="submit" className="btn primary-btn">
+        <button type="submit" className="btn btn-primary">
           Módosítás</button>
 
       </form>

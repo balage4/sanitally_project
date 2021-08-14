@@ -12,16 +12,17 @@ export const categoryService = {
       return { status: 500, error: 'Something went wrong' };
     }
   },
-  async createCategory(data) {
+  async updateCategory(data) {
     try {
-      const newCategory = await new Category({
-        categoryName: data.categoryName,
-        categoryNotes: data.categoryNotes
-      })
-      await newCategory.save();
+      const updateResponse = await Category.findByIdAndUpdate(data.id, {
+        $set: {
+          categoryName: data.updateData.categoryName,
+          categoryNotes: data.updateData.categoryNotes
+        }
+      });
       return {
-        status: 201,
-        message: 'Category created'
+        status: 200,
+        message: updateResponse
       }
     } catch (err) {
       logger.error(err);

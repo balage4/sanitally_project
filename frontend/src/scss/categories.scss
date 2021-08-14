@@ -2,12 +2,25 @@
 @import 'color';
 
 .categories-main {
+  width: 90%;
   .categories-box {
     display: flex;
+    justify-content: space-around;
+
     div {
       flex: 1;
-      height: 60vh;
-      border: 1px solid $linkColorMain;
+      textarea {
+        height: 200px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .categories-box {
+    flex-direction: column;
+    .categories div {
+      width: 80%;
     }
   }
 }

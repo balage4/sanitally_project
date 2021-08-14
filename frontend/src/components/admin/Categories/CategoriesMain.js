@@ -29,15 +29,15 @@ export default function CategoriesMain({ user, setUser }) {
     <div className="categories-main">
       <AuthenticatedNavbar user={user} setUser={setUser} />
 
-      <h2 className="text-center m-2">Kategória leírások listája</h2>
+      <h2 className="text-center m-3">Kategória leírások listája</h2>
 
-      <div className="categories-box">
+      <div className="categories-box mt-2">
 
         {editCategories && (
           editCategories.map(category => (
-            <div>
-              <CategoryForm category={category} />
-            </div>
+            <CategoryForm
+              key={category._id}
+              category={category} />
           ))
         )}
         {fetchError && (
