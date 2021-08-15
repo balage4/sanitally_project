@@ -18,7 +18,6 @@ export default function ListOfUsers({ user, setUser }) {
     try {
       const response = await fetchWithAuth(`${backend.endpoint}/admin/users`, user.token, 'GET', null);
       setListOfUsers(response.users);
-      /*       setListOfServices(response.services); */
     } catch (err) {
       setFetchError(err.message);
     }

@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import fetchWithAuth, { backend } from "../../../../utilities";
+import fetchWithAuth, { backend, setEventsEndpoint } from "../../../../utilities";
 import EventsTable from "./EventsTable";
 
 export default function ListOfEvents({ user }) {
@@ -12,14 +12,7 @@ export default function ListOfEvents({ user }) {
 
   async function fetchEvents() {
     try {
-      let eventsEndpoint;
-      if (user.role === 'admin') {
-        eventsEndpoint = `${backend.endpoint}/events`
-      } else if (user.role === 'provider') {
-        eventsEndpoint = `${backend.endpoint}/provider/events/${user.email}`;
-      } else {
-        eventsEndpoint = `${backend.endpoint}/events/${user.email}`;
-      }
+      const eventsEndpoint = setEventsEndpoint(user);
 
       const eventsResponse = await fetchWithAuth(eventsEndpoint,
         user.token,
@@ -60,7 +53,7 @@ export default function ListOfEvents({ user }) {
 
   return (
     <div>
-      {user.role === 'admin' && (<h3 className="text-center m-3">A rendszerben rögzített események</h3>)}
+      {user.role === 'admin' && (<h3 className="text-center m-3">A rendszerben rögzített események (összes)</h3>)}
       {user.role === 'user' && (<h3 className="text-center m-3">A rendszerben rögzített eseményeim</h3>)}
       {user.role === 'provider' && (<h3 className="text-center m-3">A szolgáltatásomra rögzített események</h3>)}
       {listOfEvents && (

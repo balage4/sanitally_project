@@ -71,9 +71,9 @@ export default function AuthenticatedNavbar({ user, setUser }) {
             className='nav-item d-flex align-items-center'>
             <button
               type="button"
-              className="btn btn-info"
+              className="btn btn-info m-3 border border-secondary"
               onClick={logoutUser}
-            >Logout</button></li>
+            >Kijelentkezés</button></li>
 
         </ul>
 

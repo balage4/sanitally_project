@@ -25,6 +25,18 @@ const backend = {
   endpoint: `${REACT_APP_BACKEND_PROTOCOL}://${REACT_APP_BACKEND_HOST}:${REACT_APP_BACKEND_PORT}/${REACT_APP_BACKEND_ROUTE}`
 }
 
+function setEventsEndpoint(user) {
+  let eventsEndpoint;
+  if (user.role === 'admin') {
+    eventsEndpoint = `${backend.endpoint}/events`
+  } else if (user.role === 'provider') {
+    eventsEndpoint = `${backend.endpoint}/provider/events/${user.email}`;
+  } else {
+    eventsEndpoint = `${backend.endpoint}/events/${user.email}`;
+  }
+  return eventsEndpoint;
+}
+
 const months = [
   'január',
   'február',
@@ -62,4 +74,4 @@ function getServiceNameById(serviceArray, serviceId) {
 }
 
 export default fetchWithAuth;
-export { months, backend, getServiceIdByName, getServiceNameById };
+export { months, backend, getServiceIdByName, getServiceNameById, setEventsEndpoint };
