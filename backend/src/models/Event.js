@@ -5,6 +5,10 @@ const eventSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
+  eventTime: {
+    type: String,
+    required: true
+  },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

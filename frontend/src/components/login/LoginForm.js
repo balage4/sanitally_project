@@ -177,7 +177,7 @@ export default function LoginForm({ user, setUser }) {
   }
 
   if (user) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/" />;
   }
 
   return (

@@ -172,7 +172,8 @@ function validateEventData(data) {
         return errors;
       }),
     eventService: Joi.string().required(),
-    eventProvider: Joi.string().required()
+    eventProvider: Joi.string().required(),
+    eventTime: Joi.string().required()
   });
   return schema.validate(data, { abortEarly: false });
 }

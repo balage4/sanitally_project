@@ -6,7 +6,7 @@ export default function NewEvent({ user, setUser }) {
   return (
     <div className="new-event">
       <AuthenticatedNavbar user={user} setUser={setUser} />
-      <h3>Új esemény rögzítése</h3>
+      <h3 className="text-center m-3">Új esemény rögzítése</h3>
       <NewEventForm user={user} />
     </div>
   )

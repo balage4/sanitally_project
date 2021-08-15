@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { Link } from "react-router-dom";
 import AuthNavMenu from "./AuthNavMenu";
 
 export default function AuthenticatedNavbar({ user, setUser }) {
@@ -17,6 +16,7 @@ export default function AuthenticatedNavbar({ user, setUser }) {
     admin: [
       'Admin',
       'Események',
+      'Receptek'
     ],
     provider: [
       'Események',
@@ -45,18 +45,12 @@ export default function AuthenticatedNavbar({ user, setUser }) {
           <li className="nav-item d-flex align-items-center nav-title-li">
             Sanitally
           </li>
-          <li className="nav-item d-flex align-items-center">
-            <Link className="link me-3" to="/dashboard">
-              Dashboard
-            </Link>
-          </li>
         </ul>
 
 
         <ul className="navbar-nav ms-auto">
 
           <AuthNavMenu
-            // eslint-disable-next-line react/prop-types
             menus={menusByRoles[user.role]}
             endpoints={endpoints}
             liClass='nav-item d-flex align-items-center'

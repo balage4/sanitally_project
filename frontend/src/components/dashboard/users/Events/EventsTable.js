@@ -7,6 +7,7 @@ export default function EventsTable({ listOfEvents }) {
     ['_id', 'ID'],
     ['userName', 'Felhasználó'],
     ['eventDate', 'Dátum'],
+    ['eventTime', 'Időpont'],
     ['eventService', 'Szolgáltatás'],
     ['eventProvider', 'Szolgáltató neve']
   ];

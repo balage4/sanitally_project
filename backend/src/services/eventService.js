@@ -23,6 +23,7 @@ export const eventService = {
       const event = await new Event({
         userId: userObject._id,
         eventDate: data.eventDate,
+        eventTime: data.eventTime,
         eventService: serviceObject._id,
         eventProvider: eventProviderObject._id
       });

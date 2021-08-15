@@ -35,12 +35,14 @@ export default function NewEventForm({ user }) {
 
   const [fieldValues, setFieldValues] = useState({
     eventDate: '',
+    eventTime: '',
     eventService: '',
     eventProvider: ''
   });
 
   const [errors, setErrors] = useState({
     eventDate: '',
+    eventTime: '',
     eventService: '',
     eventProvider: ''
   });
@@ -73,6 +75,7 @@ export default function NewEventForm({ user }) {
 
   const references = {
     eventDate: useRef(),
+    eventTime: useRef(),
     eventService: useRef(),
     eventProvider: useRef()
   };
@@ -151,6 +154,7 @@ export default function NewEventForm({ user }) {
           'POST', JSON.stringify({
             userEmail: user.email,
             eventDate: fieldValues.eventDate,
+            eventTime: fieldValues.eventTime,
             eventService: fieldValues.eventService,
             eventProvider: fieldValues.eventProvider
           }));
@@ -211,8 +215,19 @@ export default function NewEventForm({ user }) {
         <InputFieldSet
           reference={references.eventDate}
           name="eventDate"
-          labelText="Esemény időpontja"
+          labelText="Esemény dátuma"
           type="date"
+          errors={errors}
+          fieldValues={fieldValues}
+          handleInputBlur={handleInputBlur}
+          handleInputChange={handleInputChange}
+          required
+        />
+        <InputFieldSet
+          reference={references.eventTime}
+          name="eventTime"
+          labelText="Esemény időpontja"
+          type="time"
           errors={errors}
           fieldValues={fieldValues}
           handleInputBlur={handleInputBlur}

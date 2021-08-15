@@ -181,6 +181,22 @@ export default function InputFieldSet({
           ref={reference}
         />
       </>)
+  } else if (type === 'time') {
+    input = (
+      <>
+        {label}
+        <input
+          className="form-control"
+          name={name}
+          id={name}
+          type={type}
+          value={fieldValues[name]}
+          onChange={handleInputChange}
+          onBlur={handleInputBlur}
+          required={required}
+          ref={reference}
+        />
+      </>)
   }
 
   return (
