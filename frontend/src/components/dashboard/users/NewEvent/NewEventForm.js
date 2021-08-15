@@ -53,8 +53,7 @@ export default function NewEventForm({ user }) {
       try {
         const res = await fetchWithAuth(
           `${backend.endpoint}/users/${choosedService}`,
-          user.token,
-          'GET', null
+          user.token
         );
         if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
 
