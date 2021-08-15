@@ -1,15 +1,23 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import App from '../App';
+import { MemoryRouter } from 'react-router-dom';
+import Home from '../components/home/Home';
 
 beforeEach(() => {
-  render(<App />);
+  render(
+    <MemoryRouter>
+      <Home />
+    </MemoryRouter>);
+});
+
+afterEach(() => {
+  cleanup();
 });
 
 describe('Home page renders correctly', () => {
   test('`Appointment` text should be in the document', () => {
-    const appointmentText = screen.getByText('Appointment System');
+    const appointmentText = screen.getByText('Egészségügyi foglalási rendszer');
     expect(appointmentText).toBeInTheDocument();
   });
 
@@ -29,10 +37,10 @@ describe('Home page renders correctly', () => {
   });
 })
 
-describe('Pursuit to Registration page', () => {
+describe('Pursuit to Registration', () => {
   test('should have a title on the page', () => {
     fireEvent.click(screen.getByText('register'));
-    expect(screen.getByText('Registration Page')).toBeInTheDocument();
+    expect(screen.getByText('Registrate')).toBeInTheDocument();
   });
   test('should have an input label of `Email`', () => {
     const emailLabel = screen.getByLabelText('Email')
@@ -46,6 +54,195 @@ describe('Pursuit to Registration page', () => {
     const regButton = screen.getByText('Registrate');
     expect(regButton).toBeInTheDocument();
   });
+  test('should have an input label of `First Name`', () => {
+    const firstNameField = screen.getByLabelText('First Name')
+    expect(firstNameField).toBeInTheDocument();
+  });
+  test('should have an input label of `Last Name`', () => {
+    const lastNameField = screen.getByLabelText('Last Name')
+    expect(lastNameField).toBeInTheDocument();
+  });
 });
 
+describe('Check Registration page validations', () => {
+  describe('Empty fields validations', () => {
+    test('Empty First Name field should have an error message', () => {
+      const firstNameField = document.querySelector('#firstName');
+      fireEvent.focusIn(firstNameField);
+      fireEvent.focusOut(firstNameField);
+      const errorMessage = screen.getByText('Value is missing');
+      expect(errorMessage).toBeInTheDocument();
+    });
+    test('Empty Last Name field should have an error message', () => {
+      const lastNameField = document.querySelector('#lastName');
+      fireEvent.focusIn(lastNameField);
+      fireEvent.focusOut(lastNameField);
+      const errorMessage = screen.getByText('Value is missing');
+      expect(errorMessage).toBeInTheDocument();
+    });
+    test('Empty Email field should have an error message', () => {
+      const emailField = document.querySelector('#email');
+      fireEvent.focusIn(emailField);
+      fireEvent.focusOut(emailField);
+      const errorMessage = screen.getByText('Value is missing');
+      expect(errorMessage).toBeInTheDocument();
+    });
+    test('Empty Password field should have an error message', () => {
+      const passwordField = document.querySelector('#password');
+      fireEvent.focusIn(passwordField);
+      fireEvent.focusOut(passwordField);
+      const errorMessage = screen.getByText('Value is missing');
+      expect(errorMessage).toBeInTheDocument();
+    });
+  });
+  describe('Check invalid input values', () => {
+    test('Invalid value of email field should have an error message', () => {
+      const emailField = document.querySelector('#email');
+      fireEvent.change(emailField, {
+        target: {
+          value: 'test@test'
+        }
+      });
+      fireEvent.focusOut(emailField);
+      const errorMessage = screen.getByText('Not valid email');
+      expect(errorMessage).toBeInTheDocument();
+    });
+    test('Check valid email should remove the errormessage', () => {
+      const emailField = document.querySelector('#email');
+      fireEvent.change(emailField, {
+        target: {
+          value: 'test@test.hu'
+        }
+      });
+      fireEvent.focusOut(emailField);
+      const errorMessage = screen.queryByText('Not valid email');
+      expect(errorMessage).toBeNull();
+    });
 
+    describe('Check password validations', () => {
+      let validPassword;
+      let pwErrorMessage;
+      let pwField;
+
+      beforeEach(() => {
+        validPassword = 'cErTGH;71Y';
+        pwErrorMessage = 'Password should contain: 8 character, lowercase/uppercase, number, special character.';
+        pwField = document.querySelector('#password');
+      });
+
+      test('Check password value minimum length', () => {
+        fireEvent.change(pwField, {
+          target: {
+            value: 'asdfghj'
+          }
+        });
+        fireEvent.focusOut(pwField);
+        expect(screen.getByText(pwErrorMessage)).toBeInTheDocument();
+      });
+      test('Check valid password', () => {
+        fireEvent.change(pwField, {
+          target: {
+            value: validPassword
+          }
+        });
+        fireEvent.focusOut(pwField);
+        expect(screen.queryByText(pwErrorMessage)).toBeNull();
+      });
+      test('Check password value missing number', () => {
+        fireEvent.change(pwField, {
+          target: {
+            value: 'cErTGH;Y'
+          }
+        });
+        fireEvent.focusOut(pwField);
+        expect(screen.getByText(pwErrorMessage)).toBeInTheDocument();
+      });
+      test('Check password value missing special character', () => {
+        fireEvent.change(pwField, {
+          target: {
+            value: 'cErTGH77Y'
+          }
+        });
+        fireEvent.focusOut(pwField);
+        expect(screen.getByText(pwErrorMessage)).toBeInTheDocument();
+      });
+      test('Check password value missing uppercase character', () => {
+        fireEvent.change(pwField, {
+          target: {
+            value: 'certgh77y;{'
+          }
+        });
+        fireEvent.focusOut(pwField);
+        expect(screen.getByText(pwErrorMessage)).toBeInTheDocument();
+      });
+      test('Final check of valid password', () => {
+        fireEvent.change(pwField, {
+          target: {
+            value: validPassword
+          }
+        });
+        fireEvent.focusOut(pwField);
+        expect(screen.queryByText(pwErrorMessage)).toBeNull();
+      });
+    })
+  });
+
+  describe('Fetch registration', () => {
+
+    beforeEach(() => {
+      global.fetch = jest.fn(() =>
+        Promise.resolve({
+          json: () => Promise.resolve({ status: 200 })
+        })
+      );
+    });
+
+    afterEach(() => {
+      global.fetch.mockClear();
+    });
+
+    test('Registration with empty form should NOT call fetch method', () => {
+      const regButton = screen.getByText('Registrate');
+      fireEvent.click(regButton);
+      expect(fetch).toHaveBeenCalledTimes(0);
+    });
+
+    test('Registration data should call a fetch method', async () => {
+      fireEvent.change(document.querySelector('#firstName'), {
+        target: {
+          value: 'testFirst'
+        }
+      });
+
+      fireEvent.change(document.querySelector('#lastName'), {
+        target: {
+          value: 'testLast'
+        }
+      });
+      fireEvent.change(document.querySelector('#email'), {
+        target: {
+          value: 'test@test.hu'
+        }
+      });
+      fireEvent.change(document.querySelector('#password'), {
+        target: {
+          value: 'LofaszJoska79)'
+        }
+      });
+
+      const regButton = screen.getByText('Registrate');
+      fireEvent.click(regButton);
+      expect(fetch).toHaveBeenCalledTimes(1);
+    });
+  });
+});
+
+describe('Check navigate to Login page renders correctly', () => {
+  test('Back to unauthorized Home page', () => {
+    const homeButton = screen.getByText('Home');
+    expect(homeButton).toBeInTheDocument();
+    fireEvent.click(homeButton);
+    const appointmentText = screen.getByText('Appointment System');
+    expect(appointmentText).toBeInTheDocument();
+  });
+});

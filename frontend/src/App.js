@@ -6,7 +6,6 @@ import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 import ListOfUsers from './components/admin/users/ListOfUsers';
-import './scss/global.scss';
 import NewEvent from './components/dashboard/users/NewEvent/NewEvent';
 import AdminMain from './components/admin/Admin.js/AdminMain';
 import ServicesMain from './components/admin/Services/ServicesMain';
@@ -16,6 +15,7 @@ import EventsMain from './components/dashboard/users/Events/EventsMain';
 import PrescriptionsMain from './components/Provider/Prescriptions/PrescriptionsMain';
 import NewPrescription from './components/Provider/Prescriptions/NewPrescription';
 import CategoriesMain from './components/admin/Categories/CategoriesMain';
+import './scss/global.scss';
 
 function getUser() {
   const storageUser = localStorage.getItem('user');
