@@ -21,7 +21,7 @@ export default function Home({ user, setUser }) {
   }
 
   async function getCategories() {
-    const res = await fetchWithAuth(`${backend.endpoint}/categories`, null, 'GET', null);
+    const res = await fetchWithAuth(`${backend.endpoint}/categories`);
     return res;
   }
 

@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import AuthNavMenu from "./AuthNavMenu";
 
 export default function AuthenticatedNavbar({ user, setUser }) {
@@ -48,8 +49,11 @@ export default function AuthenticatedNavbar({ user, setUser }) {
       </button>
       <div className="collapse navbar-collapse" id="navbarNavDropdown">
         <ul className="navbar-nav me-auto">
-          <li className="nav-item d-flex align-items-center nav-title-li">
-            Sanitally
+          <li >
+            <Link className="nav-item d-flex align-items-center"
+              to="/">
+              Sanitally
+            </Link>
           </li>
           <li
             className="nav-item d-flex align-items-center link me-3 text-center m-2">

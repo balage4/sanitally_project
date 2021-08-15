@@ -4,7 +4,7 @@ export default function Categories({ categories }) {
     <div className="d-flex categories">
 
       {categories.map(category => (
-        <div>
+        <div key={category.categoryName}>
           <h4>{category.categoryName}</h4>
           <p>{category.categoryNotes}</p>
         </div>
