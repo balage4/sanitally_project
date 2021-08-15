@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Redirect } from 'react-router-dom';
 import InputFieldSet from '../InputFieldSet';
+import { backend } from '../../utilities'
 
 // eslint-disable-next-line react/prop-types
 export default function LoginForm({ user, setUser }) {
@@ -102,18 +103,6 @@ export default function LoginForm({ user, setUser }) {
     }));
   }
 
-  const backend = {
-    protocol: 'http',
-    host: '127.0.0.1',
-    port: 5000,
-  };
-
-  const backendUrl = `${backend.protocol}://${backend.host}:${backend.port}`;
-
-  const endpoint = {
-    login: `${backendUrl}/api/login`,
-  };
-
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -124,7 +113,7 @@ export default function LoginForm({ user, setUser }) {
     const isValid = isFormValid();
 
     if (isValid) {
-      fetch(endpoint.login, {
+      fetch(`${backend.endpoint}/api/login`, {
         method: 'POST',
         mode: 'cors',
         headers: {
