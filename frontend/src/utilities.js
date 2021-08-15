@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const fetchWithAuth = async (url, token, requestMethod, requestBody) => {
   const response = await fetch(url, {
     method: requestMethod,
@@ -63,6 +64,26 @@ function getServiceIdByName(servicesArray, serviceName) {
   return serviceId;
 }
 
+function listOfEventsStringify(events, users, services) {
+  const out = JSON.parse(JSON.stringify(events));
+  out.forEach(event => {
+    users.forEach(userResp => {
+      if (event.userId === userResp._id) {
+        event.userName = `${userResp.lastName} ${userResp.firstName}`;
+      }
+      if (event.eventProvider === userResp._id) {
+        event.eventProvider = `${userResp.lastName} ${userResp.firstName}`;
+      }
+    })
+    services.forEach(serviceResp => {
+      if (event.eventService === serviceResp._id) {
+        event.eventService = serviceResp.serviceName;
+      }
+    });
+  });
+  return out;
+}
+
 function getServiceNameById(serviceArray, serviceId) {
   let serviceName;
   serviceArray.forEach(service => {
@@ -74,4 +95,4 @@ function getServiceNameById(serviceArray, serviceId) {
 }
 
 export default fetchWithAuth;
-export { months, backend, getServiceIdByName, getServiceNameById, setEventsEndpoint };
+export { months, backend, getServiceIdByName, getServiceNameById, setEventsEndpoint, listOfEventsStringify };

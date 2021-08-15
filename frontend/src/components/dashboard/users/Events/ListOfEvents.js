@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import fetchWithAuth, { backend, setEventsEndpoint } from "../../../../utilities";
+import fetchWithAuth, { backend, listOfEventsStringify, setEventsEndpoint } from "../../../../utilities";
 import EventsTable from "./EventsTable";
 
 export default function ListOfEvents({ user }) {
@@ -22,24 +22,9 @@ export default function ListOfEvents({ user }) {
       if (eventsResponse.status < 200 || eventsResponse.status >= 300 || !eventsResponse) throw new Error(eventsResponse.error);
       if (userResponse.status < 200 || userResponse.status >= 300 || !userResponse) throw new Error(userResponse.error);
 
+      const stringedEvents = await listOfEventsStringify(eventsResponse.events, userResponse.users, userResponse.services);
 
-      await eventsResponse.events.forEach(event => {
-        userResponse.users.forEach(userResp => {
-          if (event.userId === userResp._id) {
-            event.userName = `${userResp.lastName} ${userResp.firstName}`;
-          }
-          if (event.eventProvider === userResp._id) {
-            event.eventProvider = `${userResp.lastName} ${userResp.firstName}`;
-          }
-        })
-        userResponse.services.forEach(serviceResp => {
-          if (event.eventService === serviceResp._id) {
-            event.eventService = serviceResp.serviceName;
-          }
-        })
-      });
-
-      await setListOfEvents(eventsResponse.events);
+      setListOfEvents(stringedEvents);
 
 
     } catch (err) {
