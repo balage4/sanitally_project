@@ -2,8 +2,9 @@ import mongoose from 'mongoose';
 
 const prescriptionSchema = new mongoose.Schema({
   prescriptionFor: {
-    type: String,
-    required: true
+    type: mongoose.Types.ObjectId,
+    required: true,
+    ref: 'User'
   },
   prescriptionVaccine: {
     type: String,
@@ -14,8 +15,9 @@ const prescriptionSchema = new mongoose.Schema({
     required: true
   },
   prescriptionFrom: {
-    type: String,
-    required: true
+    type: mongoose.Types.ObjectId,
+    required: true,
+    ref: 'User'
   }
 });
 

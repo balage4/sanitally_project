@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useRef, useEffect } from 'react';
-import fetchWithAuth from '../../../utilities';
+import fetchWithAuth, { backend } from '../../../utilities';
 import InputFieldSet from '../../InputFieldSet';
 
 // eslint-disable-next-line no-unused-vars
@@ -54,8 +54,8 @@ export default function NewPrescriptionForm({ user }) {
 
   async function fetchUserNames() {
     try {
-      const res = await fetchWithAuth('http://localhost:5000/api/admin/users', user.token, 'GET', null);
-      if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+      const res = await fetchWithAuth('http://localhost:5000/api/admin/users', user.token);
+      if (res.status < 200 || res.status >= 300) throw new Error(res.error);
       const usersFullName = [];
       res.users.forEach(resUser => {
         usersFullName.push(`${resUser.lastName} ${resUser.firstName}`)
@@ -121,18 +121,6 @@ export default function NewPrescriptionForm({ user }) {
     }));
   }
 
-  const backend = {
-    protocol: 'http',
-    host: 'localhost',
-    port: 5000,
-  };
-
-  const backendUrl = `${backend.protocol}://${backend.host}:${backend.port}`;
-
-  const endpoint = {
-    newPrescription: `${backendUrl}/api/provider/prescriptions/new`,
-  };
-
   async function handleSubmit(e) {
     e.preventDefault();
     setFormAlertText('');
@@ -149,15 +137,15 @@ export default function NewPrescriptionForm({ user }) {
       }
       try {
         const res = await fetchWithAuth(
-          endpoint.newPrescription,
+          `${backend.endpoint}/provider/prescriptions/new`,
           user.token,
           'POST',
           JSON.stringify(prescriptionData)
         );
-        if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+        if (res.status < 200 || res.status >= 300) throw new Error(res.error);
         setFormAlertText('Recept elmentve.');
         setTimeout(() => {
-          setFormAlertText('');
+          setFormAlertText(null);
         }, 2000);
       } catch (err) { setFormAlertText(err.message) }
 

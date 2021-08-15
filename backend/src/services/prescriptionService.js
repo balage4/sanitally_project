@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import Prescription from "../models/Prescription";
 import logger from "../logger";
 import User from "../models/User";
@@ -7,19 +8,17 @@ export const prescriptrionService = {
   async createNewPrescription(data) {
     try {
 
-      const userName = data.prescriptionFor.split(' ');
+      const userFullName = data.prescriptionFor.split(' ');
 
-      const userFor = await User.find({
-        and: [
-          { lastName: userName[0] },
-          { firstName: userName[1] }
-        ]
-      });
+      const user = await User.findOne(({ $and: [{ lastName: userFullName[0] }, { firstName: userFullName[1] }] }));
+      const provider = await User.findOne({ "email": data.prescriptionFrom });
+
+
       const prescriptionData = await new Prescription({
-        prescriptionFor: userFor[0],
+        prescriptionFor: user._id,
         prescriptionVaccine: data.prescriptionVaccine,
         prescriptionDosage: data.prescriptionDosage,
-        prescriptionFrom: data.prescriptionFrom
+        prescriptionFrom: provider._id
       });
       const prescriptionResponse = await prescriptionData.save();
       return { status: 201, prescriptionResponse };
