@@ -31,7 +31,7 @@ export const userService = {
         role: user.role
       },
         process.env.TOKEN_SECRET,
-        { expiresIn: '1day' }
+        { expiresIn: '1week' }
       );
 
       return {
@@ -40,6 +40,7 @@ export const userService = {
           email: user.email,
           role: user.role,
           firstName: user.firstName,
+          lastName: user.lastName,
           token
         }
       };
