@@ -12,10 +12,10 @@ export default function PrescriptionsMain({ user, setUser }) {
         className="btn btn-primary"
         to="/prescriptions/new"
       >Új recept írása felhasználónak</Link>)}
-      {user.role === 'user' && (
+      {(user.role === 'user' || user.role === 'admin') && (
         <PrescriptionList user={user} />
       )}
-    </div>
 
+    </div>
   )
 }
