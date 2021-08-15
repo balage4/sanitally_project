@@ -83,6 +83,21 @@ function listOfEventsStringify(events, users, services) {
   });
   return out;
 }
+function listOfPrescriptionsStringify(prescriptions, users) {
+  const out = JSON.parse(JSON.stringify(prescriptions));
+  out.forEach(prescription => {
+    users.forEach(userResp => {
+      if (prescription.prescriptionFor === userResp._id) {
+        prescription.prescriptionFor = `${userResp.lastName} ${userResp.firstName}`;
+      }
+      if (prescription.prescriptionFrom === userResp._id) {
+        prescription.prescriptionFrom = `${userResp.lastName} ${userResp.firstName}`;
+      }
+    })
+
+  });
+  return out;
+}
 
 function getServiceNameById(serviceArray, serviceId) {
   let serviceName;
@@ -95,4 +110,12 @@ function getServiceNameById(serviceArray, serviceId) {
 }
 
 export default fetchWithAuth;
-export { months, backend, getServiceIdByName, getServiceNameById, setEventsEndpoint, listOfEventsStringify };
+export {
+  months,
+  backend,
+  getServiceIdByName,
+  getServiceNameById,
+  setEventsEndpoint,
+  listOfEventsStringify,
+  listOfPrescriptionsStringify
+};

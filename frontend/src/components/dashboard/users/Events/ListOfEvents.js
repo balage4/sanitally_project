@@ -15,9 +15,8 @@ export default function ListOfEvents({ user }) {
       const eventsEndpoint = setEventsEndpoint(user);
 
       const eventsResponse = await fetchWithAuth(eventsEndpoint,
-        user.token,
-        'GET', null);
-      const userResponse = await fetchWithAuth(`${backend.endpoint}/admin/users`, user.token, 'GET', null);
+        user.token);
+      const userResponse = await fetchWithAuth(`${backend.endpoint}/admin/users`, user.token);
 
       if (eventsResponse.status < 200 || eventsResponse.status >= 300 || !eventsResponse) throw new Error(eventsResponse.error);
       if (userResponse.status < 200 || userResponse.status >= 300 || !userResponse) throw new Error(userResponse.error);

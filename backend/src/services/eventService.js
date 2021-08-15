@@ -50,6 +50,7 @@ export const eventService = {
       return { status: 500, error: 'Something went wrong' };
     }
   },
+
   async getEventsByUserEmail(userEmail) {
 
     try {
@@ -62,6 +63,7 @@ export const eventService = {
       return { status: 500, error: 'Something went wrong' };
     }
   },
+
   async getEventsByProvider(userEmail) {
     try {
       const userObject = await User.findOne({ email: userEmail });

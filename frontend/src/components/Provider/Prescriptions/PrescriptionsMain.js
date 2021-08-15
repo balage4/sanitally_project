@@ -9,7 +9,7 @@ export default function PrescriptionsMain({ user, setUser }) {
       <AuthenticatedNavbar user={user} setUser={setUser} />
 
       {user.role === 'provider' && (<Link
-        className="btn btn-primary"
+        className="btn btn-primary m-3"
         to="/prescriptions/new"
       >Új recept írása felhasználónak</Link>)}
       {(user.role === 'user' || user.role === 'admin') && (
