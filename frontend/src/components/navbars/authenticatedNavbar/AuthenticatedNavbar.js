@@ -8,6 +8,12 @@ export default function AuthenticatedNavbar({ user, setUser }) {
     setUser(null);
   }
 
+  const roles = {
+    admin: 'Adminisztrátor',
+    provider: 'Szolgáltató',
+    user: 'Felhasználó'
+  };
+
   const menusByRoles = {
     user: [
       'Események',
@@ -45,6 +51,15 @@ export default function AuthenticatedNavbar({ user, setUser }) {
           <li className="nav-item d-flex align-items-center nav-title-li">
             Sanitally
           </li>
+          <li
+            className="nav-item d-flex align-items-center link me-3 text-center m-2">
+            Bejelentkezve:<br /> {`${user.lastName} ${user.firstName}`}
+          </li>
+          <li className="nav-item d-flex align-items-center">
+            <b>
+              {roles[user.role]}
+            </b>
+          </li>
         </ul>
 
 
@@ -57,10 +72,6 @@ export default function AuthenticatedNavbar({ user, setUser }) {
             linkClass='link me-3'
           />
 
-          <li
-            className="nav-item d-flex align-items-center link me-3 text-center">
-            Bejelentkezve:<br /> {`${user.lastName} ${user.firstName}`}
-          </li>
           <li
             className='nav-item d-flex align-items-center'>
             <button
