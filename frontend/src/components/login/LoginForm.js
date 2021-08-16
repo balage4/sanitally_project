@@ -113,7 +113,7 @@ export default function LoginForm({ user, setUser }) {
     const isValid = isFormValid();
 
     if (isValid) {
-      fetch(`${backend.endpoint}/api/login`, {
+      fetch(`${backend.endpoint}/login`, {
         method: 'POST',
         mode: 'cors',
         headers: {
