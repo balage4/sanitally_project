@@ -34,38 +34,36 @@ export default function Home({ user, setUser }) {
     <>
       {!user && <Navbar />}
       {user && <AuthenticatedNavbar user={user} setUser={setUser} />}
-      <div className="main d-flex justify-content-center">
+      <div className="main d-flex flex-column justify-content-center">
+        <h1 className="text-center">SanitAlly</h1>
+        <h4 className="text-center">Egészségügyi foglalási rendszer</h4>
         <div>
-          <h1 className="text-center">SanitAlly</h1>
-          <h4 className="text-center">Egészségügyi foglalási rendszer</h4>
-          <div>
-            {!user && <h3 className="text-center text-danger mb-3">Nincs bejelentkezett felhasználó</h3>}
-            {user && (
-              <>
-                <h3 className="text-center mb-3">Üdvözlünk, {user.firstName}</h3>
-              </>
-            )}
+          {!user && <h3 className="text-center text-danger mb-3">Nincs bejelentkezett felhasználó</h3>}
+          {user && (
+            <>
+              <h3 className="text-center mb-3">Üdvözlünk, {user.firstName}</h3>
+            </>
+          )}
 
-            {!user && <h3 className="text-center mt-4">
-              Az alkalmazás használatához{' '}
-              <span onClick={goToRegistration} aria-hidden="true">
-                regisztrálj
-              </span>{' '}
-              vagy{' '}
-              <span onClick={goToLogin} aria-hidden="true">
-                jelentkezz be{' '}
-              </span>
-              !
-            </h3>}
+          {!user && <h3 className="text-center mt-4">
+            Az alkalmazás használatához{' '}
+            <span onClick={goToRegistration} aria-hidden="true">
+              regisztrálj
+            </span>{' '}
+            vagy{' '}
+            <span onClick={goToLogin} aria-hidden="true">
+              jelentkezz be{' '}
+            </span>
+            !
+          </h3>}
 
-          </div>
-          <div>
-            <h4 className="text-center mt-5">Ismerkedj meg szolgáltatásainkkal:</h4>
-            {categories && (<Categories categories={categories} />)}
-            {!categories && (
-              <div className="text-center text-danger mt-3">Szolgáltatási ismertető pillanatnyilag nem érhető el! :(</div>
-            )}
-          </div>
+        </div>
+        <div>
+          <h4 className="text-center mt-5">Ismerkedj meg szolgáltatásainkkal:</h4>
+          {categories && (<Categories categories={categories} />)}
+          {!categories && (
+            <div className="text-center text-danger mt-3">Szolgáltatási ismertető pillanatnyilag nem érhető el! :(</div>
+          )}
         </div>
       </div>
       <Footer />
