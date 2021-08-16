@@ -13,19 +13,14 @@ export default function ListOfEvents({ user }) {
   async function fetchEvents() {
     try {
       const eventsEndpoint = setEventsEndpoint(user);
-
       const eventsResponse = await fetchWithAuth(eventsEndpoint,
         user.token);
       const userResponse = await fetchWithAuth(`${backend.endpoint}/admin/users`, user.token);
-
       if (eventsResponse.status < 200 || eventsResponse.status >= 300 || !eventsResponse) throw new Error(eventsResponse.error);
       if (userResponse.status < 200 || userResponse.status >= 300 || !userResponse) throw new Error(userResponse.error);
 
       const stringedEvents = await listOfEventsStringify(eventsResponse.events, userResponse.users, userResponse.services);
-
       setListOfEvents(stringedEvents);
-
-
     } catch (err) {
       setFetchError(err.message);
     }
@@ -50,6 +45,5 @@ export default function ListOfEvents({ user }) {
         </div>
       )}
     </div>
-
   )
 }
