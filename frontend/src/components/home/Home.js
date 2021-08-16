@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Navbar from '../navbars/nonAuthenticatedNavbar/Navbar';
 import AuthenticatedNavbar from '../navbars/authenticatedNavbar/AuthenticatedNavbar';
-import Footer from '../footer/Footer';
+/* import Footer from '../footer/Footer'; */
 import Categories from './CategoriesMain';
 import fetchWithAuth, { backend } from '../../utilities';
 
@@ -66,7 +66,7 @@ export default function Home({ user, setUser }) {
           )}
         </div>
       </div>
-      <Footer />
+      {/*  <Footer /> */}
     </>
   );
 }
