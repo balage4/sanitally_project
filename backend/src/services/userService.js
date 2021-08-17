@@ -19,12 +19,10 @@ export const userService = {
 
     const user = await User.findOne({ email: data.email }).exec();
 
-    if (!user) {
-      return { status: 400, error: `We couldn't find any user with this email address` };
-    }
+    if (!user) throwError(400, 'Nem létezik ilyen felhasználó.');
 
     const validPassword = await bcrypt.compare(data.password, user.password);
-    if (!validPassword) throwError(428, 'not valid pw');
+    if (!validPassword) throwError(400, 'E-mail, vagy jelszó hibás.');
 
     const token = jwt.sign({
       email: user.email,

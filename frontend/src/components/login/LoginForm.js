@@ -135,7 +135,7 @@ export default function LoginForm({ user, setUser }) {
         .then(res => {
           localStorage.setItem(
             'user',
-            JSON.stringify(res.user)
+            JSON.stringify(res)
           );
           setFieldValues({
             email: '',
@@ -143,7 +143,7 @@ export default function LoginForm({ user, setUser }) {
           });
           setFormAlertText('');
           setFormAlertType('');
-          setUser(res.user);
+          setUser(res);
         })
         .catch(error => {
           setFormWasValidated(false);
