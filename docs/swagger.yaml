@@ -2,19 +2,208 @@ openapi: 3.0.1
 info:
   title: Sanitally webapp
   version: 1.0.0
-  description: Medical appointment system
+  description: API Documentation for Medical appointment system
 servers:
   - url: 'http://localhost:5000/api'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+  schemas:
+    User:
+      type: object
+      required:
+        - lastName
+        - firstName
+        - email
+        - password
+      properties:
+        _id:
+          type: string
+          description: The auto-generated id of the user
+        lastName:
+          type: string
+          description: The last name of the user
+        firstName:
+          type: string
+          description: The first of the user
+        email:
+          type: string
+          description: The email of the user
+        password:
+          type: string
+          description: The password of the user
+      example:
+        _id: d3efr334rf3
+        lastName: John
+        firstName: Doe
+        email: john@doe.com
+        password: johndoe123$)
+    Category:
+      type: object
+      required:
+        - categoryName
+        - categoryNotes
+      properties:
+        _id:
+          type: string
+          description: The auto-generated id of the category
+        categoryName:
+          type: string
+          description: Name of the categoryName
+        categoryNotes:
+          type: string
+          description: Short note of the category
+      example:
+        _id: derf23r12
+        categoryName: Szakrendelések
+        categoryNotes: Rövid leírás a kategóriáról, kezelésről
+    Service:
+      type: object
+      required:
+        - serviceName
+        - serviceNote
+      properties:
+        _id:
+          type: string
+          description: The auto-generated id of the service
+        serviceName:
+          type: string
+          description: Name of the service
+        serviceNote:
+          type: string
+          description: Short note of the service
+        providers:
+          type: array
+            items:
+              type: string
+      example:
+        _id: derf23r12
+        serviceName: Szakrendelések
+        serviceNote: Rövid leírás a szolgálatásról, kezelésről
+        providers: ["23rt4rjef43","dw2fr4rf43f","d4fr4r4f4"]
+    Event:
+      type: object
+      required:
+        - eventDate
+        - eventTime
+        - userId
+        - eventService
+        - eventProvider
+      properties:
+        _id:
+          type: string
+          description: The auto-generated id of the event
+        eventDate:
+          type: string
+          description: Date of the vent
+        eventTime:
+          type: string
+          description: The exact time of the event
+        userId:
+          type: string
+            schema:
+              $ref: User
+          description: ObjectId ref to User schema
+        eventService:
+          type: string
+            schema:
+              $ref: Service
+          description: ObjectId ref to Service schema
+        eventProvider:
+          type: string
+            schema:
+              $ref: User
+          description: ObjectId ref to User schema
+      example:
+        _id: s3ede3wf45
+        eventDate: 2021-12-21
+        eventTime: "14:30"
+        userId: fgvrfse3eed32
+        eventService: d4fewf3f345
+        eventProvider: d4f3g4gh54h5
+    Prescription:
+      type: object
+      required:
+        - prescriptionFor
+        - prescriptionVaccine
+        - prescriptionDosage
+        - prescriptionFrom
+      properties:
+        _id:
+          type: string
+          description: The auto-generated id of the prescription
+        prescriptionFor:
+          type: string
+          description: ID of the user for prescription
+        prescriptionVaccine:
+          type: string
+          description: Vaccine name
+        prescriptionDosage:
+          type: string
+          description: Dosage of the vaccine
+        prescriptionFrom:
+          type: string
+            schema:
+              $ref: User
+          description: ObjectId ref to User schema
+      example:
+        _id: s3ede3wf45
+        prescriptionFor: 2021-12-21
+        prescriptionVaccine: Saridon
+        prescriptionDosage: 3 X 1
+        prescriptionFrom: d4fewf3f345
 paths:
   /login:
     post:
-      summary: login to the app
-      parameters:
-        - email: email
-          in: body
-          type: string
-          required: true
-        - password: password
-          in: body
-          required: true
-          type: string
+      summary: Login user to the app
+      tags: [User]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+                required:
+                  - email
+                  - password
+                properties:
+                  email:
+                    type: string
+                    description: valid e-mail address
+                  password:
+                    type: string
+                    description: strong password (min. 8 char, includes uppercase letter and special character)
+                example: 
+                  email: john@doe.com
+                  password: johhDoe869)!
+      responses:
+        200:
+          description: Successful login of the user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    description: 200
+                  body:
+                    type: object
+                    description: Body of the logged responses
+                    properties:
+                      required: 
+                        - email
+                        - role 
+                        - firstName
+                        - lastName
+                        - token
+
+
+
+                
+
