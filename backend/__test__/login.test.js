@@ -50,8 +50,6 @@ describe('Login tests', () => {
     expect(res.body).toBeTruthy();
   });
 
-
-
   it('should send error via invalid inputs', async () => {
     loginData.password = 'aaa888';
     const res = await request(app)
@@ -61,17 +59,6 @@ describe('Login tests', () => {
 
     expect(res.statusCode).toBe(400);
     expect(res.error).toBeTruthy();
+
   });
-
-  it('should have token in the login response', async () => {
-    loginData.password = 'asdFG77))';
-    const res = await request(app)
-      .post('/api/login')
-      .set('Content-Type', 'application/json')
-      .send(loginData);
-
-    expect(res.statusCode).toBe(200);
-    expect(res.body.user.token).toBeTruthy();
-  });
-
 });
