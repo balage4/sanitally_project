@@ -6,9 +6,13 @@ export const userController = {
     res.sendStatus(200);
   },
 
-  async loginUser(req, res) {
-    const user = await userService.loginUser(req.body);
-    res.status(user.status).json(user);
+  async loginUser(req, res, next) {
+    try {
+      const user = await userService.loginUser(req.body);
+      res.status(200).json(user);
+    } catch (e) {
+      next(e);
+    }
   },
 
   async registerUser(req, res) {

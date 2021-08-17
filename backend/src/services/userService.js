@@ -7,48 +7,41 @@ import logger from '../logger';
 import User from '../models/User';
 import { validateLoginData, validateUserData } from '../utils';
 import Service from "../models/Service";
+import throwError from "../common/throwError";
 
 export const userService = {
   async loginUser(data) {
-    try {
-      const { error } = validateLoginData(data);
-      if (error) {
-        return { status: 400, error: error.details[0].message };
-      }
 
-      const user = await User.findOne({ email: data.email }).exec();
-      if (!user) {
-        return { status: 400, error: `We couldn't find any user with this email address` };
-      }
-
-      const validPassword = await bcrypt.compare(data.password, user.password);
-      if (!validPassword) {
-        return { status: 400, error: 'Email or password is incorrect' };
-      }
-
-      const token = jwt.sign({
-        email: user.email,
-        role: user.role
-      },
-        process.env.TOKEN_SECRET,
-        { expiresIn: '1week' }
-      );
-
-      return {
-        status: 200,
-        user: {
-          email: user.email,
-          role: user.role,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          token
-        }
-      };
-
-    } catch (err) {
-      logger.error(err);
-      return { status: 500, error: 'Something went wrong' };
+    const { error } = validateLoginData(data);
+    if (error) {
+      return { status: 400, error: error.details[0].message };
     }
+
+    const user = await User.findOne({ email: data.email }).exec();
+
+    if (!user) {
+      return { status: 400, error: `We couldn't find any user with this email address` };
+    }
+
+    const validPassword = await bcrypt.compare(data.password, user.password);
+    if (!validPassword) throwError(428, 'not valid pw');
+
+    const token = jwt.sign({
+      email: user.email,
+      role: user.role
+    },
+      process.env.TOKEN_SECRET,
+      { expiresIn: '1week' }
+    );
+
+    return {
+      email: user.email,
+      role: user.role,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      token
+    };
+
   },
 
   async createUser(data) {
