@@ -55,7 +55,7 @@ export const userService = {
       }
 
       const usersCount = await User.count();
-      console.log(usersCount);
+
 
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(data.password, salt);
