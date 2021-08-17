@@ -2,12 +2,21 @@ import { categoryService } from '../services';
 
 export const categoryController = {
 
-  async getCategories(req, res) {
-    const categories = await categoryService.getCategories();
-    res.status(categories.status).json(categories);
+  async getCategories(req, res, next) {
+    try {
+      const categories = await categoryService.getCategories();
+      res.status(200).json(categories);
+    } catch (e) {
+      next(e);
+    }
+
   },
-  async updateCategory(req, res) {
-    const createResponse = await categoryService.updateCategory(req.body);
-    res.status(createResponse.status).json(createResponse);
+  async updateCategory(req, res, next) {
+    try {
+      const createResponse = await categoryService.updateCategory(req.body);
+      res.status(201).json(createResponse);
+    } catch (e) {
+      next(e);
+    }
   }
 }

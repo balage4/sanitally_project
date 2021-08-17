@@ -1,15 +1,17 @@
+/* eslint-disable consistent-return */
 import Category from "../models/Category";
 import logger from "../logger";
+import throwError from "../common/throwError";
 
 export const categoryService = {
 
   async getCategories() {
     try {
-      const categories = await Category.find({});
-      return { status: 200, categories };
+      const categories = await Category.find();
+      return categories;
     } catch (err) {
       logger.error(err);
-      return { status: 500, error: 'Something went wrong' };
+      throwError(500, err.message);
     }
   },
   async updateCategory(data) {
@@ -20,13 +22,10 @@ export const categoryService = {
           categoryNotes: data.updateData.categoryNotes
         }
       });
-      return {
-        status: 200,
-        message: 'Sikeres frissítés'
-      }
+      return 'Sikeres mentés';
     } catch (err) {
       logger.error(err);
-      return { status: 500, error: 'Something went wrong' };
+      throwError(500, 'Adatbázis hiba.')
     }
   }
 }

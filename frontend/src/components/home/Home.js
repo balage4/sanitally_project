@@ -27,7 +27,7 @@ export default function Home({ user, setUser }) {
 
   useEffect(async () => {
     const categoriesResponse = await getCategories();
-    setCategories(categoriesResponse.categories);
+    setCategories(categoriesResponse);
   }, []);
 
   return (

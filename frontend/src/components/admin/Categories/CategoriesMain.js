@@ -14,7 +14,7 @@ export default function CategoriesMain({ user, setUser }) {
     fetch(`${backend.endpoint}/categories`)
       .then(res => res.json())
       .then(res => {
-        setEditCategories(res.categories);
+        setEditCategories(res);
       })
       .catch(err => {
         setFetchError(err.message);
