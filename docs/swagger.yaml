@@ -164,6 +164,7 @@ paths:
       summary: Login user to the app
       tags: [User]
       requestBody:
+        required: true
         content:
           application/json:
             schema:
