@@ -54,11 +54,13 @@ export default function NewPrescriptionForm({ user }) {
 
   async function fetchUserNames() {
     try {
-      const res = await fetchWithAuth('http://localhost:5000/api/admin/users', user.token);
+      const res = await fetchWithAuth(`${backend.endpoint}/admin/users`, user.token);
       if (res.status < 200 || res.status >= 300) throw new Error(res.error);
       const usersFullName = [];
       res.users.forEach(resUser => {
-        usersFullName.push(`${resUser.lastName} ${resUser.firstName}`)
+        if (resUser.role === 'user') {
+          usersFullName.push(`${resUser.lastName} ${resUser.firstName}`)
+        }
       });
       setUsersFullName(usersFullName);
     } catch (err) { setFormAlertText(err.message) }
