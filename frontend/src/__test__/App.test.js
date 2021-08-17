@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { MemoryRouter } from 'react-router-dom';
@@ -246,3 +246,4 @@ describe('Check navigate to Login page renders correctly', () => {
     expect(appointmentText).toBeInTheDocument();
   });
 });
+ */

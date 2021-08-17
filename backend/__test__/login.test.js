@@ -1,16 +1,77 @@
 import request from 'supertest';
-
+import mongoose from 'mongoose';
+import testdb from './test_db';
 import app from '../src/app';
+import User from '../src/models/User';
 
-describe('POST /api/test', () => {
 
-  describe('given an email address and a password', () => {
-    test('should respond with a 200 status code', async () => {
-      const response = await request(app).post('/api/test').send({
-        email: 'test@test.com',
-        password: 'testTEST*1'
-      });
-      expect(response.statusCode).toBe(200);
-    })
-  })
-})
+let registrationData;
+let loginData;
+
+
+beforeAll(async () => {
+  await testdb();
+  registrationData = {
+    firstName: 'Joe',
+    lastName: 'Doe',
+    email: 'test@mail.com',
+    password: 'asdFG77))',
+  }
+  loginData = {
+    email: 'test@mail.com',
+    password: 'asdFG77))',
+  }
+});
+
+afterAll(async () => {
+  await User.deleteMany();
+  await mongoose.connection.close();
+});
+
+describe('Login tests', () => {
+
+  it('post:register via dummy', async () => {
+    const res = await request(app)
+      .post('/api/register')
+      .set('Content-Type', 'application/json')
+      .send(registrationData);
+
+    expect(res.statusCode).toBe(201);
+    expect(res.body).toBeTruthy();
+  });
+
+  it('should login success', async () => {
+    const res = await request(app)
+      .post('/api/login')
+      .set('Content-Type', 'application/json')
+      .send(loginData);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toBeTruthy();
+  });
+
+
+
+  it('should send error via invalid inputs', async () => {
+    loginData.password = 'aaa888';
+    const res = await request(app)
+      .post('/api/login')
+      .set('Content-Type', 'application/json')
+      .send(loginData);
+
+    expect(res.statusCode).toBe(400);
+    expect(res.error).toBeTruthy();
+  });
+
+  it('should have token in the login response', async () => {
+    loginData.password = 'asdFG77))';
+    const res = await request(app)
+      .post('/api/login')
+      .set('Content-Type', 'application/json')
+      .send(loginData);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.user.token).toBeTruthy();
+  });
+
+});
