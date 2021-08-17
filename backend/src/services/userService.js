@@ -54,6 +54,9 @@ export const userService = {
         return { status: 400, error: 'Email address is already used' };
       }
 
+      const usersCount = await User.count();
+      console.log(usersCount);
+
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(data.password, salt);
 
@@ -61,7 +64,8 @@ export const userService = {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
-        password: hashedPassword
+        password: hashedPassword,
+        role: usersCount ? 'user' : 'admin'
       });
       await user.save();
 
