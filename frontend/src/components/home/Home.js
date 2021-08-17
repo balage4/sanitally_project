@@ -24,10 +24,20 @@ export default function Home({ user, setUser }) {
     const res = await fetchWithAuth(`${backend.endpoint}/categories`);
     return res;
   }
+  async function initCategories() {
+    const res = await fetchWithAuth(`${backend.endpoint}/categories/init`, null, 'POST');
+    return res;
+  }
 
   useEffect(async () => {
     const categoriesResponse = await getCategories();
-    setCategories(categoriesResponse);
+    if (!categoriesResponse.length) {
+      await initCategories();
+      const categoriesAfterInit = await getCategories();
+      setCategories(categoriesAfterInit);
+    } else {
+      setCategories(categoriesResponse);
+    }
   }, []);
 
   return (

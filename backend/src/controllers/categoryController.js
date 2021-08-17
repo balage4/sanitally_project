@@ -18,5 +18,13 @@ export const categoryController = {
     } catch (e) {
       next(e);
     }
+  },
+  async initCategories(req, res, next) {
+    try {
+      const initResponse = await categoryService.initCategories();
+      res.status(201).json(initResponse);
+    } catch (e) {
+      next(e);
+    }
   }
 }

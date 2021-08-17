@@ -35,6 +35,7 @@ router.post('/admin/services/new', tokenCheck, adminCheck, serviceController.cre
 router.put('/admin/services/:id', tokenCheck, adminCheck, serviceController.updateService);
 router.delete('/admin/services/:id', tokenCheck, adminCheck, serviceController.deleteService);
 
+router.post('/categories/init', categoryController.initCategories);
 router.get('/categories', categoryController.getCategories);
 router.put('/admin/categories', tokenCheck, adminCheck, categoryController.updateCategory);
 

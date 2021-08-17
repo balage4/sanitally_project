@@ -2,6 +2,7 @@
 import Category from "../models/Category";
 import logger from "../logger";
 import throwError from "../common/throwError";
+import { categoryDefaults } from "../defaults";
 
 export const categoryService = {
 
@@ -23,6 +24,15 @@ export const categoryService = {
         }
       });
       return { message: 'Sikeres mentés' };
+    } catch (err) {
+      logger.error(err);
+      throwError(500, 'Adatbázis hiba.')
+    }
+  },
+  async initCategories() {
+    try {
+      await Category.insertMany(categoryDefaults);
+      return 'Sikeres alaphelyzetbe állítás';
     } catch (err) {
       logger.error(err);
       throwError(500, 'Adatbázis hiba.')
