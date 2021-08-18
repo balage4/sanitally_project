@@ -4,21 +4,24 @@ import testdb from './test_db';
 import app from '../src/app';
 import User from '../src/models/User';
 
+const regData = {
+  firstName: 'Joe',
+  lastName: 'Doe',
+  email: 'admin@hello.hu',
+  password: 'Admin79)',
+}
 
-let registrationData;
+const loginData = {
+  email: 'admin@hello.hu',
+  password: 'Admin79)',
+}
 
 beforeAll(async () => {
   await testdb();
-  registrationData = {
-    firstName: "Joe",
-    lastName: "Doe",
-    email: "test@mail.com",
-    password: "asdFG77))",
-  }
+  await User.deleteMany();
 });
 
 afterAll(async () => {
-  await User.deleteMany();
   await mongoose.connection.close();
 });
 
@@ -33,44 +36,53 @@ describe('mockTest', () => {
 })
 
 describe('Registration test', () => {
-  it("post:register", async () => {
+  it('post:register', async () => {
     const res = await request(app)
       .post('/api/register')
       .set('Content-Type', 'application/json')
-      .send(registrationData);
-
+      .send(regData);
     expect(res.statusCode).toBe(201);
     expect(res.body).toBeTruthy();
   });
 
-  it("post:register again with the same data", async () => {
+  it('register with invalid data', async () => {
     const res = await request(app)
       .post('/api/register')
       .set('Content-Type', 'application/json')
-      .send(registrationData);
+      .send({ email: 'xyyy', password: 'doeiruhf' });
 
     expect(res.statusCode).toBe(400);
     expect(res.error).toBeTruthy();
   });
 
-  it("post:register with invalid password", async () => {
-    registrationData.password = 'aaa';
+  it('post:register with invalid password', async () => {
+    regData.password = 'aaa';
     const res = await request(app)
       .post('/api/register')
       .set('Content-Type', 'application/json')
-      .send(registrationData)
+      .send(regData)
       .expect(400)
     expect(res.error).toBeTruthy();
   });
-  it("post:register with invalid e-mail address", async () => {
-    registrationData.email = 'test'
-    registrationData.password = 'testTEST*1';
+  it('post:register with invalid e-mail address', async () => {
+    regData.email = 'test'
+    regData.password = 'testTEST*1';
     const res = await request(app)
       .post('/api/register')
       .set('Content-Type', 'application/json')
-      .send(registrationData)
+      .send(regData)
       .expect(400);
     expect(res.error).toBeTruthy();
+  });
+
+  it('should success login by valid data', async () => {
+    const res = await request(app)
+      .post('/api/login')
+      .set('Content-Type', 'application/json')
+      .send(loginData)
+      .expect(200)
+    expect(res.body.token).toBeTruthy();
+    expect(res.body.role).toBe('admin');
   });
 
 });

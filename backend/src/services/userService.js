@@ -2,7 +2,6 @@
 /* eslint-disable no-underscore-dangle */
 import mongoose from "mongoose";
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import logger from '../logger';
 import User from '../models/User';
 import { validateLoginData, validateUserData } from '../utils';
@@ -14,12 +13,8 @@ export const userService = {
   async loginUser(data) {
 
     const { error } = validateLoginData(data);
-    if (error) {
-      return { status: 400, error: error.details[0].message };
-    }
-
+    if (error) throwError(400, error.details[0].message)
     const user = await User.findOne({ email: data.email });
-
     if (!user) throwError(400, 'Nem létezik ilyen felhasználó.');
 
     const validPassword = await bcrypt.compare(data.password, user.password);
