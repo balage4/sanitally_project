@@ -24,7 +24,7 @@ Látogató megtekintheti a létesítmény szolgáltatóinak bemutatkozását, sz
 ### Regisztrált szolgáltató (provider):
 
 - megtekintheti a szolgáltatására foglalt események részleteit,
-- recepteket rögzíthet pácienseinek, akik regisztrált felhasználó (user) jogkörrel rendelkeznek, 
+- recepteket rögzíthet pácienseinek, akik regisztrált felhasználó (user) jogkörrel rendelkeznek,
 
 ### Adminisztrátor:
 
@@ -56,7 +56,33 @@ Látogató megtekintheti a létesítmény szolgáltatóinak bemutatkozását, sz
 
 ## Telepítési útmutató
 
-Az alkalmazás gyökérkönyvtárában az alkalmazás `docker compose up` terminál-parancs megadásával indítható:
- 
+Az alkalmazás gyökérkönyvtárában az alkalmazás `docker compose up` terminál-parancs megadásával indítható.
 
- 
+## Az alkalmazás megjeleníthető oldalai
+
+| Frontend URL        | Oldal leírása                      |
+| ------------------- | ---------------------------------- |
+| /                   | Főoldal, (landing page)            |
+| /register           | Regisztráció                       |
+| /login              | Bejelentkezés az applikációba      |
+| /admin              | Adminisztráció menü                |
+| /admin/users/:id    | Felhasználó adatainak szerkesztése |
+| /admin/services     | Szolgálatások                      |
+| /admin/services/:id | Szolgálatás szerkesztése           |
+| /admin/services/new | Új szolgáltatás rögzítése          |
+| /events             | Rögzített események                |
+| /events/new         | Új esemény rögzítése               |
+| /prescriptions      | Rögzített receptek                 |
+| /prescriptions/new  | Új recept rögzítése                |
+
+## API végpontok
+
+## Adatbázis kollekciók
+
+| Kollekció neve | Leírása                            |
+| -------------- | ---------------------------------- |
+| User           | Az oldal regisztrált felhasználói  |
+| Category       | Főoldalon megjelenített kategóriák |
+| Event          | Rögzített események                |
+| Prescription   | Rögzített receptek                 |
+| Service        | Szolgáltatások                     |
