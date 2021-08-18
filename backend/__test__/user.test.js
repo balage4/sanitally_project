@@ -32,8 +32,6 @@ const dummies = [
   },
 ]
 
-let updateId;
-
 beforeAll(async () => {
   await testdb();
   await User.deleteMany();
