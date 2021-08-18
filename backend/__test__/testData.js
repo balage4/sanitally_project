@@ -1,3 +1,4 @@
+
 export const registrationData = {
   firstName: 'Joe',
   lastName: 'Doe',
@@ -8,3 +9,4 @@ export const loginData = {
   email: 'test@mail.com',
   password: 'asdFG77))',
 }
+
