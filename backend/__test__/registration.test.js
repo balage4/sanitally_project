@@ -24,11 +24,11 @@ afterAll(async () => {
 
 describe('mockTest', () => {
   test('test route sending', async () => {
-    const response = await request(app).post('/api/test').send({
+    await request(app).post('/api/test').send({
       email: 'test@test.com',
       password: 'testTEST*1'
-    });
-    expect(response.statusCode).toBe(200);
+    })
+      .expect(200);
   })
 })
 
@@ -58,11 +58,21 @@ describe('Registration test', () => {
     const res = await request(app)
       .post('/api/register')
       .set('Content-Type', 'application/json')
-      .send(registrationData);
-
-    expect(res.statusCode).toBe(400);
+      .send(registrationData)
+      .expect(400)
     expect(res.error).toBeTruthy();
   });
+  it("post:register with invalid e-mail address", async () => {
+    registrationData.email = 'test'
+    registrationData.password = 'testTEST*1';
+    const res = await request(app)
+      .post('/api/register')
+      .set('Content-Type', 'application/json')
+      .send(registrationData)
+      .expect(400);
+    expect(res.error).toBeTruthy();
+  });
+
 });
 
 

@@ -2,7 +2,7 @@
 
 ## A projekt áttekintése
 
-Az eseményfoglalási rendszer lehetőséget biztosít egészségügy szolgáltatásokra történő időpont foglalásra.
+Az eseményfoglalási rendszer lehetőséget biztosít egy egészségügyi intézményben szolgáltatásokra történő időpont foglalásra.
 
 ## A projekt rövid leírása
 
