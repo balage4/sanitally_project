@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import request from 'supertest';
 import mongoose from 'mongoose';
 import testdb from './test_db';
@@ -6,11 +7,12 @@ import User from '../src/models/User';
 import { loginData } from './testData';
 import { generateToken } from '../src/common/createToken';
 
-const adminToken = generateToken(loginData.email, loginData.role);
+const adminToken = generateToken(loginData.email, 'admin');
 const userToken = generateToken('user@user.hu', 'user');
 
 const dummies = [
   {
+    _id: 111,
     firstName: 'Joe',
     lastName: 'Doe',
     email: 'joe@hello.hu',
@@ -29,6 +31,8 @@ const dummies = [
     password: 'Admin79)',
   },
 ]
+
+let updateId;
 
 beforeAll(async () => {
   await testdb();
@@ -64,6 +68,7 @@ describe('Users test', () => {
       .set('Authorization', `Bearer ${userToken}`)
       .expect(200)
     expect(res.body.users).toBeTruthy();
+    updateId = res.body.users[0]._id;
     expect(res.body.services).toBeTruthy();
   });
   it('should refuse request without token', async () => {
@@ -71,5 +76,21 @@ describe('Users test', () => {
       .get('/api/admin/users')
       .set('Content-Type', 'application/json')
       .expect(401);
+  });
+  it('should update document successfully', async () => {
+    await request(app)
+      .put('/api/admin/users')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .send({
+        id: 1,
+        updateData: {
+          firstName: 'Jóska',
+          lastName: 'Pista',
+          role: 'provider',
+          providerTitle: 'dfgbvfdrgt3er'
+        }
+      })
+      .expect(200);
   });
 });
