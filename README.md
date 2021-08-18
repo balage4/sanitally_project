@@ -94,6 +94,11 @@ Az alkalmazás gyökérkönyvtárában az alkalmazás `docker compose up` termin
 | PUT:/api/admin/services/:id             | Szolgáltatás frissítése ID alapján        |
 | DELETE:/api/admin/services/:id          | Szolgáltatás törlése ID alapján           |
 | POST:/api/admin/services/new            | Új szolgáltatás rögzítése                 |
+| GET:/api/categories                     | Kategóriák lekérése                       |
+| POST:/api/categories/init               | Kategóriák inicializálása                 |
+| PUT:/api/admin/categories               | Kategóriák frissítése                     |
+| GET:/api/prescriptions/:email           | Receptek lekérése e-mail alapján          |
+| POST:/api/provider/prescriptions/new    | Új recept létrehozása                     |
 
 ## Adatbázis kollekciók
 
