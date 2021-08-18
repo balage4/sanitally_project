@@ -179,9 +179,9 @@ paths:
                   password:
                     type: string
                     description: strong password (min. 8 char, includes uppercase letter and special character)
-                example: 
-                  email: john@doe.com
-                  password: johhDoe869)!
+              example: 
+                email: john@doe.com
+                password: johhDoe869)!
       responses:
         200:
           description: Successful login of the user
