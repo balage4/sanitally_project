@@ -12,24 +12,25 @@ Látogató megtekintheti a létesítmény szolgáltatóinak bemutatkozását, sz
 
 ### Nem regisztrált felhasználó:
 
-- Megtekinteheti valamennyi egészségügyi szolgáltató bemutatkozását, szolgáltatásának rövid leírását.
+- Tájékozódhat az intézmény főbb szolgáltatásairól,
+- Alapadatok megadásával (Vezetéknév, Keresztnév, e-mail cím, jelszó) regisztálhat az oldalra
 
 ### Regisztrált felhasználó:
 
 - időpontot foglalhat egy kiválasztott egészségügyi szolgáltatónál,
-- Aktív foglalásait megtekintheti, szerkesztheti,
-- egészségügyi profil szerkesztése
+- Aktív foglalásait megtekintheti,
+- Számára felírt recepteket listázhatja
 
-### Regisztrált szolgáltató:
+### Regisztrált szolgáltató (provider):
 
 - megtekintheti a szolgáltatására foglalt események részleteit,
-- Események szerkesztése,
-- szolgálatói profil szerkesztése
+- recepteket rögzíthet pácienseinek, akik regisztrált felhasználó (user) jogkörrel rendelkeznek, 
 
 ### Adminisztrátor:
 
-- Új szolgálatót rögzíthet a rendszerben,
 - regisztrált felhasználó jogosultságát módosíthatja
+- rögzíthet és szerkesztheti az egészségügyi szolgáltatásokat
+- főoldali 'kategóriák' leírásait módosíthatja
 
 ## Főbb funkciók:
 
@@ -52,3 +53,12 @@ Látogató megtekintheti a létesítmény szolgáltatóinak bemutatkozását, sz
 #### Frontend
 
 - React
+
+## Telepítési útmutató
+
+### Docker környezetben
+
+Az alkalmazás gyökérkönyvtárában az alkalmazás az alábbi terminál-parancs megadásával indítható:
+- "docker compose up"
+
+ 
