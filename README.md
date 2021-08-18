@@ -56,9 +56,7 @@ Látogató megtekintheti a létesítmény szolgáltatóinak bemutatkozását, sz
 
 ## Telepítési útmutató
 
-### Docker környezetben
-
-Az alkalmazás gyökérkönyvtárában az alkalmazás az alábbi terminál-parancs megadásával indítható:
-- "docker compose up"
+Az alkalmazás gyökérkönyvtárában az alkalmazás `docker compose up` terminál-parancs megadásával indítható:
+ 
 
  
