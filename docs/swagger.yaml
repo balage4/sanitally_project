@@ -176,6 +176,33 @@ components:
         lastName: Doe
         role: user
         token: cuxjdhbfje3edh47ez4ew82uw7z3hwe7sduehidjhjndaay
+    loginErrorUserDoesntExist:
+      title: Root Type for errorMessage
+      description: ""
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: Nem létezik ilyen felhasználó.
+    loginValidateError:
+      title: Root Type for errorMessage
+      description: ""
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: Hibás adat.
+    validatePasswordError:
+      title: Root Type for errorMessage
+      description: ""
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: Hibás adat.
 paths:
   /login:
     post:
@@ -207,8 +234,67 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/loggedResponse'
-
-
-
-                
-
+        400:
+          description: User doesn't exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/loginErrorUserDoesntExist'
+        400:
+          description: Validate error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/loginValidateError'
+        400:
+          description: E-mail or password error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/validatePasswordError'
+  /register:
+    post:
+      summary: Registration of the user
+      tags: [User]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+                required:
+                  - firstName
+                  - lastName
+                  - email
+                  - password
+                properties:
+                  firstName:
+                    type: string
+                  lastName:
+                    type: string
+                  email:
+                    type: string
+                    description: valid e-mail address
+                  password:
+                    type: string
+                    description: strong password (min. 8 char, includes uppercase letter and special character)
+              example: 
+                firstName: John
+                lastName: Doe
+                email: john@doe.com
+                password: johhDoe869)!
+      responses:
+        201:
+          description: Registration successful
+        400:
+          description: E-mail already exist
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: E-mail cím már létezik!
+                  

@@ -41,7 +41,7 @@ export const userService = {
 
       const emailExist = await User.findOne({ email: data.email }).exec();
       if (emailExist) {
-        return { status: 400, error: 'Email address is already used' };
+        return { status: 400, error: 'E-mail cím már létezik!' };
       }
 
       const usersCount = await User.count();
