@@ -66,7 +66,6 @@ describe('Users test', () => {
       .set('Authorization', `Bearer ${userToken}`)
       .expect(200)
     expect(res.body.users).toBeTruthy();
-    updateId = res.body.users[0]._id;
     expect(res.body.services).toBeTruthy();
   });
   it('should refuse request without token', async () => {
