@@ -1,10 +1,11 @@
-export const registrationData = {
+export const regData = {
   firstName: 'Joe',
   lastName: 'Doe',
-  email: 'test@mail.com',
-  password: 'asdFG77))',
+  email: 'admin@hello.hu',
+  password: 'Admin79)',
 }
+
 export const loginData = {
-  email: 'test@mail.com',
-  password: 'asdFG77))',
+  email: 'admin@hello.hu',
+  password: 'Admin79)',
 }

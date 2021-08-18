@@ -2,35 +2,25 @@
 /* eslint-disable no-underscore-dangle */
 import mongoose from "mongoose";
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import logger from '../logger';
 import User from '../models/User';
 import { validateLoginData, validateUserData } from '../utils';
 import Service from "../models/Service";
 import throwError from "../common/throwError";
+import { generateToken } from "../common/createToken";
 
 export const userService = {
   async loginUser(data) {
 
     const { error } = validateLoginData(data);
-    if (error) {
-      return { status: 400, error: error.details[0].message };
-    }
-
-    const user = await User.findOne({ email: data.email }).exec();
-
+    if (error) throwError(400, error.details[0].message)
+    const user = await User.findOne({ email: data.email });
     if (!user) throwError(400, 'Nem létezik ilyen felhasználó.');
 
     const validPassword = await bcrypt.compare(data.password, user.password);
     if (!validPassword) throwError(400, 'E-mail, vagy jelszó hibás.');
 
-    const token = jwt.sign({
-      email: user.email,
-      role: user.role
-    },
-      process.env.TOKEN_SECRET,
-      { expiresIn: '1week' }
-    );
+    const token = generateToken(user.email, user.role);
 
     return {
       email: user.email,
