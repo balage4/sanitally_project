@@ -158,6 +158,24 @@ components:
         prescriptionVaccine: Saridon
         prescriptionDosage: 3 X 1
         prescriptionFrom: d4fewf3f345
+    loggedResponse:
+      title: User successful logged in 
+      description: Data contains the user's token, name, and role
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        role:
+          type: string
+        token:
+          type: string
+      example:
+        firstName: John
+        lastName: Doe
+        role: user
+        token: cuxjdhbfje3edh47ez4ew82uw7z3hwe7sduehidjhjndaay
 paths:
   /login:
     post:
@@ -188,21 +206,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  status:
-                    type: number
-                    description: 200
-                  body:
-                    type: object
-                    description: Body of the logged responses
-                    properties:
-                      required: 
-                        - email
-                        - role 
-                        - firstName
-                        - lastName
-                        - token
+                $ref: '#/components/schemas/loggedResponse'
 
 
 
