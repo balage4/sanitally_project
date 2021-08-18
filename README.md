@@ -77,6 +77,24 @@ Az alkalmazás gyökérkönyvtárában az alkalmazás `docker compose up` termin
 
 ## API végpontok
 
+| Végpont                                 | Leírása                                   |
+| --------------------------------------- | ----------------------------------------- |
+| POST:/api/login                         | Felhasználó bejelentkezése                |
+| POST:/api/register                      | Felhasználói regisztráció                 |
+| GET:/api/events                         | Események lekérése                        |
+| GET:/api/events/:useremail              | Felhasználóhoz tartozó események lekérése |
+| GET:/api/provider/events/:provideremail | Szolgáltatóhoz tartozó események lekérése |
+| POST:/api/events/new                    | Új esemény létrehozása                    |
+| GET:/api/admin/users                    | Felhaszálók lekérése                      |
+| PUT:/api/admin/users                    | Felhasználó adatainak frissítése          |
+| GET:/api/admin/users/:id                | Felhasználó lekérése ID alapján           |
+| DELETE:/api/admin/users/:id             | Felhasználó törlése ID alapján            |
+| GET:/api/services                       | Szolgáltatások lekérése                   |
+| GET:/api/admin/services/:id             | Szolgáltatás lekérése ID alapján          |
+| PUT:/api/admin/services/:id             | Szolgáltatás frissítése ID alapján        |
+| DELETE:/api/admin/services/:id          | Szolgáltatás törlése ID alapján           |
+| POST:/api/admin/services/new            | Új szolgáltatás rögzítése                 |
+
 ## Adatbázis kollekciók
 
 | Kollekció neve | Leírása                            |
