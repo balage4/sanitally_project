@@ -10,7 +10,7 @@ export default function ActionButtons({
         <button
           key={`actionKey_${action}_${actionId}`}
           type="button"
-          className={`btn btn-${action === 'Törlés' ? 'danger' : 'primary'} m-1`}
+          className={`btn ${action === 'Törlés' ? 'delete-button' : 'modify-button'} m-1`}
           name={action}
           data-id={actionId}
           onClick={handleActionButtons}
