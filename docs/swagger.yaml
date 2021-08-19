@@ -288,4 +288,30 @@ paths:
                       type: string
                 example: 
                   message: E-mail cím már létezik!
+  /events:
+    get:
+      summary: get stored events
+      tags: [Event]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Return event in array
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Event'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
                   
