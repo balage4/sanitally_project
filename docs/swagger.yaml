@@ -377,7 +377,7 @@ paths:
                       type: string
                 example: 
                   message: Something went wrong
-  /events/{provideremail}:
+  /provider/events/{provideremail}:
     get:
       summary: get events by provider's e-mail
       tags: [Event]
@@ -851,3 +851,81 @@ paths:
                       type: string
                 example: 
                   message: Something went wrong
+  /admin/categories:
+    put:
+      summary: return default category-list
+      tags: [Category]
+      description: update categories by id from request body
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        201:
+          description: successful update category
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                    type: string
+                example: 
+                  message: Sikeres mentés.
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /prescriptions/{email}:
+    get:
+      summary: return prescriptions list
+      tags: [Prescription]
+      description: returns prescription list for specific user
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: email
+          schema: 
+            type: string
+          required: true
+          description: e-mail of user for filtering prescriptions
+      responses:
+        200:
+          description: return prescriptions  
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Prescription'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /provider/prescription/new:
+    post:
+      summary: return prescriptions list
+      tags: [Prescription]
+      description: returns prescription list for specific user
+      security:
+        - bearerAuth: []
+        

@@ -34,7 +34,7 @@ router.delete('/admin/services/:id', tokenCheck, adminCheck, serviceController.d
 router.get('/services', tokenCheck, serviceController.getServices); // doc
 
 router.put('/admin/categories', tokenCheck, adminCheck, categoryController.updateCategory);
-router.post('/categories/init', categoryController.initCategories);
-router.get('/categories', categoryController.getCategories);
+router.post('/categories/init', categoryController.initCategories); // doc
+router.get('/categories', categoryController.getCategories); // doc
 
 export default router;

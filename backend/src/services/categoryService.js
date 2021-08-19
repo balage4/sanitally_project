@@ -23,7 +23,7 @@ export const categoryService = {
           categoryNotes: data.updateData.categoryNotes
         }
       });
-      return { message: 'Sikeres mentés' };
+      return { message: 'Sikeres mentés.' };
     } catch (err) {
       logger.error(err);
       throwError(500, 'Adatbázis hiba.')
