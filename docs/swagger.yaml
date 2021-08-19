@@ -717,4 +717,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Service'
-                
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  
