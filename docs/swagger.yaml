@@ -801,18 +801,45 @@ paths:
   /categories:
     get:
       summary: return categories
-      tags: [Service]
-      description: get all services by array
+      tags: [Category]
+      description: get all categories by array
       responses:
-        responses:
         200:
-          description: Return all of services
+          description: Return all of categories 
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#components/schemas/Category'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /categories/init:
+    post:
+      summary: return default category-list
+      tags: [Category]
+      description: setup categories at home page when load the page first time.
+      responses:
+        201:
+          description: setup categories with defaults
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                    type: string
+                example: 
+                  message: Sikeres alaphelyzetbe állítás.
         500:
           description: Internal server error
           content:

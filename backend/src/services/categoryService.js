@@ -32,7 +32,7 @@ export const categoryService = {
   async initCategories() {
     try {
       await Category.insertMany(categoryDefaults);
-      return 'Sikeres alaphelyzetbe állítás';
+      return 'Sikeres alaphelyzetbe állítás.';
     } catch (err) {
       logger.error(err);
       throwError(500, 'Adatbázis hiba.')
