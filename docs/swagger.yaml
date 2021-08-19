@@ -114,9 +114,9 @@ components:
               type: string
       example:
         _id: derf23r12
-        serviceName: Szakrendelések
+        serviceName: Fogászat
         serviceNote: Rövid leírás a szolgálatásról, kezelésről
-        providers: ["23rt4rjef43","dw2fr4rf43f","d4fr4r4f4"]
+        providers: ["23rtd4f4rt4rjef43","dw2fjs8hd34r4rf43f","d4fr4j3dw78ugr4f4"]
     Event:
       type: object
       required:
@@ -615,4 +615,30 @@ paths:
                       type: string
                 example: 
                   message: Something went wrong
-
+  /services:
+    get:
+      summary: get all services (providing services)
+      tags: [User]
+      security:
+        - bearerAuth: []
+      description: get all services by array
+      responses:
+        200:
+          description: Return all of services
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Service'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
