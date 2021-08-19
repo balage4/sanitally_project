@@ -13,7 +13,7 @@ export const servService = {
 
       const serviceExist = await Service.findOne({ serviceName: data.serviceName }).exec();
       if (serviceExist) {
-        return { status: 400, error: 'Service is already saved' };
+        return { status: 400, error: 'Ilyen szolgáltatás már létezik.' };
       }
       const serv = await new Service({
         serviceName: data.serviceName,
@@ -22,7 +22,7 @@ export const servService = {
       await serv.save();
       return {
         status: 201,
-        message: 'Service saved'
+        message: 'Szolgáltatás sikeresen mentve'
       };
 
     } catch (err) {
@@ -50,13 +50,13 @@ export const servService = {
   },
   async updateService(data) {
     try {
-      const updateResponse = await Service.findByIdAndUpdate(data.id, {
+      await Service.findByIdAndUpdate(data.id, {
         $set: {
           serviceName: data.updateData.serviceName,
           serviceNote: data.updateData.serviceNote
         }
       });
-      return { status: 200, message: updateResponse };
+      return { status: 200, message: 'Sikeres frissítés' };
     } catch (err) {
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };

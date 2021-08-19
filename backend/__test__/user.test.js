@@ -12,7 +12,6 @@ const userToken = generateToken('user@user.hu', 'user');
 
 const dummies = [
   {
-    _id: 111,
     firstName: 'Joe',
     lastName: 'Doe',
     email: 'joe@hello.hu',
@@ -73,21 +72,5 @@ describe('Users test', () => {
       .get('/api/admin/users')
       .set('Content-Type', 'application/json')
       .expect(401);
-  });
-  it('should update document successfully', async () => {
-    await request(app)
-      .put('/api/admin/users')
-      .set('Content-Type', 'application/json')
-      .set('Authorization', `Bearer ${adminToken}`)
-      .send({
-        id: 1,
-        updateData: {
-          firstName: 'Jóska',
-          lastName: 'Pista',
-          role: 'provider',
-          providerTitle: 'dfgbvfdrgt3er'
-        }
-      })
-      .expect(200);
   });
 });

@@ -44,6 +44,36 @@ components:
         firstName: Doe
         email: john@doe.com
         password: johndoe123$)
+    loggedUser:
+      type: object
+      required:
+        - id
+        - lastName
+        - firstName
+        - role
+        - providerTitle
+      properties:
+        _id:
+          type: string
+          description: id of the user for the update
+        lastName:
+          type: string
+          description: The last name of the user
+        firstName:
+          type: string
+          description: The first of the user
+        role:
+          type: string
+          description: role of the user
+        providerTitle:
+          type: string
+          description: service name when the role is 'provider'
+      example:
+        _id: e38e7uzrg4zr7u
+        firstName: John
+        lastName: Doe
+        role: provider
+        providerTitle: Szemészet
     Category:
       type: object
       required:
@@ -84,9 +114,9 @@ components:
               type: string
       example:
         _id: derf23r12
-        serviceName: Szakrendelések
+        serviceName: Fogászat
         serviceNote: Rövid leírás a szolgálatásról, kezelésről
-        providers: ["23rt4rjef43","dw2fr4rf43f","d4fr4r4f4"]
+        providers: ["23rtd4f4rt4rjef43","dw2fjs8hd34r4rf43f","d4fr4j3dw78ugr4f4"]
     Event:
       type: object
       required:
@@ -158,6 +188,51 @@ components:
         prescriptionVaccine: Saridon
         prescriptionDosage: 3 X 1
         prescriptionFrom: d4fewf3f345
+    loggedResponse:
+      title: User successful logged in 
+      description: Data contains the user's token, name, and role
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        role:
+          type: string
+        token:
+          type: string
+      example:
+        firstName: John
+        lastName: Doe
+        role: user
+        token: cuxjdhbfje3edh47ez4ew82uw7z3hwe7sduehidjhjndaay
+    loginErrorUserDoesntExist:
+      title: Root Type for errorMessage
+      description: ""
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: Nem létezik ilyen felhasználó.
+    loginValidateError:
+      title: Root Type for errorMessage
+      description: ""
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: Hibás adat.
+    validatePasswordError:
+      title: Root Type for errorMessage
+      description: ""
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: Hibás adat.
 paths:
   /login:
     post:
@@ -179,32 +254,735 @@ paths:
                   password:
                     type: string
                     description: strong password (min. 8 char, includes uppercase letter and special character)
-                example: 
-                  email: john@doe.com
-                  password: johhDoe869)!
+              example: 
+                email: john@doe.com
+                password: johhDoe869)!
       responses:
         200:
           description: Successful login of the user
           content:
             application/json:
               schema:
-                type: object
+                $ref: '#/components/schemas/loggedResponse'
+        400:
+          description: User doesn't exist
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/loginErrorUserDoesntExist'
+                - $ref: '#/components/schemas/loginValidateError'
+                - $ref: '#/components/schemas/validatePasswordError'
+  /register:
+    post:
+      summary: Registration of the user
+      tags: [User]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+                required:
+                  - firstName
+                  - lastName
+                  - email
+                  - password
                 properties:
-                  status:
-                    type: number
-                    description: 200
-                  body:
-                    type: object
-                    description: Body of the logged responses
-                    properties:
-                      required: 
-                        - email
-                        - role 
-                        - firstName
-                        - lastName
-                        - token
-
-
-
-                
-
+                  firstName:
+                    type: string
+                  lastName:
+                    type: string
+                  email:
+                    type: string
+                    description: valid e-mail address
+                  password:
+                    type: string
+                    description: strong password (min. 8 char, includes uppercase letter and special character)
+              example: 
+                firstName: John
+                lastName: Doe
+                email: john@doe.com
+                password: johhDoe869)!
+      responses:
+        201:
+          description: Registration successful
+        400:
+          description: E-mail already exist
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: E-mail cím már létezik!
+  /events:
+    get:
+      summary: get stored events
+      tags: [Event]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Return events in array
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Event'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /events/{useremail}:
+    get:
+      summary: get events by user e-mail
+      tags: [Event]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: useremail
+          schema: 
+            type: string
+          required: true
+          description: e-mail of the user 
+      responses:
+        200:
+          description: Return events in array
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Event'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /provider/events/{provideremail}:
+    get:
+      summary: get events by provider's e-mail
+      tags: [Event]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: provideremail
+          schema: 
+            type: string
+          required: true
+          description: e-mail of the user (has provider role)
+      responses:
+        200:
+          description: Return events in array
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Event'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /events/new:
+    post:
+      summary: create new event
+      tags: [Event]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        201:
+          description: New event successfully saved
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  message: 'Event created'
+        400:
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Validation error
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /admin/users/:
+    get:
+      summary: get all of users
+      tags: [User]
+      security:
+        - bearerAuth: []
+      description: 
+      responses:
+        200:
+          description: Return all of users, and services in one request
+          content:
+            application/json:
+              schema:
+                type: object
+                parameters:
+                  users:
+                    schema:
+                      - $ref: '#components/schemas/User'
+                  services:
+                    schema:
+                      - $ref: '#components/schemas/Service'
+                example:
+                  users:
+                    schema:
+                      - $ref: '#components/schemas/User'
+                  services:
+                    schema:
+                      - $ref: '#components/schemas/Service'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+    put:
+      summary: update user 
+      tags: [User]
+      security:
+        - bearerAuth: []
+      description: update one user with the id from the request body
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/loggedUser'
+      responses:
+        200:
+          description: Success update of user
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  message: Sikeres frissítés
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /admin/users/{id}:
+    get:
+      summary: get one user by params id
+      tags: [User]
+      security:
+        - bearerAuth: []
+      description: Return single user by ID
+      parameters:
+        - in: path
+          name: id
+          schema: 
+            type: string
+          required: true
+          description: id of the user
+      responses:
+        200:
+          description: Return single user by ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/loggedResponse'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+    delete:
+      summary: delete user 
+      tags: [User]
+      security:
+        - bearerAuth: []
+      description: delete one user by params id
+      parameters:
+        - in: path
+          name: id
+          schema: 
+            type: string
+          required: true
+          description: id of the user
+      responses:
+        200:
+          description: Success delete of user
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  message: Sikeres törlés
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /users/{service}:
+    get:
+      summary: get users by serviceName
+      tags: [User]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Return users that has providerName in own properties
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/User'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /services:
+    get:
+      summary: get all services (providing services)
+      tags: [Service]
+      description: get all services by array
+      responses:
+        200:
+          description: Return all of services
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Service'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /admin/services/new:
+    post:
+      summary: create new service (providing service)
+      tags: [Service]
+      security:
+        - bearerAuth: []
+      description: create new service by request data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+                required:
+                  - serviceName
+                  - serviceNote
+                properties:
+                  serviceName:
+                    type: string
+                  serviceNote:
+                    type: string
+              example: 
+                serviceName: Urológia
+                serviceNote: Vízvezetékproblémák, csöpögő csap...
+      responses: 
+        201:
+          description: Service data successful saved
+          content:
+            application/json:
+              type: object
+                parameters:
+                  message:
+                    type: string
+              example: 
+                message: Szolgáltatás sikeresen mentve
+        400:
+          description: validation error, or service already exist
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message:
+                      type: string
+              example: 
+                message: Ilyen szolgálatás már létezik.
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /admin/services/{id}:
+    get:
+      summary: get service by id from params
+      tags: [Service]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema: 
+            type: string
+          required: true
+          description: id of the service
+      responses:
+        200:
+          description: Return service object by id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+    put:
+      summary: update service by id from params
+      tags: [Service]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema: 
+            type: string
+          required: true
+          description: id of the service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        200:
+          description: Successful update of service
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  message: Sikeres frissítés
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+    delete:
+      summary: delete service by id from params
+      tags: [Service]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema: 
+            type: string
+          required: true
+          description: id of the service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        202:
+          description: Successful delete of service
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /categories:
+    get:
+      summary: return categories
+      tags: [Category]
+      description: get all categories by array
+      responses:
+        200:
+          description: Return all of categories 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Category'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /categories/init:
+    post:
+      summary: return default category-list
+      tags: [Category]
+      description: setup categories at home page when load the page first time.
+      responses:
+        201:
+          description: setup categories with defaults
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                    type: string
+                example: 
+                  message: Sikeres alaphelyzetbe állítás.
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /admin/categories:
+    put:
+      summary: return default category-list
+      tags: [Category]
+      description: update categories by id from request body
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        201:
+          description: successful update category
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                    type: string
+                example: 
+                  message: Sikeres mentés.
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /prescriptions/{email}:
+    get:
+      summary: return prescriptions list
+      tags: [Prescription]
+      description: returns prescription list for specific user
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: email
+          schema: 
+            type: string
+          required: true
+          description: e-mail of user for filtering prescriptions
+      responses:
+        200:
+          description: return prescriptions  
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Prescription'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /provider/prescription/new:
+    post:
+      summary: return prescriptions list
+      tags: [Prescription]
+      description: Only users with 'provider' role can use this endpoint!
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+                required:
+                  - prescriptionFor
+                  - prescriptionVaccine
+                  - prescriptionDosage
+                  - prescriptionFrom
+                properties:
+                  prescriptionFor:
+                    type: string
+                  prescriptionVaccine:
+                    type: string
+                  prescriptionDosage:
+                    type: string
+                  prescriptionFrom:
+                    type: string
+              example: 
+                prescriptionFor: John Doe
+                prescriptionVaccine: százfűléfőzet
+                prescriptionDosage: 1 X 100 csepp
+                prescriptionFrom: Kozák Antal
+      responses: 
+        201:
+          description: Prescription saved
+          content:
+            application/json:
+              type: object
+                parameters:
+                  message:
+                    type: string
+              example: 
+                message: 'Sikeres mentés.'
+        400:
+          description: validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message:
+                      type: string
+              example: 
+                message: Hiányzó adat!
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong  

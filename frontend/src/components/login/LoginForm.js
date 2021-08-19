@@ -199,7 +199,7 @@ export default function LoginForm({ user, setUser }) {
           handleInputChange={handleInputChange}
           required
         />
-        <button type="submit" className="btn login-btn">
+        <button type="submit" className="btn submit-btn">
           Login
         </button>
         {formAlertText && (

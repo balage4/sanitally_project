@@ -29,10 +29,12 @@ footer {
 }
 
 .admin,
-.dashboard {
+.dashboard,
+.categories-main {
   background-image: url('../assets/medical-dash.jpg');
   background-size: cover;
   height: 100vh;
+  width: 100vw;
 }
 
 .admin-background {
@@ -103,10 +105,34 @@ footer {
   }
 }
 
-.login-btn,
-.registrate-btn {
+.submit-btn {
   border: 1px solid $linkColorMain;
   background-color: $navbackground;
+  &:hover {
+    background-color: $buttonSubmitHover;
+    transition: 0.6s;
+  }
+}
+
+.modify-button,
+.delete-button {
+  border: 1px solid $linkColorMain;
+  background-color: $navbackground;
+}
+
+.delete-button {
+  color: $buttonDelete;
+  &:hover {
+    background-color: $buttonDeleteHover;
+    transition: 0.6s;
+  }
+}
+.modify-button {
+  color: $buttonModify;
+  &:hover {
+    background-color: $buttonModifyHover;
+    transition: 0.6s;
+  }
 }
 
 @media only screen and (max-width: 768px) {

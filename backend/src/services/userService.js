@@ -41,7 +41,7 @@ export const userService = {
 
       const emailExist = await User.findOne({ email: data.email }).exec();
       if (emailExist) {
-        return { status: 400, error: 'Email address is already used' };
+        return { status: 400, error: 'E-mail cím már létezik!' };
       }
 
       const usersCount = await User.count();
@@ -144,7 +144,7 @@ export const userService = {
   async deleteUser(id) {
     try {
       await User.findByIdAndRemove(id);
-      return { status: 202, message: 'Successful delete' };
+      return { status: 202, message: 'Sikeres törlés' };
     } catch (err) {
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };
