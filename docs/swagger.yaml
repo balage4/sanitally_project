@@ -350,6 +350,13 @@ paths:
       tags: [Event]
       security:
         - bearerAuth: []
+      parameters:
+        - in: path
+          name: useremail
+          schema: 
+            type: string
+          required: true
+          description: e-mail of the user 
       responses:
         200:
           description: Return events in array
@@ -376,6 +383,13 @@ paths:
       tags: [Event]
       security:
         - bearerAuth: []
+      parameters:
+        - in: path
+          name: provideremail
+          schema: 
+            type: string
+          required: true
+          description: e-mail of the user (has provider role)
       responses:
         200:
           description: Return events in array
