@@ -766,3 +766,35 @@ paths:
                       type: string
                 example: 
                   message: Something went wrong
+    delete:
+      summary: delete service by id from params
+      tags: [Service]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema: 
+            type: string
+          required: true
+          description: id of the service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        202:
+          description: Successful delete of service
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong

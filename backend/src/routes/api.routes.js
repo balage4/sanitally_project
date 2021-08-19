@@ -29,8 +29,8 @@ router.delete('/admin/users/:id', tokenCheck, adminCheck, userController.deleteU
 
 router.get('/admin/services/:id', tokenCheck, adminCheck, serviceController.getServiceById); // doc
 router.post('/admin/services/new', tokenCheck, adminCheck, serviceController.createService); // doc
-router.put('/admin/services/:id', tokenCheck, adminCheck, serviceController.updateService);
-router.delete('/admin/services/:id', tokenCheck, adminCheck, serviceController.deleteService);
+router.put('/admin/services/:id', tokenCheck, adminCheck, serviceController.updateService); // doc
+router.delete('/admin/services/:id', tokenCheck, adminCheck, serviceController.deleteService); // doc
 router.get('/services', tokenCheck, serviceController.getServices); // doc
 
 router.put('/admin/categories', tokenCheck, adminCheck, categoryController.updateCategory);
