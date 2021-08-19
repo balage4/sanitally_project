@@ -492,36 +492,24 @@ paths:
               $ref: '#/components/schemas/loggedUser'
       responses:
         200:
-          description: Return all of users, and services in one request
+          description: Success update of user
           content:
             application/json:
               schema:
                 type: object
-                parameters:
-                  users:
-                    schema:
-                      - $ref: '#components/schemas/User'
-                  services:
-                    schema:
-                      - $ref: '#components/schemas/Service'
-                example:
-                  users:
-                    schema:
-                      - $ref: '#components/schemas/User'
-                  services:
-                    schema:
-                      - $ref: '#components/schemas/Service'
-      500:
-        description: Internal server error
-        content:
-          application/json:
-            schema:
-              type: object
-                parameters:
-                  message: 
-                    type: string
-              example: 
-                message: Something went wrong
+                example: 
+                  message: Sikeres frissítés
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
   /users/{service}:
     get:
       summary: get users by serviceName
