@@ -50,7 +50,7 @@ export const servService = {
   },
   async updateService(data) {
     try {
-      const updateResponse = await Service.findByIdAndUpdate(data.id, {
+      await Service.findByIdAndUpdate(data.id, {
         $set: {
           serviceName: data.updateData.serviceName,
           serviceNote: data.updateData.serviceNote
