@@ -366,5 +366,112 @@ paths:
                       type: string
                 example: 
                   message: Something went wrong
+  /events/new:
+    post:
+      summary: create new event
+      tags: [Event]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        201:
+          description: New event successfully saved
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  message: 'Event created'
+        400:
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Validation error
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /admin/users/:
+    get:
+      summary: get all of users
+      tags: [User]
+      security:
+        - bearerAuth: []
+      description: 
+      responses:
+        200:
+          description: Return all of users, and services in one request
+          content:
+            application/json:
+              schema:
+                type: object
+                parameters:
+                  users:
+                    schema:
+                      - $ref: '#components/schemas/User'
+                  services:
+                    schema:
+                      - $ref: '#components/schemas/Service'
+                example:
+                  users:
+                    schema:
+                      - $ref: '#components/schemas/User'
+                  services:
+                    schema:
+                      - $ref: '#components/schemas/Service'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+  /users/{service}:
+    get:
+      summary: get users by serviceName
+      tags: [User]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Return users that has providerName in own properties
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/User'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
 
-                  
