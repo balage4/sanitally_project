@@ -13,7 +13,7 @@ export const servService = {
 
       const serviceExist = await Service.findOne({ serviceName: data.serviceName }).exec();
       if (serviceExist) {
-        return { status: 400, error: 'Service is already saved' };
+        return { status: 400, error: 'Ilyen szolgáltatás már létezik.' };
       }
       const serv = await new Service({
         serviceName: data.serviceName,
@@ -22,7 +22,7 @@ export const servService = {
       await serv.save();
       return {
         status: 201,
-        message: 'Service saved'
+        message: 'Szolgáltatás sikeresen mentve'
       };
 
     } catch (err) {

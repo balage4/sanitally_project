@@ -618,7 +618,7 @@ paths:
   /services:
     get:
       summary: get all services (providing services)
-      tags: [User]
+      tags: [Service]
       security:
         - bearerAuth: []
       description: get all services by array
@@ -642,3 +642,64 @@ paths:
                       type: string
                 example: 
                   message: Something went wrong
+  /admin/services/new:
+    post:
+      summary: create new service (providing service)
+      tags: [Service]
+      security:
+        - bearerAuth: []
+      description: create new service by request data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+                required:
+                  - serviceName
+                  - serviceNote
+                properties:
+                  serviceName:
+                    type: string
+                  serviceNote:
+                    type: string
+              example: 
+                serviceName: Urológia
+                serviceNote: Vízvezetékproblémák, csöpögő csap...
+      responses: 
+        201:
+          description: Service data successful saved
+          content:
+            application/json:
+              type: object
+                parameters:
+                  message:
+                    type: string
+              example: 
+                message: Szolgáltatás sikeresen mentve
+        400:
+          description: validation error, or service already exist
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message:
+                      type: string
+              example: 
+                message: Ilyen szolgálatás már létezik.
+                
+
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+        
+

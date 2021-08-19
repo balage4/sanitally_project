@@ -28,10 +28,10 @@ router.get('/admin/users/:id', tokenCheck, adminCheck, userController.getUserByI
 router.delete('/admin/users/:id', tokenCheck, adminCheck, userController.deleteUser); // doc
 
 router.get('/admin/services/:id', tokenCheck, adminCheck, serviceController.getServiceById);
-router.post('/admin/services/new', tokenCheck, adminCheck, serviceController.createService);
+router.post('/admin/services/new', tokenCheck, adminCheck, serviceController.createService); // doc
 router.put('/admin/services/:id', tokenCheck, adminCheck, serviceController.updateService);
 router.delete('/admin/services/:id', tokenCheck, adminCheck, serviceController.deleteService);
-router.get('/services', tokenCheck, serviceController.getServices);
+router.get('/services', tokenCheck, serviceController.getServices); // doc
 
 router.put('/admin/categories', tokenCheck, adminCheck, categoryController.updateCategory);
 router.post('/categories/init', categoryController.initCategories);
