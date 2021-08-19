@@ -925,7 +925,64 @@ paths:
     post:
       summary: return prescriptions list
       tags: [Prescription]
-      description: returns prescription list for specific user
+      description: Only users with 'provider' role can use this endpoint!
       security:
         - bearerAuth: []
-        
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+                required:
+                  - prescriptionFor
+                  - prescriptionVaccine
+                  - prescriptionDosage
+                  - prescriptionFrom
+                properties:
+                  prescriptionFor:
+                    type: string
+                  prescriptionVaccine:
+                    type: string
+                  prescriptionDosage:
+                    type: string
+                  prescriptionFrom:
+                    type: string
+              example: 
+                prescriptionFor: John Doe
+                prescriptionVaccine: százfűléfőzet
+                prescriptionDosage: 1 X 100 csepp
+                prescriptionFrom: Kozák Antal
+      responses: 
+        201:
+          description: Prescription saved
+          content:
+            application/json:
+              type: object
+                parameters:
+                  message:
+                    type: string
+              example: 
+                message: 'Sikeres mentés.'
+        400:
+          description: validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message:
+                      type: string
+              example: 
+                message: Hiányzó adat!
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong  
