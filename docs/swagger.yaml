@@ -571,7 +571,7 @@ paths:
           description: id of the user
       responses:
         200:
-          description: Succes delete of user
+          description: Success delete of user
           content:
             application/json:
               schema:
@@ -619,8 +619,6 @@ paths:
     get:
       summary: get all services (providing services)
       tags: [Service]
-      security:
-        - bearerAuth: []
       description: get all services by array
       responses:
         200:
@@ -688,8 +686,6 @@ paths:
                       type: string
               example: 
                 message: Ilyen szolgálatás már létezik.
-                
-
         500:
           description: Internal server error
           content:
@@ -701,5 +697,24 @@ paths:
                       type: string
                 example: 
                   message: Something went wrong
-        
-
+  /admin/services/{id}:
+    get:
+      summary: get service by id from params
+      tags: [Service]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema: 
+            type: string
+          required: true
+          description: id of the service
+      responses:
+        200:
+          description: Return service object by id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+                
