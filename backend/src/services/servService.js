@@ -56,7 +56,7 @@ export const servService = {
           serviceNote: data.updateData.serviceNote
         }
       });
-      return { status: 200, message: updateResponse };
+      return { status: 200, message: 'Sikeres frissítés' };
     } catch (err) {
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };

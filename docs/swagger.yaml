@@ -728,4 +728,41 @@ paths:
                       type: string
                 example: 
                   message: Something went wrong
-  
+    put:
+      summary: update service by id from params
+      tags: [Service]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema: 
+            type: string
+          required: true
+          description: id of the service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        200:
+          description: Successful update of service
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  message: Sikeres frissítés
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
