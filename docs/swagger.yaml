@@ -239,19 +239,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/loginErrorUserDoesntExist'
-        400:
-          description: Validate error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/loginValidateError'
-        400:
-          description: E-mail or password error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/validatePasswordError'
+                oneOf:
+                - $ref: '#/components/schemas/loginErrorUserDoesntExist'
+                - $ref: '#/components/schemas/loginValidateError'
+                - $ref: '#/components/schemas/validatePasswordError'
   /register:
     post:
       summary: Registration of the user

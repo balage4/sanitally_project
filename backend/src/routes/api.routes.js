@@ -10,8 +10,8 @@ router.use(cors());
 router.use(express.json());
 
 router.post('/test', userController.test);
-router.post('/login', userController.loginUser);
-router.post('/register', userController.registerUser);
+router.post('/login', userController.loginUser); // doc
+router.post('/register', userController.registerUser); // doc
 
 router.get('/events', eventController.getEvents);
 router.get('/events/:useremail', tokenCheck, eventController.getEventsByUserEmail);
