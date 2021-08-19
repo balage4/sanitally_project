@@ -23,9 +23,9 @@ router.get('/prescriptions/:email', tokenCheck, prescriptionController.getPrescr
 
 router.get('/users/:service', tokenCheck, userController.getUsersByService); // doc
 router.get('/admin/users', tokenCheck, userController.getUsers); // doc
-router.put('/admin/users', tokenCheck, adminCheck, userController.updateUser);
+router.put('/admin/users', tokenCheck, adminCheck, userController.updateUser); // doc
 router.get('/admin/users/:id', tokenCheck, adminCheck, userController.getUserById);
-router.delete('/admin/users/:id', tokenCheck, adminCheck, userController.deleteUser);
+router.delete('/admin/users/:id', tokenCheck, adminCheck, userController.deleteUser); // doc
 router.get('/admin/services/:id', tokenCheck, adminCheck, serviceController.getServiceById);
 router.post('/admin/services/new', tokenCheck, adminCheck, serviceController.createService);
 router.put('/admin/services/:id', tokenCheck, adminCheck, serviceController.updateService);

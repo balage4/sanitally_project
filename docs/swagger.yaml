@@ -510,6 +510,71 @@ paths:
                       type: string
                 example: 
                   message: Something went wrong
+  /admin/users/{id}:
+    get:
+      summary: get one user by params id
+      tags: [User]
+      security:
+        - bearerAuth: []
+      description: Return single user by ID
+      parameters:
+        - in: path
+          name: id
+          schema: 
+            type: string
+          required: true
+          description: id of the user
+      responses:
+        200:
+          description: Return single user by ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/loggedResponse'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
+    delete:
+      summary: delete user 
+      tags: [User]
+      security:
+        - bearerAuth: []
+      description: delete one user by params id
+      parameters:
+        - in: path
+          name: id
+          schema: 
+            type: string
+          required: true
+          description: id of the user
+      responses:
+        200:
+          description: Succes delete of user
+          content:
+            application/json:
+              schema:
+                type: object
+                example: 
+                  message: Sikeres törlés
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
   /users/{service}:
     get:
       summary: get users by serviceName

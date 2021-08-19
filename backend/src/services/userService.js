@@ -144,7 +144,7 @@ export const userService = {
   async deleteUser(id) {
     try {
       await User.findByIdAndRemove(id);
-      return { status: 202, message: 'Successful delete' };
+      return { status: 202, message: 'Sikeres törlés' };
     } catch (err) {
       logger.error(err);
       return { status: 500, error: 'Something went wrong' };
