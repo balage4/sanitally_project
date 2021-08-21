@@ -178,7 +178,7 @@ export default function LoginForm({ user, setUser }) {
       <InputFieldSet
         reference={references.email}
         name="email"
-        labelText="Email"
+        labelText="E-mail cím"
         type="email"
         errors={errors}
         fieldValues={fieldValues}
@@ -189,7 +189,7 @@ export default function LoginForm({ user, setUser }) {
       <InputFieldSet
         reference={references.password}
         name="password"
-        labelText="Password"
+        labelText="Jelszó"
         type="password"
         errors={errors}
         fieldValues={fieldValues}

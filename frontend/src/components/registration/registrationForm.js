@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Redirect } from "react-router-dom";
 import validator from 'validator';
 import InputFieldSet from "../InputFieldSet";
+import '../../scss/registration.scss';
 
 
 export default function RegistrationForm() {
@@ -199,64 +200,60 @@ export default function RegistrationForm() {
   }
 
   return (
-    <main className="registrate d-flex justify-content-center">
-      <form onSubmit={handleSubmit} noValidate
-        className={`text-center my-4 mb-3 needs-validation ${formWasValidated ? 'was-validated' : ''}`}>
+    <form onSubmit={handleSubmit} noValidate
+      className={`needs-validation ${formWasValidated ? 'was-validated' : ''}`}>
+      <InputFieldSet
+        reference={references.lastName}
+        name="lastName"
+        labelText="Vezetéknév"
+        type="text"
+        errors={errors}
+        fieldValues={fieldValues}
+        handleInputBlur={handleInputBlur}
+        handleInputChange={handleInputChange}
+        required
+      />
+      <InputFieldSet
+        reference={references.firstName}
+        name="firstName"
+        labelText="Keresztnév"
+        type="text"
+        errors={errors}
+        fieldValues={fieldValues}
+        handleInputBlur={handleInputBlur}
+        handleInputChange={handleInputChange}
+        required
+      />
+      <InputFieldSet
+        reference={references.email}
+        name="email"
+        labelText="E-mail cím"
+        type="email"
+        errors={errors}
+        fieldValues={fieldValues}
+        handleInputBlur={handleInputBlur}
+        handleInputChange={handleInputChange}
+        required
+      />
+      <InputFieldSet
+        reference={references.password}
+        name="password"
+        labelText="Jelszó"
+        type="password"
+        errors={errors}
+        fieldValues={fieldValues}
+        handleInputBlur={handleInputBlur}
+        handleInputChange={handleInputChange}
+        required
+      />
 
-        <InputFieldSet
-          reference={references.firstName}
-          name="firstName"
-          labelText="First Name"
-          type="text"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          required
-        />
-        <InputFieldSet
-          reference={references.lastName}
-          name="lastName"
-          labelText="Last Name"
-          type="text"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          required
-        />
-        <InputFieldSet
-          reference={references.email}
-          name="email"
-          labelText="Email"
-          type="email"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          required
-        />
-        <InputFieldSet
-          reference={references.password}
-          name="password"
-          labelText="Password"
-          type="password"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          required
-        />
+      <button type="submit" className="btn submit-btn">Registrate</button>
 
-        <button type="submit" className="btn submit-btn">Registrate</button>
-
-        {formAlertText &&
-          <div className={`alert mt-3 alert-${formAlertType}`} role="alert">
-            {formAlertText}
-          </div>
-        }
-
-      </form>
-    </main>
+      {formAlertText &&
+        <div className={`alert mt-3 alert-${formAlertType}`} role="alert">
+          {formAlertText}
+        </div>
+      }
+    </form>
   )
 }
