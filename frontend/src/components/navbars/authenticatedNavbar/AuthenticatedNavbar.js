@@ -38,7 +38,7 @@ export default function AuthenticatedNavbar({ user, setUser }) {
   }
 
   return (
-    <nav className="navbar navbar-expand-md">
+    <nav className="navbar navbar-expand-md navbar-light">
       <button
         className="navbar-toggler"
         type="button"
