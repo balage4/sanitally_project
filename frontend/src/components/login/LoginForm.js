@@ -46,8 +46,8 @@ export default function LoginForm({ user, setUser }) {
   };
 
   const errorTypes = {
-    required: 'Value is missing',
-    checkEmail: 'Not valid email',
+    required: 'Kötelező kitölteni',
+    checkEmail: 'Helytelen e-mail cím',
   };
 
   function validateField(fieldName) {
