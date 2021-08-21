@@ -10,13 +10,13 @@ function validateLoginData(data) {
         errors.forEach(err => {
           switch (err.code) {
             case 'string.empty':
-              err.message = 'Email is required';
+              err.message = 'E-mail cím hiányzik!';
               break;
             case 'any.required':
-              err.message = 'Email is required';
+              err.message = 'Email cím hiányzik!';
               break;
             case 'string.email':
-              err.message = 'Invalid email';
+              err.message = 'Helytelen e-mail cím!';
               break;
             default:
               break;

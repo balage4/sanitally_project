@@ -46,8 +46,8 @@ export default function LoginForm({ user, setUser }) {
   };
 
   const errorTypes = {
-    required: 'Kötelező kitölteni',
-    checkEmail: 'Helytelen e-mail cím',
+    required: 'Value is missing',
+    checkEmail: 'Not valid email',
   };
 
   function validateField(fieldName) {
@@ -108,7 +108,7 @@ export default function LoginForm({ user, setUser }) {
 
     setFormAlertText('');
     setFormAlertType('');
-    setFormWasValidated(false);
+    setFormWasValidated(true);
 
     if (isFormValid()) {
       fetch(`${backend.endpoint}/login`, {
@@ -118,15 +118,12 @@ export default function LoginForm({ user, setUser }) {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email: fieldValues.email,
-          password: fieldValues.password,
-        }),
+        body: JSON.stringify(fieldValues),
       })
         .then(async (res) => {
           if (res.status === 400) {
             const response = await res.json();
-            throw new Error(response);
+            throw new Error(response.message);
           }
           return res.json()
         })
@@ -144,12 +141,14 @@ export default function LoginForm({ user, setUser }) {
           setUser(res);
         })
         .catch(error => {
-          console.log(error);
-          setFormWasValidated(false);
           setFormAlertText(error.message);
           setFormAlertType('danger');
+
         });
     }
+    setFormWasValidated(true);
+    setFormAlertText('');
+    setFormAlertType('');
   }
 
   function handleInputBlur(e) {
