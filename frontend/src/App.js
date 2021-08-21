@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Dashboard from './components/dashboard/users/Dashboard';
 import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
@@ -35,9 +34,7 @@ function App() {
           <Route exact path="/"><Home user={user} setUser={setUser} /></Route>
           <Route path="/register"><Registration user={user} setUser={setUser} /></Route>
           <Route path="/login"><Login user={user} setUser={setUser} /></Route>
-          <ProtectedRoute
-            path="/dashboard"
-            component={() => <Dashboard user={user} setUser={setUser} />} />
+
           <ProtectedRoute
             exact path="/admin/users"
             component={() => <ListOfUsers user={user} setUser={setUser} />} />

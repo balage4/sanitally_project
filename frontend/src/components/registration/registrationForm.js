@@ -247,7 +247,7 @@ export default function RegistrationForm() {
         required
       />
 
-      <button type="submit" className="btn submit-btn">Registrate</button>
+      <button type="submit" className="btn submit-btn">Regisztráció</button>
 
       {formAlertText &&
         <div className={`alert mt-3 alert-${formAlertType}`} role="alert">
