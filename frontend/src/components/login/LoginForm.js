@@ -167,44 +167,43 @@ export default function LoginForm({ user, setUser }) {
   }
 
   return (
-    <div className="d-flex justify-content-center">
-      <form
-        onSubmit={handleSubmit}
-        noValidate
-        className={`needs-validation ${formWasValidated ? 'was-validated' : ''
-          }`}
-      >
-        <InputFieldSet
-          reference={references.email}
-          name="email"
-          labelText="Email"
-          type="email"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          required
-        />
-        <InputFieldSet
-          reference={references.password}
-          name="password"
-          labelText="Password"
-          type="password"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          required
-        />
-        <button type="submit" className="btn submit-btn">
-          Login
-        </button>
-        {formAlertText && (
-          <div className={`alert mt-3 alert-${formAlertType}`} role="alert">
-            {formAlertText}
-          </div>
-        )}
-      </form>
-    </div>
+
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      className={`needs-validation ${formWasValidated ? 'was-validated' : ''
+        }`}
+    >
+      <InputFieldSet
+        reference={references.email}
+        name="email"
+        labelText="Email"
+        type="email"
+        errors={errors}
+        fieldValues={fieldValues}
+        handleInputBlur={handleInputBlur}
+        handleInputChange={handleInputChange}
+        required
+      />
+      <InputFieldSet
+        reference={references.password}
+        name="password"
+        labelText="Password"
+        type="password"
+        errors={errors}
+        fieldValues={fieldValues}
+        handleInputBlur={handleInputBlur}
+        handleInputChange={handleInputChange}
+        required
+      />
+      <button type="submit" className="btn submit-btn">
+        Login
+      </button>
+      {formAlertText && (
+        <div className={`alert mt-3 alert-${formAlertType}`} role="alert">
+          {formAlertText}
+        </div>
+      )}
+    </form>
   );
 }
