@@ -16,7 +16,7 @@ afterAll(async () => {
 
 describe('Login test', () => {
 
-  it('should success register', async () => {
+  it('should register again success', async () => {
     const res = await request(app)
       .post('/api/register')
       .set('Content-Type', 'application/json')
@@ -25,7 +25,7 @@ describe('Login test', () => {
     expect(res.body).toBeTruthy();
   });
 
-  it('should refuse login by invalid data', async () => {
+  it('should refuse login with empty password field', async () => {
     await request(app)
       .post('/api/login')
       .set('Content-Type', 'application/json')
@@ -33,7 +33,7 @@ describe('Login test', () => {
       .expect(400);
   });
 
-  it("login invalid data2", async () => {
+  it("should refuse login with invalid password", async () => {
     const mockLogin = {
       email: 'test@mail.com',
       password: 'FG77*',
@@ -44,11 +44,13 @@ describe('Login test', () => {
       .send(mockLogin)
       .expect(400);
   });
-  it("should login success", async () => {
+
+  it("should login success again", async () => {
     await request(app)
       .post('/api/login')
       .set('Content-Type', 'application/json')
       .send(loginData)
       .expect(200);
   });
+
 });

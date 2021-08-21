@@ -36,7 +36,7 @@ describe('mockTest', () => {
 })
 
 describe('Registration test', () => {
-  it('post:register', async () => {
+  it('should register success', async () => {
     const res = await request(app)
       .post('/api/register')
       .set('Content-Type', 'application/json')
@@ -45,7 +45,7 @@ describe('Registration test', () => {
     expect(res.body).toBeTruthy();
   });
 
-  it('register with invalid data', async () => {
+  it('should refuse registration with invalid data', async () => {
     const res = await request(app)
       .post('/api/register')
       .set('Content-Type', 'application/json')
@@ -55,7 +55,7 @@ describe('Registration test', () => {
     expect(res.error).toBeTruthy();
   });
 
-  it('post:register with invalid password', async () => {
+  it('should refuse with invalid password', async () => {
     regData.password = 'aaa';
     const res = await request(app)
       .post('/api/register')
@@ -64,7 +64,7 @@ describe('Registration test', () => {
       .expect(400)
     expect(res.error).toBeTruthy();
   });
-  it('post:register with invalid e-mail address', async () => {
+  it('should refuse with unused email', async () => {
     regData.email = 'test'
     regData.password = 'testTEST*1';
     const res = await request(app)
@@ -75,7 +75,7 @@ describe('Registration test', () => {
     expect(res.error).toBeTruthy();
   });
 
-  it('should success login by valid data', async () => {
+  it('should login success with valid data', async () => {
     const res = await request(app)
       .post('/api/login')
       .set('Content-Type', 'application/json')
@@ -84,7 +84,6 @@ describe('Registration test', () => {
     expect(res.body.token).toBeTruthy();
     expect(res.body.role).toBe('admin');
   });
-
 });
 
 
