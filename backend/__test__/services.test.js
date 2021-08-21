@@ -181,5 +181,4 @@ describe('Services tests', () => {
       .set('Authorization', `Bearer ${adminToken}`)
       .expect(202);
   });
-
 });

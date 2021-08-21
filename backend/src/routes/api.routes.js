@@ -13,7 +13,7 @@ router.post('/test', userController.test);
 router.post('/login', userController.loginUser); // doc
 router.post('/register', userController.registerUser); // doc
 
-router.get('/events', eventController.getEvents); // doc
+router.get('/events', tokenCheck, eventController.getEvents); // doc
 router.get('/events/:useremail', tokenCheck, eventController.getEventsByUserEmail); // doc
 router.get('/provider/events/:provideremail', tokenCheck, providerCheck, eventController.getEventsByProvider); // doc
 router.post('/events/new', tokenCheck, eventController.createNewEvent); // doc
