@@ -21,8 +21,8 @@ describe('Login test', () => {
       .post('/api/register')
       .set('Content-Type', 'application/json')
       .send(regData);
-    expect(res.statusCode).toBe(201);
-    expect(res.body).toBeTruthy();
+    await expect(res.statusCode).toBe(201);
+    await expect(res.body).toBeTruthy();
   });
 
   it('should refuse login with empty password field', async () => {
