@@ -1,7 +1,9 @@
 import React, { useState, useRef } from 'react';
+import validator from 'validator';
 import { Redirect } from 'react-router-dom';
 import InputFieldSet from '../InputFieldSet';
-import { backend } from '../../utilities'
+import { backend } from '../../utilities';
+import '../../scss/login.scss';
 
 // eslint-disable-next-line react/prop-types
 export default function LoginForm({ user, setUser }) {
@@ -30,9 +32,11 @@ export default function LoginForm({ user, setUser }) {
   }
 
   function checkEmail(value) {
-    const validRegex =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    return value.match(validRegex);
+    return validator.isEmail(value);
+  }
+
+  function strongPassword(value) {
+    return validator.isStrongPassword(value);
   }
 
   const validators = {
@@ -42,12 +46,14 @@ export default function LoginForm({ user, setUser }) {
     },
     password: {
       required: isNotEmpty,
+      strongPassword
     },
   };
 
   const errorTypes = {
-    required: 'Value is missing',
-    checkEmail: 'Not valid email',
+    required: 'Hiányzó adat!',
+    checkEmail: 'Helytelen e-mail cím',
+    strongPassword: 'A jelszó minimum 8 karakter hosszú, tartalmaz számot, nagybetűt és speciális karaktert!'
   };
 
   function validateField(fieldName) {
@@ -165,7 +171,7 @@ export default function LoginForm({ user, setUser }) {
       <form
         onSubmit={handleSubmit}
         noValidate
-        className={`login-form needs-validation ${formWasValidated ? 'was-validated' : ''
+        className={`needs-validation ${formWasValidated ? 'was-validated' : ''
           }`}
       >
         <InputFieldSet

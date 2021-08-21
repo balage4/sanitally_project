@@ -31,13 +31,13 @@ function validateLoginData(data) {
         errors.forEach(err => {
           switch (err.code) {
             case 'string.empty':
-              err.message = 'Password is required';
+              err.message = 'Jelszó megadása kötelező';
               break;
             case 'any.required':
-              err.message = 'Password is required';
+              err.message = 'Jelszó megadása kötelező';
               break;
             case 'string.pattern.base':
-              err.message = 'Password should be at least 8 characters long, should contain a number, a capital letter, and a symbol';
+              err.message = 'A jelszó minimum 8 karakter hosszú, tartalmaz számot, nagybetűt és speciális karaktert!';
               break;
             default:
               break;

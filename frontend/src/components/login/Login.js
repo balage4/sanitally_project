@@ -8,7 +8,7 @@ export default function Login({ user, setUser }) {
   return (
     <>
       <Navbar />
-      <h1 className="text-center mt-3">Bejelentkezés</h1>
+      <h1>Bejelentkezés</h1>
       <LoginForm user={user} setUser={setUser} />
     </>
   );
