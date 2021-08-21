@@ -56,7 +56,8 @@ describe('Initialize categroies', () => {
       .send(putData)
     expect(401);
   });
-  it('should success update one category', async () => {
+
+  it('should success update one category with admin role', async () => {
 
     const res = await request(app)
       .get('/api/categories');
