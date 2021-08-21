@@ -3,6 +3,7 @@ import validator from 'validator';
 import { Redirect } from 'react-router-dom';
 import InputFieldSet from '../InputFieldSet';
 import { backend } from '../../utilities';
+import loginKey from '../../assets/loginKey.png';
 import '../../scss/login.scss';
 
 // eslint-disable-next-line react/prop-types
@@ -204,6 +205,9 @@ export default function LoginForm({ user, setUser }) {
           {formAlertText}
         </div>
       )}
+      <div className="login-key d-flex justify-content-center m-3">
+        <img src={loginKey} alt="login-key" width="170px" />
+      </div>
     </form>
   );
 }
