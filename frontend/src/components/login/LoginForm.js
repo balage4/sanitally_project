@@ -110,9 +110,7 @@ export default function LoginForm({ user, setUser }) {
     setFormAlertType('');
     setFormWasValidated(false);
 
-    const isValid = isFormValid();
-
-    if (isValid) {
+    if (isFormValid()) {
       fetch(`${backend.endpoint}/login`, {
         method: 'POST',
         mode: 'cors',
@@ -128,7 +126,7 @@ export default function LoginForm({ user, setUser }) {
         .then(async (res) => {
           if (res.status === 400) {
             const response = await res.json();
-            throw new Error(response?.error);
+            throw new Error(response);
           }
           return res.json()
         })
@@ -146,18 +144,12 @@ export default function LoginForm({ user, setUser }) {
           setUser(res);
         })
         .catch(error => {
+          console.log(error);
           setFormWasValidated(false);
           setFormAlertText(error.message);
           setFormAlertType('danger');
-          setFieldValues({
-            email: '',
-            password: '',
-          });
         });
     }
-    setFormWasValidated(true);
-    setFormAlertText('');
-    setFormAlertType('');
   }
 
   function handleInputBlur(e) {

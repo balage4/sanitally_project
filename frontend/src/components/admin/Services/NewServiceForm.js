@@ -133,7 +133,7 @@ export default function NewServiceForm({ token, id, serviceData }) {
           token,
           fetchData.method,
           JSON.stringify(id ? fetchBody.update : fetchBody.new));
-        if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
+        if (res.status < 200 || res.status >= 300) throw new Error(res.error);
         setFieldValues({
           serviceName: '',
           serviceNote: '',
