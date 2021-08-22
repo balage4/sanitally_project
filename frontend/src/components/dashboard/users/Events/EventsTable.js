@@ -22,7 +22,6 @@ export default function EventsTable({ listOfEvents }) {
                 key={`th_${i + 1}`}
               >{headerMap[i][1]}</th>
             ))}
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
