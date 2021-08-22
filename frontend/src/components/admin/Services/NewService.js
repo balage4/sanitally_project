@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom"
-import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar"
+import AuthenticatedNavbar from "../../../Common/navbars/authenticatedNavbar/AuthenticatedNavbar"
 import NewServiceForm from "./NewServiceForm";
 
 

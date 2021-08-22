@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
-import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
+import ProtectedRoute from './Common/protectedRoute/ProtectedRoute';
 import ListOfUsers from './components/admin/users/ListOfUsers';
 import NewEvent from './components/dashboard/users/NewEvent/NewEvent';
 import AdminMain from './components/admin/Admin.js/AdminMain';

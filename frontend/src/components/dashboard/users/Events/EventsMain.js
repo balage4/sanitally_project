@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
-import AuthenticatedNavbar from "../../../navbars/authenticatedNavbar/AuthenticatedNavbar";
+import AuthenticatedNavbar from "../../../../Common/navbars/authenticatedNavbar/AuthenticatedNavbar";
 import ListOfEvents from "./ListOfEvents";
 import '../../../../scss/events.scss';
 

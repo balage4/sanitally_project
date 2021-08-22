@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar"
+import AuthenticatedNavbar from "../../../Common/navbars/authenticatedNavbar/AuthenticatedNavbar"
 import NewPrescriptionForm from "./NewPrescriptionForm";
 
 export default function NewPrescription({ user, setUser }) {

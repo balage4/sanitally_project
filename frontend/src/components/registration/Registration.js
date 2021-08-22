@@ -1,6 +1,6 @@
 import React from 'react';
-import AuthenticatedNavbar from '../navbars/authenticatedNavbar/AuthenticatedNavbar';
-import Navbar from '../navbars/nonAuthenticatedNavbar/Navbar';
+import AuthenticatedNavbar from '../../Common/navbars/authenticatedNavbar/AuthenticatedNavbar';
+import Navbar from '../../Common/navbars/nonAuthenticatedNavbar/Navbar';
 import RegistrationForm from './RegistrationForm';
 
 // eslint-disable-next-line react/prop-types

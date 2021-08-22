@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import Navbar from '../navbars/nonAuthenticatedNavbar/Navbar';
-import AuthenticatedNavbar from '../navbars/authenticatedNavbar/AuthenticatedNavbar';
+import Navbar from '../../Common/navbars/nonAuthenticatedNavbar/Navbar';
+import AuthenticatedNavbar from '../../Common/navbars/authenticatedNavbar/AuthenticatedNavbar';
 /* import Footer from '../footer/Footer'; */
 import Categories from './CategoriesMain';
 import fetchWithAuth, { backend } from '../../utilities';

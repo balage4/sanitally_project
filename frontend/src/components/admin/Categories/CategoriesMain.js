@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar";
+import AuthenticatedNavbar from "../../../Common/navbars/authenticatedNavbar/AuthenticatedNavbar";
 import '../../../scss/categories.scss';
 import CategoryForm from "./CategoryForm";
 import { backend } from "../../../utilities";

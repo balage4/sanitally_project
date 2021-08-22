@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../navbars/nonAuthenticatedNavbar/Navbar';
+import Navbar from '../../Common/navbars/nonAuthenticatedNavbar/Navbar';
 import LoginForm from './LoginForm';
 
 

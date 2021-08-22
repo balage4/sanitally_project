@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import AuthenticatedNavbar from "../../../navbars/authenticatedNavbar/AuthenticatedNavbar";
+import AuthenticatedNavbar from "../../../../Common/navbars/authenticatedNavbar/AuthenticatedNavbar";
 import NewEventForm from "./NewEventForm";
 
 export default function NewEvent({ user, setUser }) {

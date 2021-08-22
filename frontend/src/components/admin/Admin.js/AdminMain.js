@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Link, Redirect } from "react-router-dom"
-import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar"
+import AuthenticatedNavbar from "../../../Common/navbars/authenticatedNavbar/AuthenticatedNavbar"
 import usersIcon from '../../../assets/usersIcon.png';
 import medicalServicesIcon from '../../../assets/medicalServicesIcon.png';
 import categoriesIcon from '../../../assets/categoriesIcon.png';

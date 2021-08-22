@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import fetchWithAuth, { backend, getServiceIdByName, /* getServiceNameById */ } from "../../../utilities";
 import InputFieldSet from "../../InputFieldSet";
-import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar";
+import AuthenticatedNavbar from "../../../Common/navbars/authenticatedNavbar/AuthenticatedNavbar";
 
 export default function EditUserForm({ user, setUser }) {
   const { id } = useParams();

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Table from "./Table";
-import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar";
+import AuthenticatedNavbar from "../../../Common/navbars/authenticatedNavbar/AuthenticatedNavbar";
 import fetchWithAuth, { backend } from "../../../utilities";
 
 export default function ListOfUsers({ user, setUser }) {
