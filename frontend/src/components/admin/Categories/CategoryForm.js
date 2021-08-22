@@ -159,7 +159,7 @@ export default function CategoryForm({ token, category }) {
           handleInputChange={handleInputChange}
           required
         />
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn submit-btn">
           Módosítás</button>
         {successMessage && <div className="alert alert-info mt-2">{successMessage}</div>}
         {fetchError && <div className="alert alert-danger mt-2">{fetchError}</div>}
