@@ -1,21 +1,17 @@
 # SanitAlly, egészségügyi eseményfoglalási rendszer
 
-## A projekt áttekintése
+## A projekt áttekintése, célja, rövid leírása
 
-Az eseményfoglalási rendszer lehetőséget biztosít egy egészségügyi intézményben szolgáltatásokra történő időpont foglalásra.
-
-## A projekt rövid leírása
-
-Látogató megtekintheti a létesítmény szolgáltatóinak bemutatkozását, szolgáltatásának rövid leírását, esetleg javaslatát az időpont foglalására. Regisztrációt követően, időpontot foglalhat választott szolgáltatójánál.
+Az időpontfoglalási rendszer célja lehetőséget biztosítani a felhasznólknak egy egészségügyi intézményben különböző szakterületekre történő időpont foglalására, megkönnyítve ezzel az intézmény adminisztrációs terheit, mind a pácienseknek, mind az egyes szakterületek képviselőinek.
 
 ## Szerepkörök
 
 ### Nem regisztrált felhasználó:
 
 - Tájékozódhat az intézmény főbb szolgáltatásairól,
-- Alapadatok megadásával (Vezetéknév, Keresztnév, e-mail cím, jelszó) regisztálhat az oldalra
+- Alapadatok megadásával (Vezetéknév, Keresztnév, e-mail cím, jelszó) regisztrálhat az oldalra
 
-### Regisztrált felhasználó:
+### Regisztrált felhasználó (user):
 
 - időpontot foglalhat egy kiválasztott egészségügyi szolgáltatónál,
 - Aktív foglalásait megtekintheti,
@@ -26,7 +22,7 @@ Látogató megtekintheti a létesítmény szolgáltatóinak bemutatkozását, sz
 - megtekintheti a szolgáltatására foglalt események részleteit,
 - recepteket rögzíthet pácienseinek, akik regisztrált felhasználó (user) jogkörrel rendelkeznek,
 
-### Adminisztrátor:
+### Adminisztrátor (admin):
 
 - regisztrált felhasználó jogosultságát módosíthatja
 - rögzíthet és szerkesztheti az egészségügyi szolgáltatásokat
@@ -36,9 +32,9 @@ Látogató megtekintheti a létesítmény szolgáltatóinak bemutatkozását, sz
 
 - Regisztráció: Vezetéknév, keresztnév, e-mail, és jelszó megadásával,
 - Login e-mail és jelszó párossal,
-- Szolgáltató- és szolgálatás leírások megtekintése, szerkesztése,
 - Események létrehozása, szerkesztése,
 - Események listázása
+- Receptek megtekintése
 
 ## Technikai követelmények:
 
@@ -57,6 +53,9 @@ Látogató megtekintheti a létesítmény szolgáltatóinak bemutatkozását, sz
 ## Telepítési útmutató
 
 Az alkalmazás gyökérkönyvtárában az alkalmazás `docker compose up` terminál-parancs megadásával indítható.
+Frontend url: `http://localhost:3000`
+Backend url: `http://localhost:5000`
+Dokumentáció url: `http://localhost:4000/api-docs`
 
 ## Az alkalmazás megjeleníthető oldalai
 

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom"
 import AuthenticatedNavbar from "../../../Common/navbars/authenticatedNavbar/AuthenticatedNavbar"
+import { backend } from "../../../utilities";
 import NewServiceForm from "./NewServiceForm";
 
 
@@ -13,7 +14,7 @@ export default function NewService({ user, setUser }) {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:5000/api/admin/services/${id}`, {
+      fetch(`${backend.endpoint}/admin/services/${id}`, {
         method: 'GET',
         mode: 'cors',
         headers: {

@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import fetchWithAuth, { backend, getServiceIdByName, /* getServiceNameById */ } from "../../../utilities";
 import InputFieldSet from "../../InputFieldSet";
 import AuthenticatedNavbar from "../../../Common/navbars/authenticatedNavbar/AuthenticatedNavbar";
+import '../../../scss/editUser.scss'
 
 export default function EditUserForm({ user, setUser }) {
   const { id } = useParams();
@@ -178,71 +179,72 @@ export default function EditUserForm({ user, setUser }) {
   }
 
   return (
-    <>
+    <div className="edit-user">
       <AuthenticatedNavbar user={user} setUser={setUser} />
-      <main className="d-flex justify-content-center">
-        <form
-          onSubmit={handleSubmit}
-          noValidate
-          className={`needs-validation ${formWasValidated ? 'was-validated' : ''
-            }`}
-        >
-          <InputFieldSet
-            reference={references.firstName}
-            name="firstName"
-            labelText="First Name"
-            type="text"
-            errors={errors}
-            fieldValues={fieldValues}
-            handleInputBlur={handleInputBlur}
-            handleInputChange={handleInputChange}
-            required
-          />
-          <InputFieldSet
-            reference={references.lastName}
-            name="lastName"
-            labelText="Last Name"
-            type="text"
-            errors={errors}
-            fieldValues={fieldValues}
-            handleInputBlur={handleInputBlur}
-            handleInputChange={handleInputChange}
-            required
-          />
-          <InputFieldSet
-            reference={references.role}
-            name="role"
-            labelText="Role"
-            type="select"
-            errors={errors}
-            fieldValues={fieldValues}
-            handleInputBlur={handleInputBlur}
-            handleInputChange={handleInputChange}
-            optionsarray={rolesArray}
-            required
-          />
-          <InputFieldSet
-            reference={references.providerTitle}
-            name="providerTitle"
-            labelText="Provider title"
-            type="select"
-            errors={errors}
-            fieldValues={fieldValues}
-            handleInputBlur={handleInputBlur}
-            handleInputChange={handleInputChange}
-            optionsarray={servicesArray}
-            disabled={fieldValues.role !== 'provider'}
-          />
-          <button type="submit" className="btn btn-primary">
-            Módosítás
-          </button>
-          {successMessage && (
-            <div className="alert mt-3 alert-danger" role="alert">
-              {successMessage}
-            </div>
-          )}
-        </form>
-      </main >
-    </>
+      <form
+        onSubmit={handleSubmit}
+        noValidate
+        className={`needs-validation ${formWasValidated ? 'was-validated' : ''
+          }`}
+      >
+        <InputFieldSet
+          reference={references.lastName}
+          name="lastName"
+          labelText="Vezetéknév"
+          type="text"
+          errors={errors}
+          fieldValues={fieldValues}
+          handleInputBlur={handleInputBlur}
+          handleInputChange={handleInputChange}
+          required
+        />
+        <InputFieldSet
+          reference={references.firstName}
+          name="firstName"
+          labelText="Keresztnév"
+          type="text"
+          errors={errors}
+          fieldValues={fieldValues}
+          handleInputBlur={handleInputBlur}
+          handleInputChange={handleInputChange}
+          required
+        />
+        <InputFieldSet
+          reference={references.role}
+          name="role"
+          labelText="Jogosultság"
+          type="select"
+          errors={errors}
+          fieldValues={fieldValues}
+          handleInputBlur={handleInputBlur}
+          handleInputChange={handleInputChange}
+          optionsarray={rolesArray}
+          required
+        />
+        <InputFieldSet
+          reference={references.providerTitle}
+          name="providerTitle"
+          labelText="Szakterület"
+          type="select"
+          errors={errors}
+          fieldValues={fieldValues}
+          handleInputBlur={handleInputBlur}
+          handleInputChange={handleInputChange}
+          optionsarray={servicesArray}
+          disabled={fieldValues.role !== 'provider'}
+        />
+        <button type="submit" className="btn submit-btn">
+          Módosítás
+        </button>
+        {successMessage && (
+          <div className="alert submit-btn mt-3" role="alert">
+            {successMessage}
+          </div>
+        )}
+      </form>
+      <Link
+        className="btn return-btn"
+        to="/admin/users">Vissza</Link>
+    </div>
   );
 }
