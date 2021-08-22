@@ -79,16 +79,23 @@ export default function NewEventForm({ user }) {
   };
 
   const errorTypes = {
-    required: "Value is missing",
+    required: 'Hiányzó adat!',
+    isGreaterThanToday: 'Legkorábban holnapra foglalhatsz időpontot!'
   };
 
   function isNotEmpty(value) {
     return value !== '';
   }
 
+  function isGreaterThanToday(value) {
+
+    return new Date(value) >= new Date();
+  }
+
   const validators = {
     eventDate: {
-      required: isNotEmpty
+      required: isNotEmpty,
+      isGreaterThanToday
     },
     eventService: {
       required: isNotEmpty
