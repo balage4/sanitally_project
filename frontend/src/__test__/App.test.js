@@ -18,12 +18,12 @@ describe('Home page renders correctly', () => {
   });
 
   test('`Login` text should be in the document', () => {
-    const loginText = screen.getByText('Login');
+    const loginText = screen.getByText('Bejelentkezés');
     expect(loginText).toBeInTheDocument();
   });
 
   test('`Registration` text should be in the document', () => {
-    const registrationText = screen.getByText('Registration');
+    const registrationText = screen.getByText('Regisztráció');
     expect(registrationText).toBeInTheDocument();
   });
 
@@ -235,7 +235,7 @@ describe('Check Registration page validations', () => {
 
 describe('Check navigate to Login page renders correctly', () => {
   test('Back to unauthorized Home page', () => {
-    const homeButton = screen.getByText('Home');
+    const homeButton = screen.getByText('Főoldal');
     expect(homeButton).toBeInTheDocument();
     fireEvent.click(homeButton);
     const appointmentText = screen.getByText('SanitAlly');
