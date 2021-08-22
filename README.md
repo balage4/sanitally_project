@@ -13,7 +13,7 @@ Az időpontfoglalási rendszer célja lehetőséget biztosítani a felhasznólkn
 
 ### Regisztrált felhasználó (user):
 
-- időpontot foglalhat egy kiválasztott egészségügyi szolgáltatónál,
+- időpontot foglalhat egy kiválasztott egészségügyi szolgáltatónál, szakterület alapján
 - Aktív foglalásait megtekintheti,
 - Számára felírt recepteket listázhatja
 
@@ -25,8 +25,9 @@ Az időpontfoglalási rendszer célja lehetőséget biztosítani a felhasznólkn
 ### Adminisztrátor (admin):
 
 - regisztrált felhasználó jogosultságát módosíthatja
-- rögzíthet és szerkesztheti az egészségügyi szolgáltatásokat
-- főoldali 'kategóriák' leírásait módosíthatja
+- szolgáltató (provider) jogú felhasználónak szakterületet rendelhet hozzá
+- rögzíthet és szerkesztheti az egészségügyi szakterületeket
+- főoldali 'Főbb szolgáltatásaink' (Category collection) nevét,leírását módosíthatja
 
 ## Főbb funkciók:
 
@@ -50,12 +51,31 @@ Az időpontfoglalási rendszer célja lehetőséget biztosítani a felhasznólkn
 
 - React
 
+#### API dokumentáció
+
+- Open API/Swagger
+
 ## Telepítési útmutató
 
-Az alkalmazás gyökérkönyvtárában az alkalmazás `docker compose up` terminál-parancs megadásával indítható.
-Frontend url: `http://localhost:3000`
-Backend url: `http://localhost:5000`
-Dokumentáció url: `http://localhost:4000/api-docs`
+1. Környezeti változók beállítása
+
+- A frontend, valamint backend mappákban található `.env.example ` fájl alapján állítsa be a környezeti változókat!
+
+2. Dockerizált alkalmazás indítása
+
+- Az alkalmazás gyökérkönyvtárában az alkalmazás `docker compose up` terminál-parancs megadásával indítható.
+
+3. Az alkalmazás indítása böngészőben
+
+- Frontend url: `http://localhost:3000`
+- Backend url: `http://localhost:5000`
+- Dokumentáció url: `http://localhost:4000/api-docs`
+
+Első indítás alkalmával a rendszer (frontend) ellenőrzi a főoldali szolgálatáslista meglétét. Amennyiben még nem létezik (Category kollekció), úgy automatikusan létrehozza azt.
+
+A rendszer az első regisztrált felhasználó jogkörét automatikusan 'admin' jogkörre állítja be.
+
+Minden, ezt követően regisztrált felhasználó automatikusan felhasználó (user) jogkört kap.
 
 ## Az alkalmazás megjeleníthető oldalai
 
@@ -108,3 +128,15 @@ Dokumentáció url: `http://localhost:4000/api-docs`
 | Event          | Rögzített események                |
 | Prescription   | Rögzített receptek                 |
 | Service        | Szolgáltatások                     |
+
+## Az alkalmazás használata
+
+Regisztráció, majd az alkalmazásba való belépést követően a felhasználó a navigációs menü segítségével megtekintheti a már rögzített eseményeit, receptjeit. (`Események`,`Receptek`).
+
+Amennyiben új időpontot szeretne foglalni egy egészségügyi szolgáltatása, az `Új időpontot foglalok ` gombra kattintva, az űrlap kitöltésével teheti meg.
+
+A `szolgáltató` jogkörű felhasználó az `Események` menüpont alatt a szakterületére rögzített eseményeket listaszerűen láthatja.
+
+- Minden szolgáltató csak a saját szolgáltatására rögíztett eseményt látja.
+- Minden felhasználó csak a maga által létrehozott eseményeket látja.
+- `Admin` jogú felhasználó a rendszerben rögzített összes eseményt láthatja.
