@@ -130,7 +130,7 @@ export default function CategoryForm({ token, category }) {
   }
 
   return (
-    <main className="d-flex justify-content-center">
+    <main className="single-category d-flex justify-content-center">
       <form
         onSubmit={handleSubmit}
         noValidate
