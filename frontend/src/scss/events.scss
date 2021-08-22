@@ -1,6 +1,12 @@
+@import 'color';
+
 .events-main,
 .new-event {
   background-image: url('../assets/medical-appointment.jpg');
   background-size: cover;
   height: 100vh;
+  h3 {
+    text-shadow: 1px 1px #fff;
+    color: $h3Color;
+  }
 }

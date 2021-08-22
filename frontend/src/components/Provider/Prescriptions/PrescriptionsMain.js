@@ -5,15 +5,18 @@ import PrescriptionList from "./PrescriptionList";
 
 export default function PrescriptionsMain({ user, setUser }) {
   return (
-    <div>
+    <div className="text-center prescription">
       <AuthenticatedNavbar user={user} setUser={setUser} />
 
       {user.role === 'provider' && (<Link
-        className="btn btn-primary m-3"
+        className="btn submit-btn m-3"
         to="/prescriptions/new"
       >Új recept írása felhasználónak</Link>)}
       {(user.role === 'user' || user.role === 'admin') && (
-        <PrescriptionList user={user} />
+        <>
+          <h3 className="m-3">Receptjeim</h3>
+          <PrescriptionList user={user} />
+        </>
       )}
 
     </div>

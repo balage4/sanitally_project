@@ -10,7 +10,7 @@ export default function EventsMain({ user, setUser }) {
       <AuthenticatedNavbar user={user} setUser={setUser} />
       <ListOfEvents user={user} />
       <Link
-        className="btn btn-primary m-3"
+        className="btn submit-btn m-3"
         to="/events/new">
         Új időpontot foglalok
       </Link>

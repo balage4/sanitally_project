@@ -56,6 +56,16 @@ table {
   height: 100vh;
 }
 
+.prescription {
+  background-image: url('../assets/prescription.jpg');
+  background-size: cover;
+  height: 100vh;
+  h3 {
+    text-shadow: 1px 1px #fff;
+    color: $h3Color;
+  }
+}
+
 .main {
   height: 100vh;
   background-image: url('../assets/sanitally-background.jpg');

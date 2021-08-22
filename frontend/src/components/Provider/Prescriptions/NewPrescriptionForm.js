@@ -48,7 +48,7 @@ export default function NewPrescriptionForm({ user }) {
   };
 
   const errorTypes = {
-    required: 'Value is missing'
+    required: 'Hiányzó adat!'
   };
 
 
@@ -163,7 +163,7 @@ export default function NewPrescriptionForm({ user }) {
   }
 
   return (
-    <main className="d-flex justify-content-center">
+    <main className="d-flex justify-content-center m-3">
       <form
         onSubmit={handleSubmit}
         noValidate
@@ -204,8 +204,8 @@ export default function NewPrescriptionForm({ user }) {
           handleInputChange={handleInputChange}
           required
         />
-        <button type="submit" className="btn btn-primary">
-          Rögzítés
+        <button type="submit" className="btn submit-btn">
+          Recept rögzítése
         </button>
         {formAlertText && (
           <div className={`alert mt-3 alert-${formAlertType}`} role="alert">
