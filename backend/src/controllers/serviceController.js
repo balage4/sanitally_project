@@ -18,7 +18,7 @@ export const serviceController = {
   },
 
   async updateService(req, res) {
-    const updatedService = await servService.updateService(req.body);
+    const updatedService = await servService.updateService(req.params.id, req.body);
     res.status(updatedService.status).json(updatedService);
   },
 

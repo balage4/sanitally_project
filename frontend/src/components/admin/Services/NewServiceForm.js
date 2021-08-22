@@ -114,11 +114,8 @@ export default function NewServiceForm({ token, id, serviceData }) {
           serviceNote: fieldValues.serviceNote,
         },
         update: {
-          id,
-          updateData: {
-            serviceName: fieldValues.serviceName,
-            serviceNote: fieldValues.serviceNote,
-          }
+          serviceName: fieldValues.serviceName,
+          serviceNote: fieldValues.serviceNote,
         }
       }
 

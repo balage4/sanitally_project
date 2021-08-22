@@ -48,12 +48,12 @@ export const servService = {
       return { status: 500, error: 'Something went wrong' };
     }
   },
-  async updateService(data) {
+  async updateService(serviceId, data) {
     try {
-      await Service.findByIdAndUpdate(data.id, {
+      await Service.findByIdAndUpdate(serviceId, {
         $set: {
-          serviceName: data.updateData.serviceName,
-          serviceNote: data.updateData.serviceNote
+          serviceName: data.serviceName,
+          serviceNote: data.serviceNote
         }
       });
       return { status: 200, message: 'Sikeres frissítés' };

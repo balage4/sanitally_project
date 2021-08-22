@@ -35,7 +35,7 @@ export default function NewEventForm({ user }) {
 
   const [fieldValues, setFieldValues] = useState({
     eventDate: '',
-    eventTime: '',
+    eventTime: '09:00:00',
     eventService: '',
     eventProvider: ''
   });
