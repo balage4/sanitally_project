@@ -7,15 +7,15 @@ import '../../scss/registration.scss';
 
 export default function RegistrationForm() {
   const [fieldValues, setFieldValues] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: ""
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: ''
   });
 
   const [errors, setErrors] = useState({
-    firstName: "",
-    lastName: "",
+    firstName: '',
+    lastName: '',
     email: '',
     password: ''
   });
@@ -35,9 +35,9 @@ export default function RegistrationForm() {
   };
 
   const errorTypes = {
-    required: "Value is missing",
-    email: "Not valid email",
-    passwordType: "Password should contain: 8 character, lowercase/uppercase, number, special character."
+    required: "Hiányzó adat!",
+    email: "Helytelen e-mail cím",
+    passwordType: "A jelszó minimum 8 karakter hosszú, tartalmaz számot, nagybetűt és speciális karaktert!"
   };
 
   function isNotEmpty(value) {

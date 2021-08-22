@@ -1,14 +1,11 @@
 import React from 'react';
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-/* import '@testing-library/jest-dom/extend-expect'; */
+import { fireEvent, render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 import App from '../App';
 
-beforeAll(() => {
+beforeEach(() => {
   render(<App />);
 });
-afterAll(() => {
-  cleanup();
-})
 
 describe('Pursuit to Login page', () => {
   test('has a `Login` header tag', () => {
