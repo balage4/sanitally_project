@@ -21,11 +21,9 @@ export default function Table({ listOfUsers, handleActionButtons }) {
             {headerMap.map((header, headerIndex) => (
               <th
                 key={`th_${headerIndex + 1}`}
-                className="text-center"
               >{headerMap[headerIndex][1]}</th>
             ))}
             <th
-              className="text-center"
             >Műveletek</th>
           </tr>
         </thead>
