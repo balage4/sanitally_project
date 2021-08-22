@@ -198,7 +198,7 @@ export default function LoginForm({ user, setUser }) {
         required
       />
       <button type="submit" className="btn submit-btn">
-        Login
+        Bejelentkezés
       </button>
       {formAlertText && (
         <div className={`alert mt-3 alert-${formAlertType}`} role="alert">
