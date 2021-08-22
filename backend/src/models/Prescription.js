@@ -19,6 +19,8 @@ const prescriptionSchema = new mongoose.Schema({
     required: true,
     ref: 'User'
   }
-});
+},
+  { timestamps: true }
+);
 
 export default mongoose.model('Prescription', prescriptionSchema);

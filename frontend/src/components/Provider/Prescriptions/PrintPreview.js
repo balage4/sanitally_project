@@ -4,7 +4,7 @@ import '../../../scss/preview.scss';
 
 export default function PrintPreview({ user }) {
 
-  const { provider, vaccine, dosage } = useParams();
+  const { provider, vaccine, dosage, date } = useParams();
 
   return (
     <div className="m-3 p-3 border border-dark col-10 m-auto">
@@ -14,7 +14,6 @@ export default function PrintPreview({ user }) {
         <thead>
           <tr>
             <th>Recept kiállítója</th>
-            <th>Szakterület</th>
             <th>Beteg neve</th>
           </tr>
         </thead>
@@ -24,6 +23,7 @@ export default function PrintPreview({ user }) {
             <td>{`${user.lastName} ${user.firstName}`}</td>
             <td>{vaccine}</td>
             <td>{dosage}</td>
+            <td>{date}</td>
           </tr>
         </tbody>
       </table>
