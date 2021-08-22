@@ -28,9 +28,14 @@ footer {
   }
 }
 
-table {
-  border-radius: 15px;
-  background-color: $tablebackground;
+.admin-background,
+.services,
+.events-main,
+.prescription {
+  table {
+    border-radius: 15px;
+    background-color: $tablebackground;
+  }
 }
 
 .services,
