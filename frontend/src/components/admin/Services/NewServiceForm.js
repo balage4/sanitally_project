@@ -158,44 +158,43 @@ export default function NewServiceForm({ token, id, serviceData }) {
   }
 
   return (
-    <main className="d-flex justify-content-center">
-      <form
-        onSubmit={handleSubmit}
-        noValidate
-        className={`needs-validation ${formWasValidated ? 'was-validated' : ''
-          }`}
-      >
-        <InputFieldSet
-          reference={references.serviceName}
-          name="serviceName"
-          labelText="Szolgáltatás neve"
-          type="text"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          required
-        />
-        <InputFieldSet
-          reference={references.serviceNote}
-          name="serviceNote"
-          labelText="Szolgáltatás rövid leírása"
-          type="textarea"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          required
-        />
-        <button type="submit" className="btn submit-btn">
-          {serviceData ? 'Módosítás' : 'Rögzítés'}
-        </button>
-        {formAlertText && (
-          <div className={`alert mt-3 alert-${formAlertType}`} role="alert">
-            {formAlertText}
-          </div>
-        )}
-      </form>
-    </main>
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      className={`needs-validation ${formWasValidated ? 'was-validated' : ''
+        }`}
+    >
+      <InputFieldSet
+        reference={references.serviceName}
+        name="serviceName"
+        labelText="Szolgáltatás neve"
+        type="text"
+        errors={errors}
+        fieldValues={fieldValues}
+        handleInputBlur={handleInputBlur}
+        handleInputChange={handleInputChange}
+        required
+      />
+      <InputFieldSet
+        reference={references.serviceNote}
+        name="serviceNote"
+        labelText="Szolgáltatás rövid leírása"
+        type="textarea"
+        errors={errors}
+        fieldValues={fieldValues}
+        handleInputBlur={handleInputBlur}
+        handleInputChange={handleInputChange}
+        required
+      />
+      <button type="submit" className="btn submit-btn">
+        {serviceData ? 'Módosítás' : 'Rögzítés'}
+      </button>
+      {formAlertText && (
+        <div className={`alert mt-3 alert-${formAlertType}`} role="alert">
+          {formAlertText}
+        </div>
+      )}
+    </form>
+
   );
 }

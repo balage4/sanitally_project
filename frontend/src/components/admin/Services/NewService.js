@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom"
 import AuthenticatedNavbar from "../../../Common/navbars/authenticatedNavbar/AuthenticatedNavbar"
 import { backend } from "../../../utilities";
 import NewServiceForm from "./NewServiceForm";
+import '../../../scss/newService.scss';
 
 
 export default function NewService({ user, setUser }) {

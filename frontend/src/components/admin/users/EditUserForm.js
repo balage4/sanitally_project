@@ -181,6 +181,7 @@ export default function EditUserForm({ user, setUser }) {
   return (
     <div className="edit-user">
       <AuthenticatedNavbar user={user} setUser={setUser} />
+      <h3 className="mt-4">Felhasználó adatainak módosítása</h3>
       <form
         onSubmit={handleSubmit}
         noValidate
