@@ -10,7 +10,7 @@ export default function PrintPreview({ user }) {
   return (
     <div className="page">
       <div className="subpage">
-        <h3 className="mt-5">SanitAlly recept</h3>
+        <h1 className="mt-5">SanitAlly recept</h1>
         <table className="print-table">
           <thead>
             <tr>

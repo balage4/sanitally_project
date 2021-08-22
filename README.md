@@ -15,7 +15,8 @@ Az időpontfoglalási rendszer célja lehetőséget biztosítani a felhasznólkn
 
 - időpontot foglalhat egy kiválasztott egészségügyi szolgáltatónál, szakterület alapján
 - Aktív foglalásait megtekintheti,
-- Számára felírt recepteket listázhatja
+- Számára felírt recepteket listázhatja,
+- Receptet nyomtatási nézetben megtekintheti, kinyomtathatja
 
 ### Regisztrált szolgáltató (provider):
 
