@@ -57,19 +57,19 @@ Az időpontfoglalási rendszer célja lehetőséget biztosítani a felhasznólkn
 
 ## Telepítési útmutató
 
-### Környezeti változók beállítása
+#### Környezeti változók beállítása
 
 - A frontend, valamint backend mappákban található `.env.example ` fájl alapján állítsa be a környezeti változókat!
 
-### Dockerizált alkalmazás indítása
+#### Dockerizált alkalmazás indítása
 
 - Az alkalmazás gyökérkönyvtárában az alkalmazás `docker compose up` terminál-parancs megadásával indítható.
 
-### Az alkalmazás indítása böngészőben
+#### Az alkalmazás indítása böngészőben
 
 - Frontend url: `http://localhost:3000`
 
-### További elérések
+#### További elérések
 
 - Backend url: `http://localhost:5000`
 - Dokumentáció url: `http://localhost:4000/api-docs`
