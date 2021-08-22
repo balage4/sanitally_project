@@ -2,7 +2,7 @@
 import { useParams } from 'react-router-dom';
 import '../../../scss/preview.scss';
 
-export default function Preview({ user }) {
+export default function PrintPreview({ user }) {
 
   const { provider, vaccine, dosage } = useParams();
 

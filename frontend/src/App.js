@@ -14,8 +14,8 @@ import EventsMain from './components/dashboard/users/Events/EventsMain';
 import PrescriptionsMain from './components/Provider/Prescriptions/PrescriptionsMain';
 import NewPrescription from './components/Provider/Prescriptions/NewPrescription';
 import CategoriesMain from './components/admin/Categories/CategoriesMain';
+import PrintPreview from './components/Provider/Prescriptions/PrintPreview';
 import './scss/global.scss';
-import Preview from './components/Provider/Prescriptions/Preview';
 
 function getUser() {
   const storageUser = localStorage.getItem('user');
@@ -70,7 +70,7 @@ function App() {
             component={() => <NewPrescription user={user} setUser={setUser} />} />
           <ProtectedRoute
             exact path="/prescriptions/preview/:provider/:vaccine/:dosage"
-            component={() => <Preview user={user} setUser={setUser} />} />
+            component={() => <PrintPreview user={user} setUser={setUser} />} />
         </Switch>
       </Router>
     </>
