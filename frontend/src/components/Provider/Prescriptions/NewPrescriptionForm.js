@@ -55,7 +55,7 @@ export default function NewPrescriptionForm({ user }) {
   async function fetchUserNames() {
     try {
       const res = await fetchWithAuth(`${backend.endpoint}/admin/users`, user.token);
-      if (res.status < 200 || res.status >= 300) throw new Error(res.error);
+      if (res.status < 200 || res.status >= 300) throw new Error(res);
       const usersFullName = [];
       res.users.forEach(resUser => {
         if (resUser.role === 'user') {
@@ -63,7 +63,11 @@ export default function NewPrescriptionForm({ user }) {
         }
       });
       setUsersFullName(usersFullName);
-    } catch (err) { setFormAlertText(err.message) }
+
+    } catch (err) {
+      setFormAlertText(err.message);
+      setFormAlertType('danger')
+    }
   }
 
   useEffect(() => {
@@ -145,16 +149,18 @@ export default function NewPrescriptionForm({ user }) {
           JSON.stringify(prescriptionData)
         );
         if (res.status < 200 || res.status >= 300) throw new Error(res.error);
-        setFormAlertText('Recept elmentve.');
+        setFormAlertText('Recept sikeresen elmentve.');
+        setFormAlertType('primary');
         setTimeout(() => {
           setFormAlertText(null);
         }, 2000);
-      } catch (err) { setFormAlertText(err.message) }
+      } catch (err) {
+        setFormAlertText(err.message);
+        setFormAlertType('danger');
+      }
 
     }
     setFormWasValidated(true);
-    setFormAlertText('');
-    setFormAlertType('');
   }
 
   function handleInputBlur(e) {
@@ -207,7 +213,7 @@ export default function NewPrescriptionForm({ user }) {
         Recept rögzítése
       </button>
       {formAlertText && (
-        <div className={`alert mt-3 alert-${formAlertType}`} role="alert">
+        <div className={`text-center alert mt-3 alert-${formAlertType}`} role="alert">
           {formAlertText}
         </div>
       )}
