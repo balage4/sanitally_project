@@ -136,7 +136,7 @@ Minden, ezt követően regisztrált felhasználó automatikusan felhasználó (u
 
 Regisztráció, majd az alkalmazásba való belépést követően a felhasználó a navigációs menü segítségével megtekintheti a már rögzített eseményeit, receptjeit. (`Események`,`Receptek`).
 
-Amennyiben új időpontot szeretne foglalni egy egészségügyi szolgáltatása, az `Új időpontot foglalok ` gombra kattintva, az űrlap kitöltésével teheti meg.
+Amennyiben `felhasználó` új időpontot szeretne foglalni egy egészségügyi szolgáltatása, az `Új időpontot foglalok ` gombra kattintva, az űrlap kitöltésével teheti meg.
 
 `Szolgáltató` jogkörű felhasználó az `Események` menüpont alatt a szakterületére rögzített eseményeket listaszerűen láthatja.
 
