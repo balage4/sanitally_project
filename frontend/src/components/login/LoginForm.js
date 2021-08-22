@@ -206,7 +206,7 @@ export default function LoginForm({ user, setUser }) {
         </div>
       )}
       <div className="login-key d-flex justify-content-center m-3">
-        <img src={loginKey} alt="login-key" width="170px" />
+        <img src={loginKey} alt="login-key" width="170" />
       </div>
     </form>
   );

@@ -3,7 +3,8 @@ import { Redirect } from "react-router-dom";
 import validator from 'validator';
 import InputFieldSet from "../InputFieldSet";
 import '../../scss/registration.scss';
-
+import { backend } from '../../utilities';
+import registerIcon from '../../assets/registerIcon.png';
 
 export default function RegistrationForm() {
   const [fieldValues, setFieldValues] = useState({
@@ -110,70 +111,53 @@ export default function RegistrationForm() {
     return isValid;
   }
 
-  const backend = {
-    protocol: 'http',
-    host: '127.0.0.1',
-    port: 5000,
-  };
-
-  const backendUrl = `${backend.protocol}://${backend.host}:${backend.port}`;
-
-  const endpoint = {
-    register: `${backendUrl}/api/register`,
-  };
-
   function handleSubmit(e) {
     e.preventDefault();
 
     setFormAlertText('');
     setFormAlertType('');
-    setFormWasValidated(false);
+    setFormWasValidated(true);
 
     const isValid = isFormValid();
 
     if (isValid) {
-      fetch(endpoint.register, {
+      fetch(`${backend.endpoint}/register`, {
         method: 'POST',
         mode: 'cors',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          firstName: fieldValues.firstName,
-          lastName: fieldValues.lastName,
-          email: fieldValues.email,
-          password: fieldValues.password
-        })
-      })
-        .then((response) => {
-          if (response.status < 200 || response.status >= 300) {
-            const err = new Error();
-            err.response = response;
-            throw err;
-          }
-          if (response.status === 204) {
-            setFormWasValidated(true);
-            setFormAlertText('');
-            setFormAlertType('');
+        body: JSON.stringify(fieldValues)
+      }).then((response) => {
+        if (response.status < 200 || response.status >= 300) {
+          const err = new Error();
+          err.response = response;
+          throw err;
+        }
+        if (response.status === 201) {
+          setFormWasValidated(true);
+          setFormAlertText('Sikeres regisztráció! Átirányítás a bejelentkezéshez...');
+          setFormAlertType('primary');
+          setTimeout(() => {
             setIsRegisterSuccess(true);
-          }
-        })
-        .catch((error) => {
-          if (error.response) {
-            error.response.json().then(data => {
-              setFormWasValidated(false);
-              setFormAlertText(data.error);
-              setFormAlertType('danger');
-              setIsRegisterSuccess(false);
-            })
-          } else {
+          }, 2000);
+        }
+      }).catch((error) => {
+        if (error.response) {
+          error.response.json().then(data => {
             setFormWasValidated(false);
-            setFormAlertText("unknown error");
+            setFormAlertText(data.error);
             setFormAlertType('danger');
             setIsRegisterSuccess(false);
-          }
-        })
+          })
+        } else {
+          setFormWasValidated(false);
+          setFormAlertText("Ismeretlen hiba történt");
+          setFormAlertType('danger');
+          setIsRegisterSuccess(false);
+        }
+      })
     }
   }
 
@@ -254,6 +238,9 @@ export default function RegistrationForm() {
           {formAlertText}
         </div>
       }
+      <div className="login-key d-flex justify-content-center m-4">
+        <img src={registerIcon} alt="login-key" width="80" />
+      </div>
     </form>
   )
 }

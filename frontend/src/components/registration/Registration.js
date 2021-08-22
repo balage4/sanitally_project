@@ -9,7 +9,8 @@ export default function Registration({ user, logoutUser }) {
     <div className="registration-form">
       {!user && <Navbar />}
       {user && <AuthenticatedNavbar user={user} logoutUser={logoutUser} />}
-      <h1 className="text-center">Regisztráció</h1>
+      <h1 className="text-center m-3">Regisztráció</h1>
+      <h6>Kérlek, add meg adataidat az alkalmazás használatához:</h6>
       <RegistrationForm />
     </div>
   );
