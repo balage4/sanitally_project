@@ -9,11 +9,11 @@ export default function EventsMain({ user, setUser }) {
     <div className="events-main">
       <AuthenticatedNavbar user={user} setUser={setUser} />
       <ListOfEvents user={user} />
-      <Link
+      {user.role !== 'provider' && <Link
         className="btn submit-btn m-3"
         to="/events/new">
         Új időpontot foglalok
-      </Link>
+      </Link>}
 
     </div>
   )
