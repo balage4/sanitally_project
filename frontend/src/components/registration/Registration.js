@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthenticatedNavbar from '../../Common/navbars/authenticatedNavbar/AuthenticatedNavbar';
 import Navbar from '../../Common/navbars/nonAuthenticatedNavbar/Navbar';
-import RegistrationForm from './RegistrationForm';
+import RegistrationForm from './RegForm';
 
 // eslint-disable-next-line react/prop-types
 export default function Registration({ user, logoutUser }) {
