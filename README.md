@@ -127,7 +127,7 @@ Minden, ezt követően regisztrált felhasználó automatikusan felhasználó (u
 | Category       | Főoldalon megjelenített kategóriák |
 | Event          | Rögzített események                |
 | Prescription   | Rögzített receptek                 |
-| Service        | Szolgáltatások                     |
+| Service        | Szolgáltatások (Szakterületek)     |
 
 ## Az alkalmazás használata
 
@@ -135,8 +135,13 @@ Regisztráció, majd az alkalmazásba való belépést követően a felhasznál�
 
 Amennyiben új időpontot szeretne foglalni egy egészségügyi szolgáltatása, az `Új időpontot foglalok ` gombra kattintva, az űrlap kitöltésével teheti meg.
 
-A `szolgáltató` jogkörű felhasználó az `Események` menüpont alatt a szakterületére rögzített eseményeket listaszerűen láthatja.
+`Szolgáltató` jogkörű felhasználó az `Események` menüpont alatt a szakterületére rögzített eseményeket listaszerűen láthatja.
 
-- Minden szolgáltató csak a saját szolgáltatására rögíztett eseményt látja.
+- Minden szolgáltató csak a saját szolgáltatására rögzített eseményt látja.
 - Minden felhasználó csak a maga által létrehozott eseményeket látja.
-- `Admin` jogú felhasználó a rendszerben rögzített összes eseményt láthatja.
+- `Admin` jogú felhasználó a rendszerben rögzített összes eseményt látja.
+
+`Szolgáltató` jogkörű felhasználó az `Receptek` menüpont alatt receptet állíthat ki páciensének.
+A páciens csak `felhasználó` jogkörű felhasználó (user) lehet. Recept felírásakor megadható a gyógyszer neve, javasolt adagolása.
+
+A felírt receptet `felhasználó` saját fiókjában szintén a `Receptek` menü alatt, listázva megtekintheti.
