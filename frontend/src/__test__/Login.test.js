@@ -15,7 +15,7 @@ afterEach(() => {
 describe('Pursuit to Login page', () => {
   test('has a `Login` header tag', () => {
     fireEvent.click(screen.getByText('Login'));
-    const headerElement = screen.getByRole('heading', { name: 'Login' });
+    const headerElement = screen.getByRole('heading', { name: 'Bejelentkezés' });
     expect(headerElement.textContent).toBe('Login');
   });
 
