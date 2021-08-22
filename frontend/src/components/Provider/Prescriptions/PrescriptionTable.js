@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
+
 export default function PrescriptionTable({ prescriptionsList }) {
 
   const headerMap = [
@@ -12,13 +14,14 @@ export default function PrescriptionTable({ prescriptionsList }) {
   return (
     <div className="container">
       <table className="table table-striped">
-        <thead>
+        <thead className="p-2">
           <tr>
             {headerMap.map((header, i) => (
               <th
                 key={`th_${i + 1}`}
               >{headerMap[i][1]}</th>
             ))}
+            <th>Előnézet</th>
           </tr>
         </thead>
         <tbody>
@@ -30,9 +33,15 @@ export default function PrescriptionTable({ prescriptionsList }) {
                     <td key={`td_${i + 1}`}>{i + 1}</td>
                   )
                 }
-
                 return (<td key={`td_${i + 1}`}>{prescription[headerName[0]]}</td>)
               })}
+              <td>
+                <Link
+                  className="btn submit-btn"
+                  to={`/prescriptions/preview/${prescription.prescriptionFrom}/${prescription.prescriptionVaccine}/${prescription.prescriptionDosage}`}
+                  target="_blank"
+                >Nyomtat</Link>
+              </td>
             </tr>
           ))}
         </tbody>

@@ -19,7 +19,6 @@ export default function PrescriptionsMain({ user, setUser }) {
           <PrescriptionList user={user} />
         </>
       )}
-
     </div>
   )
 }
