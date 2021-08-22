@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import AuthenticatedNavbar from "../../../Common/navbars/authenticatedNavbar/AuthenticatedNavbar";
 import PrescriptionList from "./PrescriptionList";
+import '../../../scss/prescriptions.scss';
 
 export default function PrescriptionsMain({ user, setUser }) {
   return (

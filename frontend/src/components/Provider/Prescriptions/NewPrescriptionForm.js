@@ -163,56 +163,54 @@ export default function NewPrescriptionForm({ user }) {
   }
 
   return (
-    <main className="d-flex justify-content-center m-3">
-      <form
-        onSubmit={handleSubmit}
-        noValidate
-        className={`needs-validation ${formWasValidated ? 'was-validated' : ''
-          }`}
-      >
-        <InputFieldSet
-          reference={references.prescriptionFor}
-          name="prescriptionFor"
-          labelText="Páciens neve"
-          type="select"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          optionsarray={usersFullNameArray}
-          required
-        />
-        <InputFieldSet
-          reference={references.prescriptionVaccine}
-          name="prescriptionVaccine"
-          labelText="Gyógyszer, vakcina neve"
-          type="text"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          required
-        />
-        <InputFieldSet
-          reference={references.prescriptionDosage}
-          name="prescriptionDosage"
-          labelText="Adagolás"
-          type="text"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          required
-        />
-        <button type="submit" className="btn submit-btn">
-          Recept rögzítése
-        </button>
-        {formAlertText && (
-          <div className={`alert mt-3 alert-${formAlertType}`} role="alert">
-            {formAlertText}
-          </div>
-        )}
-      </form>
-    </main>
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      className={`needs-validation ${formWasValidated ? 'was-validated' : ''
+        }`}
+    >
+      <InputFieldSet
+        reference={references.prescriptionFor}
+        name="prescriptionFor"
+        labelText="Páciens neve"
+        type="select"
+        errors={errors}
+        fieldValues={fieldValues}
+        handleInputBlur={handleInputBlur}
+        handleInputChange={handleInputChange}
+        optionsarray={usersFullNameArray}
+        required
+      />
+      <InputFieldSet
+        reference={references.prescriptionVaccine}
+        name="prescriptionVaccine"
+        labelText="Gyógyszer, vakcina neve"
+        type="text"
+        errors={errors}
+        fieldValues={fieldValues}
+        handleInputBlur={handleInputBlur}
+        handleInputChange={handleInputChange}
+        required
+      />
+      <InputFieldSet
+        reference={references.prescriptionDosage}
+        name="prescriptionDosage"
+        labelText="Adagolás"
+        type="text"
+        errors={errors}
+        fieldValues={fieldValues}
+        handleInputBlur={handleInputBlur}
+        handleInputChange={handleInputChange}
+        required
+      />
+      <button type="submit" className="btn submit-btn">
+        Recept rögzítése
+      </button>
+      {formAlertText && (
+        <div className={`alert mt-3 alert-${formAlertType}`} role="alert">
+          {formAlertText}
+        </div>
+      )}
+    </form>
   );
 }

@@ -7,6 +7,7 @@ export default function NewEventForm({ user }) {
 
   const [servicesArray, setServicesArray] = useState([]);
   const [providersArray, setProvidersArray] = useState([]);
+  const [servicesResponse, setServicesResponse] = useState([]);
 
   const [fetchError, setFetchError] = useState(null);
 
@@ -25,7 +26,18 @@ export default function NewEventForm({ user }) {
         servicesList.push(service.serviceName)
       });
       setServicesArray(servicesList);
+      setServicesResponse(res.services);
     } catch (err) { setFetchError(err.message) };
+  }
+
+  function getServiceNoteByName(serviceName, servicesRes) {
+    let out;
+    servicesRes.forEach(service => {
+      if (serviceName === service.serviceName) {
+        out = service.serviceNote;
+      }
+    })
+    return out;
   }
 
   useEffect(() => {
@@ -88,7 +100,6 @@ export default function NewEventForm({ user }) {
   }
 
   function isGreaterThanToday(value) {
-
     return new Date(value) >= new Date();
   }
 
@@ -191,71 +202,74 @@ export default function NewEventForm({ user }) {
   }
 
   return (
-    <main className="registrate d-flex justify-content-center">
-      <form onSubmit={handleSubmit} noValidate
-        className={`text-center my-4 mb-3 needs-validation ${formWasValidated ? 'was-validated' : ''}`}>
 
-        <InputFieldSet
-          reference={references.eventService}
-          name="eventService"
-          labelText="Szolgáltatás típusa"
-          type="select"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          required
-          optionsarray={servicesArray}
-        />
-        <InputFieldSet
-          reference={references.eventProvider}
-          name="eventProvider"
-          labelText="Szakember kiválasztása"
-          type="select"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          optionsarray={providersArray}
-          required
-        />
-        <InputFieldSet
-          reference={references.eventDate}
-          name="eventDate"
-          labelText="Esemény dátuma"
-          type="date"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          required
-        />
-        <InputFieldSet
-          reference={references.eventTime}
-          name="eventTime"
-          labelText="Esemény időpontja"
-          type="time"
-          errors={errors}
-          fieldValues={fieldValues}
-          handleInputBlur={handleInputBlur}
-          handleInputChange={handleInputChange}
-          required
-        />
+    <form onSubmit={handleSubmit} noValidate
+      className={`text-center my-4 mb-3 needs-validation ${formWasValidated ? 'was-validated' : ''}`}>
 
-        <button type="submit" className="btn submit-btn">Esemény rögzítése</button>
+      <InputFieldSet
+        reference={references.eventService}
+        name="eventService"
+        labelText="Szolgáltatás típusa"
+        type="select"
+        errors={errors}
+        fieldValues={fieldValues}
+        handleInputBlur={handleInputBlur}
+        handleInputChange={handleInputChange}
+        required
+        optionsarray={servicesArray}
+      />
+      {fieldValues.eventService && (
+        <div
+          className="alert border-dark">{getServiceNoteByName(fieldValues.eventService, servicesResponse)}</div>
+      )}
+      <InputFieldSet
+        reference={references.eventProvider}
+        name="eventProvider"
+        labelText="Szakember kiválasztása"
+        type="select"
+        errors={errors}
+        fieldValues={fieldValues}
+        handleInputBlur={handleInputBlur}
+        handleInputChange={handleInputChange}
+        optionsarray={providersArray}
+        required
+      />
+      <InputFieldSet
+        reference={references.eventDate}
+        name="eventDate"
+        labelText="Esemény dátuma"
+        type="date"
+        errors={errors}
+        fieldValues={fieldValues}
+        handleInputBlur={handleInputBlur}
+        handleInputChange={handleInputChange}
+        required
+      />
+      <InputFieldSet
+        reference={references.eventTime}
+        name="eventTime"
+        labelText="Esemény időpontja"
+        type="time"
+        errors={errors}
+        fieldValues={fieldValues}
+        handleInputBlur={handleInputBlur}
+        handleInputChange={handleInputChange}
+        required
+      />
 
-        {formAlertText &&
-          <div className="alert mt-3 alert-primary" role="alert">
-            {formAlertText}
-          </div>
-        }
-        {fetchError && (
-          <div className="alert alert-danger" role="alert">
-            {fetchError}
-          </div>
-        )}
+      <button type="submit" className="btn submit-btn">Esemény rögzítése</button>
 
-      </form>
-    </main>
+      {formAlertText &&
+        <div className="alert mt-3 alert-primary" role="alert">
+          {formAlertText}
+        </div>
+      }
+      {fetchError && (
+        <div className="alert alert-danger" role="alert">
+          {fetchError}
+        </div>
+      )}
+
+    </form>
   )
 }

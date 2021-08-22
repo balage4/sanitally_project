@@ -30,7 +30,7 @@ footer {
 
 table {
   border-radius: 15px;
-  background-color: rgba($color: #93cff7, $alpha: 0.4);
+  background-color: $tablebackground;
 }
 
 .services,
