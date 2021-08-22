@@ -72,7 +72,7 @@ export default function ServicesMain({ user, setUser }) {
 
       <Link
         to="/admin/services/new"
-        className="btn submit-btn m-3">Új szolgáltatás felvitele</Link>
+        className="btn submit-btn m-3">Új szakterület rögzítése</Link>
     </div>
   )
 }

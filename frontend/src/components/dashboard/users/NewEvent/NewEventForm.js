@@ -70,7 +70,6 @@ export default function NewEventForm({ user }) {
 
   const [formWasValidated, setFormWasValidated] = useState(false);
   const [formAlertText, setFormAlertText] = useState('');
-  const [formAlertType, setFormAlertType] = useState('');
 
   const references = {
     eventDate: useRef(),
@@ -143,7 +142,6 @@ export default function NewEventForm({ user }) {
     e.preventDefault();
 
     setFormAlertText('');
-    setFormAlertType('');
     setFormWasValidated(false);
 
     if (isFormValid()) {
@@ -158,7 +156,10 @@ export default function NewEventForm({ user }) {
             eventProvider: fieldValues.eventProvider
           }));
         if (res.status < 200 || res.status >= 300) throw new Error(res.message);
-        setFormAlertText('Event Succesfully saved.');
+        setTimeout(() => {
+          setFormAlertText(null);
+        }, 2000);
+        setFormAlertText('Esemény sikeresen rögzítve.');
       } catch (err) { setFormAlertText(err.message) }
     }
   }
@@ -234,10 +235,10 @@ export default function NewEventForm({ user }) {
           required
         />
 
-        <button type="submit" className="btn btn-primary">Esemény rögzítése</button>
+        <button type="submit" className="btn submit-btn">Esemény rögzítése</button>
 
         {formAlertText &&
-          <div className={`alert mt-3 alert-${formAlertType}`} role="alert">
+          <div className="alert mt-3 alert-primary" role="alert">
             {formAlertText}
           </div>
         }

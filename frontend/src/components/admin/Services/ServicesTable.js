@@ -19,11 +19,9 @@ export default function ServicesTable({ listOfServices, handleActionButtons }) {
             {headerMap.map((header, i) => (
               <th
                 key={`header_${i + 1}`}
-                className="text-center"
               >{headerMap[i][1]}</th>
             ))}
             <th
-              className="text-center"
             >Műveletek</th>
           </tr>
         </thead>

@@ -36,8 +36,8 @@ export default function NewService({ user, setUser }) {
   return (
     <div className="new-service">
       <AuthenticatedNavbar user={user} setUser={setUser} />
-      {!id && <h3 className="text-center m-3">Új szolgáltatás felvitele</h3>}
-      {id && <h3 className="text-center m-3">Szolgáltatás módosítása</h3>}
+      {!id && <h3 className="text-center m-3">Új szakterület</h3>}
+      {id && <h3 className="text-center m-3">Szakterület módosítása</h3>}
       {fetchError && (
         <div className="alert alert-danger" role="alert">
           {fetchError}
