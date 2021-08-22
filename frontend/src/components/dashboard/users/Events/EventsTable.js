@@ -5,11 +5,11 @@ export default function EventsTable({ listOfEvents }) {
 
   const headerMap = [
     ['_id', 'Sorszám'],
-    ['userName', 'Felhasználó'],
+    ['userName', 'Páciens neve'],
     ['eventDate', 'Dátum'],
     ['eventTime', 'Időpont'],
-    ['eventService', 'Szolgáltatás'],
-    ['eventProvider', 'Szolgáltató neve']
+    ['eventService', 'Szakterület'],
+    ['eventProvider', 'Orvos neve']
   ];
 
   return (

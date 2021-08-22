@@ -44,9 +44,9 @@ export default function Home({ user, setUser }) {
     <>
       {!user && <Navbar />}
       {user && <AuthenticatedNavbar user={user} setUser={setUser} />}
-      <div className="main d-flex flex-column justify-content-center">
+      <div className="home main d-flex flex-column justify-content-center">
         <h1 className="text-center">SanitAlly</h1>
-        <h4 className="text-center">Egészségügyi foglalási rendszer</h4>
+        <h4 className="text-center">Egészségügyi időpont-foglalási rendszer</h4>
         <div>
           {!user && <h3 className="text-center text-danger mb-3">Nincs bejelentkezett felhasználó</h3>}
           {user && (

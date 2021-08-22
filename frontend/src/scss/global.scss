@@ -81,7 +81,9 @@ table {
     color: $headerColor;
     font-weight: bold;
     &:hover {
+      color: $homeLinkHover;
       transition: 0.5s;
+      cursor: pointer;
     }
   }
 }
