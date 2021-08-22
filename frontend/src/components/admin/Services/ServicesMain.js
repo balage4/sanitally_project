@@ -53,7 +53,7 @@ export default function ServicesMain({ user, setUser }) {
     <div className="services">
       <AuthenticatedNavbar user={user} setUser={setUser} />
 
-      <h2 className="text-center m-2">Szolgáltatások listája</h2>
+      <h2 className="text-center m-2">Szakterületek listája</h2>
       {listOfServices && (
         <ServicesTable
           listOfServices={listOfServices}

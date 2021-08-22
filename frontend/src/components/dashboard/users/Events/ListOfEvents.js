@@ -32,9 +32,9 @@ export default function ListOfEvents({ user }) {
 
   return (
     <div>
-      {user.role === 'admin' && (<h3 className="text-center m-3">A rendszerben rögzített események (összes)</h3>)}
-      {user.role === 'user' && (<h3 className="text-center m-3">A rendszerben rögzített eseményeim</h3>)}
-      {user.role === 'provider' && (<h3 className="text-center m-3">A szolgáltatásomra rögzített események</h3>)}
+      {user.role === 'admin' && (<h3 className="text-center m-3">Időpontfoglalások (összes)</h3>)}
+      {user.role === 'user' && (<h3 className="text-center m-3">Időpontfoglalásaim</h3>)}
+      {user.role === 'provider' && (<h3 className="text-center m-3">Pácienseim</h3>)}
       {listOfEvents && (
         <EventsTable listOfEvents={listOfEvents}
         />

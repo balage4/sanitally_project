@@ -35,8 +35,8 @@ describe('Home page renders correctly', () => {
 
 describe('Pursuit to Registration', () => {
   test('should have a title on the page', () => {
-    fireEvent.click(screen.getByText('Registration'));
-    expect(screen.getByText('Registrate')).toBeInTheDocument();
+    fireEvent.click(screen.getByText('Regisztráció'));
+    expect(screen.getByText('Regisztráció')).toBeInTheDocument();
   });
   test('should have an input label of `Email`', () => {
     const emailLabel = screen.getByLabelText('E-mail cím')
