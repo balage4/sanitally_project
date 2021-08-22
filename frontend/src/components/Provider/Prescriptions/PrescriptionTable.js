@@ -2,7 +2,7 @@
 export default function PrescriptionTable({ prescriptionsList }) {
 
   const headerMap = [
-    ['_id', 'ID'],
+    ['_id', 'Sorszám'],
     ['prescriptionFor', 'Felhasználó'],
     ['prescriptionVaccine', 'Gyógyszer'],
     ['prescriptionDosage', 'Adagolás'],

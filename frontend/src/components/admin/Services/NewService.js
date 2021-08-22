@@ -36,8 +36,8 @@ export default function NewService({ user, setUser }) {
   return (
     <div className="new-service">
       <AuthenticatedNavbar user={user} setUser={setUser} />
-      <Link to="/admin/services">Vissza</Link>
-      <h3>Új szolgáltatás felvitele</h3>
+      {!id && <h3 className="text-center m-3">Új szolgáltatás felvitele</h3>}
+      {id && <h3 className="text-center m-3">Szolgáltatás módosítása</h3>}
       {fetchError && (
         <div className="alert alert-danger" role="alert">
           {fetchError}
@@ -49,6 +49,9 @@ export default function NewService({ user, setUser }) {
         token={user.token}
         id={id}
         serviceData={serviceData} />}
+      <Link
+        className="btn return-btn m-3"
+        to="/admin/services">Vissza</Link>
     </div>
   )
 }

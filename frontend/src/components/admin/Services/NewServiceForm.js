@@ -187,7 +187,7 @@ export default function NewServiceForm({ token, id, serviceData }) {
           handleInputChange={handleInputChange}
           required
         />
-        <button type="submit" className="btn login-btn">
+        <button type="submit" className="btn submit-btn">
           {serviceData ? 'Módosítás' : 'Rögzítés'}
         </button>
         {formAlertText && (

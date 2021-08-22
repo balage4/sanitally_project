@@ -56,7 +56,7 @@ export default function ListOfUsers({ user, setUser }) {
     <div>
       <AuthenticatedNavbar user={user} setUser={setUser} />
       <div className="admin-background d-flex flex-column align-items-center">
-        <h2>List of users</h2>
+        <h2 className="m-3">Regisztrált felhasználó listája</h2>
         {listOfUsers && (
           <Table
             listOfUsers={listOfUsers}

@@ -1,7 +1,7 @@
 /* import { useState } from "react"; */
 import { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import fetchWithAuth from "../../../utilities";
+import fetchWithAuth, { backend } from "../../../utilities";
 import AuthenticatedNavbar from "../../navbars/authenticatedNavbar/AuthenticatedNavbar";
 import ServicesTable from "./ServicesTable";
 
@@ -16,7 +16,7 @@ export default function ServicesMain({ user, setUser }) {
 
   async function fetchServices() {
     try {
-      const res = await fetchWithAuth('http://localhost:5000/api/services', user.token, 'GET', null);
+      const res = await fetchWithAuth(`${backend.endpoint}/services`, user.token, 'GET', null);
       if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
       setListOfServices(res.services);
     } catch (err) { setFetchError(err.message) };
@@ -28,9 +28,9 @@ export default function ServicesMain({ user, setUser }) {
 
   async function handleDeleteService(id) {
     try {
-      const res = await fetchWithAuth(`http://localhost:5000/api/admin/services/${id}`, user.token, 'DELETE', null);
+      const res = await fetchWithAuth(`${backend.endpoint}/admin/services/${id}`, user.token, 'DELETE', null);
       if (res.status < 200 || res.status >= 300) throw new Error(res?.error);
-      setSuccessMessage('Delete service successful!');
+      setSuccessMessage('Szolgáltatás sikeresen törölve.');
       fetchServices();
       setTimeout(() => {
         setSuccessMessage(null);

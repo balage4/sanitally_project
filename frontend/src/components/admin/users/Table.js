@@ -26,7 +26,7 @@ export default function Table({ listOfUsers, handleActionButtons }) {
             ))}
             <th
               className="text-center"
-            >Actions</th>
+            >Műveletek</th>
           </tr>
         </thead>
         <tbody>

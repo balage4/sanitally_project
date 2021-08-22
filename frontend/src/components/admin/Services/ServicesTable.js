@@ -24,7 +24,7 @@ export default function ServicesTable({ listOfServices, handleActionButtons }) {
             ))}
             <th
               className="text-center"
-            >Actions</th>
+            >Műveletek</th>
           </tr>
         </thead>
         <tbody>

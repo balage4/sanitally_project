@@ -28,6 +28,19 @@ footer {
   }
 }
 
+table {
+  border-radius: 15px;
+  background-color: rgba($color: #93cff7, $alpha: 0.4);
+}
+
+.services,
+.new-service {
+  background-image: url('../assets/medicalServices.jpg');
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+}
+
 .admin,
 .dashboard,
 .categories-main {
@@ -128,6 +141,15 @@ footer {
   }
 }
 .modify-button {
+  color: $buttonModify;
+  &:hover {
+    background-color: $buttonModifyHover;
+    transition: 0.6s;
+  }
+}
+.return-btn {
+  border: 2px solid green;
+  border-radius: 12px;
   color: $buttonModify;
   &:hover {
     background-color: $buttonModifyHover;

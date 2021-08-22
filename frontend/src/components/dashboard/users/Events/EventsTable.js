@@ -4,7 +4,7 @@ import { months } from "../../../../utilities";
 export default function EventsTable({ listOfEvents }) {
 
   const headerMap = [
-    ['_id', 'ID'],
+    ['_id', 'Sorszám'],
     ['userName', 'Felhasználó'],
     ['eventDate', 'Dátum'],
     ['eventTime', 'Időpont'],
