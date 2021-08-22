@@ -6,7 +6,7 @@ export default function PrescriptionTable({ prescriptionsList }) {
     ['prescriptionFor', 'Felhasználó'],
     ['prescriptionVaccine', 'Gyógyszer'],
     ['prescriptionDosage', 'Adagolás'],
-    ['prescriptionFrom', 'Szolgáltató neve']
+    ['prescriptionFrom', 'Recept kiállítója']
   ];
 
   return (
@@ -19,7 +19,6 @@ export default function PrescriptionTable({ prescriptionsList }) {
                 key={`th_${i + 1}`}
               >{headerMap[i][1]}</th>
             ))}
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
