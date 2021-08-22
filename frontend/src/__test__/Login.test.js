@@ -14,9 +14,9 @@ afterEach(() => {
 
 describe('Pursuit to Login page', () => {
   test('has a `Login` header tag', () => {
-    fireEvent.click(screen.getByText('Login'));
+    fireEvent.click(screen.getByText('Bejelentkezés'));
     const headerElement = screen.getByRole('heading', { name: 'Bejelentkezés' });
-    expect(headerElement.textContent).toBe('Bejelentkezés');
+    expect(headerElement).toBeInTheDocument();
   });
 
   test('has an email label', () => {
