@@ -69,7 +69,7 @@ function App() {
             exact path="/prescriptions/new"
             component={() => <NewPrescription user={user} setUser={setUser} />} />
           <ProtectedRoute
-            exact path="/prescriptions/preview/:provider/:vaccine/:dosage/:date"
+            exact path="/prescriptions/preview/:provider/:vaccine/:dosage/:date/:presuser"
             component={() => <PrintPreview user={user} setUser={setUser} />} />
         </Switch>
       </Router>

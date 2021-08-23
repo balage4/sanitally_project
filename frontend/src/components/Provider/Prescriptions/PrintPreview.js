@@ -4,7 +4,7 @@ import '../../../scss/printPreview.scss';
 
 export default function PrintPreview({ user }) {
 
-  const { provider, vaccine, dosage, date } = useParams();
+  const { provider, vaccine, dosage, date, presuser } = useParams();
   const actualDate = new Date();
 
   return (
@@ -23,7 +23,7 @@ export default function PrintPreview({ user }) {
             <tr>
               <td>{date}</td>
               <td>{provider}</td>
-              <td>{`${user.lastName} ${user.firstName}`}</td>
+              <td>{presuser}</td>
             </tr>
           </tbody>
         </table>

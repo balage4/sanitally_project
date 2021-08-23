@@ -50,7 +50,7 @@ export default function PrescriptionTable({ prescriptionsList }) {
                 <td>
                   <Link
                     className="btn submit-btn"
-                    to={`/prescriptions/preview/${prescription.prescriptionFrom}/${prescription.prescriptionVaccine}/${prescription.prescriptionDosage}/${prescriptionDate}`}
+                    to={`/prescriptions/preview/${prescription.prescriptionFrom}/${prescription.prescriptionVaccine}/${prescription.prescriptionDosage}/${prescriptionDate}/${prescription.prescriptionFor}`}
                     target="_blank"
                   >Nyomtat</Link>
                 </td>
