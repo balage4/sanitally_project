@@ -9,6 +9,7 @@ import User from '../src/models/User';
 import Prescription from '../src/models/Prescription';
 
 const userToken = generateToken('user@user.hu', 'user');
+const adminToken = generateToken('user@user.hu', 'admin');
 const providerToken = generateToken('user@user.hu', 'provider');
 
 
@@ -55,7 +56,7 @@ describe('Prescription tests', () => {
     await expect(register.body).toBeTruthy();
   });
 
-  it('should get prescriptions successfully', async () => {
+  it('should get prescriptions by e-mail, successfully', async () => {
     const prescriptions = await request(app)
       .get(`/api/prescriptions/${loginData.email}`)
       .set('Content-Type', 'application/json')
@@ -63,6 +64,24 @@ describe('Prescription tests', () => {
       .expect(200);
     expect(prescriptions.body).toBeTruthy();
   });
+
+  it('should refuse get all prescriptions, with invalid token', async () => {
+    await request(app)
+      .get(`/api/prescriptions`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${userToken}`)
+      .expect(401);
+  });
+
+  it('should get prescriptions all, successfully', async () => {
+    const prescriptions = await request(app)
+      .get(`/api/prescriptions`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .expect(200);
+    expect(prescriptions.body).toBeTruthy();
+  });
+
   it('should create provider', async () => {
 
     const provider = {
