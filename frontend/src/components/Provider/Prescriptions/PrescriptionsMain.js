@@ -13,9 +13,15 @@ export default function PrescriptionsMain({ user, setUser }) {
         className="btn submit-btn m-3"
         to="/prescriptions/new"
       >Új recept írása felhasználónak</Link>)}
-      {(user.role === 'user' || user.role === 'admin') && (
+      {user.role === 'user' && (
         <>
           <h3 className="m-3">Receptjeim</h3>
+          <PrescriptionList user={user} />
+        </>
+      )}
+      {user.role === 'admin' && (
+        <>
+          <h3 className="m-3">A rendszerben rögzített összes recept</h3>
           <PrescriptionList user={user} />
         </>
       )}
