@@ -135,7 +135,7 @@ Minden, ezt követően regisztrált felhasználó automatikusan felhasználó (u
 
 ## Az alkalmazás használata
 
-Regisztráció, majd az alkalmazásba való belépést követően a felhasználó a navigációs menü segítségével megtekintheti a már rögzített eseményeit, receptjeit. (`Események`,`Receptek`).
+Regisztráció, majd pedig az alkalmazásba való belépést követően, a felhasználó a navigációs menü segítségével megtekintheti a már rögzített eseményeit, receptjeit. (`Események`,`Receptek`).
 
 Amennyiben `felhasználó` új időpontot szeretne foglalni egy egészségügyi szolgáltatása, az `Új időpontot foglalok ` gombra kattintva, az űrlap kitöltésével teheti meg.
 
@@ -148,4 +148,7 @@ Amennyiben `felhasználó` új időpontot szeretne foglalni egy egészségügyi 
 `Szolgáltató` jogkörű felhasználó az `Receptek` menüpont alatt receptet állíthat ki páciensének.
 A páciens csak `felhasználó` jogkörű felhasználó (user) lehet. Recept felírásakor megadható a gyógyszer neve, javasolt adagolása.
 
-A felírt receptet `felhasználó` saját fiókjában szintén a `Receptek` menü alatt, listázva megtekintheti.
+### Receptek
+
+- A felírt receptet `felhasználó`, a saját fiókjában, a `Receptek` menü alatt, listázva megtekintheti.
+- A `felhasználó` receptjeit a `Nyomtat` gombra kattintva nyomtatási előnézetet kap, mely segítségével receptjét egyszerűen kinyomtathatja.
