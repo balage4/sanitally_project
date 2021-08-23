@@ -2,7 +2,7 @@
 import { useParams } from 'react-router-dom';
 import '../../../scss/printPreview.scss';
 
-export default function PrintPreview({ user }) {
+export default function PrintPreview() {
 
   const { provider, vaccine, dosage, date, presuser } = useParams();
   const actualDate = new Date();
@@ -45,7 +45,7 @@ export default function PrintPreview({ user }) {
           </tbody>
         </table>
         <div className="signature">______________________________</div>
-        <p>Beteg aláírása ({`${user.lastName} ${user.firstName}`})</p>
+        <p>Beteg aláírása ({presuser})</p>
         <div />
       </div>
       <div className="foot">SanitAlly Copyright {actualDate.getFullYear()}.</div>
