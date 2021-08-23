@@ -10,6 +10,11 @@ export const prescriptionController = {
   async getPrescriptionsByUser(req, res) {
     const prescriptions = await prescriptrionService.getPrescriptionsByUser(req.params.email);
     res.status(prescriptions.status).json(prescriptions);
+  },
+
+  async getPrescriptions(req, res) {
+    const prescriptions = await prescriptrionService.getPrescriptions();
+    res.status(prescriptions.status).json(prescriptions);
   }
 
 }

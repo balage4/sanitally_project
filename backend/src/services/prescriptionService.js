@@ -30,12 +30,19 @@ export const prescriptrionService = {
 
   async getPrescriptionsByUser(userEmail) {
     try {
-
       const userObject = await User.findOne({ "email": userEmail });
-      const prescriptions = await Prescription.find({ prescriptionFor: userObject._id }).populate('firstName');
-
+      const prescriptions = await Prescription.find({ prescriptionFor: userObject._id });
       return { status: 200, prescriptions };
+    } catch (err) {
+      logger.error(err);
+      return { status: 500, error: 'Something went wrong.' };
+    }
+  },
 
+  async getPrescriptions() {
+    try {
+      const prescriptions = await Prescription.find();
+      return { status: 200, prescriptions };
     } catch (err) {
       logger.error(err);
       return { status: 500, error: 'Something went wrong.' };

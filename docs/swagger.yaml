@@ -921,6 +921,33 @@ paths:
                       type: string
                 example: 
                   message: Something went wrong
+  /prescriptions/:
+    get:
+      summary: return prescriptions list
+      tags: [Prescription]
+      description: returns all prescriptions when admin logged in
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: return prescriptions  
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Prescription'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                  parameters:
+                    message: 
+                      type: string
+                example: 
+                  message: Something went wrong
   /provider/prescription/new:
     post:
       summary: return prescriptions list

@@ -20,6 +20,7 @@ router.post('/events/new', tokenCheck, eventController.createNewEvent);
 
 router.post('/provider/prescriptions/new', tokenCheck, providerCheck, prescriptionController.createNewPrescription);
 router.get('/prescriptions/:email', tokenCheck, prescriptionController.getPrescriptionsByUser);
+router.get('/prescriptions/', tokenCheck, adminCheck, prescriptionController.getPrescriptions);
 
 router.get('/users/:service', tokenCheck, userController.getUsersByService);
 router.get('/admin/users', tokenCheck, userController.getUsers);
