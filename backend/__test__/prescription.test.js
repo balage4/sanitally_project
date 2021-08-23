@@ -5,15 +5,16 @@ import testdb from './test_db';
 import app from '../src/app';
 import { loginData, regData } from './testData';
 import { generateToken } from '../src/common/createToken';
-import Service from '../src/models/Service';
 import User from '../src/models/User';
+import Prescription from '../src/models/Prescription';
 
 const userToken = generateToken('user@user.hu', 'user');
+const providerToken = generateToken('user@user.hu', 'provider');
 
 
 beforeAll(async () => {
   await testdb();
-  await Service.deleteMany();
+  await Prescription.deleteMany();
   await User.deleteMany();
 });
 
@@ -62,5 +63,44 @@ describe('Prescription tests', () => {
       .expect(200);
     expect(prescriptions.body).toBeTruthy();
   });
+  it('should create provider', async () => {
 
+    const provider = {
+      firstName: 'Jane',
+      lastName: 'Doe',
+      email: 'provider@hello.hu',
+      password: 'Provider79)',
+    }
+
+    const register = await request(app)
+      .post('/api/register')
+      .set('Content-Type', 'application/json')
+      .send(provider)
+      .expect(201);
+    await expect(register.body).toBeTruthy();
+  });
+  it('should create prescription successully', async () => {
+    await request(app)
+      .post('/api/prescriptions/')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${providerToken}`)
+      .send({
+        prescriptionFor: 'abcdefg',
+        prescriptionVaccine: 'vaccine',
+        prescriptionDosage: 'dosage',
+        prescriptionFrom: 'dfgbvcfg'
+      })
+    expect(201);
+  })
+  it('should refuse with some empty fields', async () => {
+    await request(app)
+      .post('/api/provider/prescriptions/new')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${providerToken}`)
+      .send({
+        prescriptionFor: 'abcdefg',
+        prescriptionFrom: 'dfgbvcfg'
+      })
+      .expect(500);
+  })
 });
