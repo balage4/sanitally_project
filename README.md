@@ -34,7 +34,7 @@ Az időpontfoglalási rendszer célja lehetőséget biztosítani a felhasznólkn
 
 - Regisztráció: Vezetéknév, keresztnév, e-mail, és jelszó megadásával,
 - Login e-mail és jelszó párossal,
-- Események létrehozása, szerkesztése,
+- Események létrehozása,
 - Események listázása
 - Receptek megtekintése
 
