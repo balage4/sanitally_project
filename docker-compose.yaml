@@ -12,7 +12,7 @@ services:
     build: frontend
     environment:
       - REACT_APP_BACKEND_HOST=localhost
-      - REACT_APP_BACKEND_PORT=5000
+      - REACT_APP_BACKEND_PORT=5001
     ports:
       - 3000:3000
     volumes:
@@ -23,9 +23,9 @@ services:
   backend:
     build: backend
     ports:
-      - 5000:5000
+      - 5001:5001
     environment:
-      - PORT=5000
+      - PORT=5001
       - DB_CONNECT=mongodb://mongo:27017/sanitally_masterwork
     volumes:
       - /app/node_modules
@@ -39,3 +39,4 @@ services:
     volumes:
       - /app/node_modules
       - ./docs:/app
+ 
