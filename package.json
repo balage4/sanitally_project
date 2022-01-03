@@ -11,8 +11,7 @@
     "dev": "nodemon --exec babel-node -r ./node_modules/dotenv/config src/index.js",
     "start": "node backend/src/index.js",
     "build": "babel backend/src/index.js -d dist",
-   "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
-   "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix backend && npm run build --prefix backend",
+   "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix backend && npm run build --prefix backend",
     "serve": "node -r dotenv/config dist/index.js"
   },
   "keywords": [],
